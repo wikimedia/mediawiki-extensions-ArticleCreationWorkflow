@@ -1,0 +1,148 @@
+/* Article Creation Text */
+.article-creation-heading {
+	font-size: 2.5em;
+	font-weight: 590;
+	display: block;
+	margin: 20px 0;
+}
+
+/* Article Creation Panel */
+#article-creation-panel {
+	position: relative;
+	margin-left: 100px;
+}
+
+
+/* Buttons */
+.ac-article-button {
+	display: inline-block;
+	border-radius: 5px;
+	color: #FFFFFF;
+	padding: 5px 10px;
+	margin: 8px 0;
+    width: 250px;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+.ac-article-button:hover {
+	text-decoration: none;
+}
+
+.ac-faded {
+	opacity: .5;
+}
+
+.ac-create-article {
+	background-color: #3365ba;
+}
+
+.ac-article-wizard {
+	background-color: #3365ba;
+}
+
+.ac-button-blue {
+	background-image: linear-gradient(bottom, rgb(33,67,122) 32%, rgb(51,101,186) 66%);
+	background-image: -o-linear-gradient(bottom, rgb(33,67,122) 32%, rgb(51,101,186) 66%);
+	background-image: -moz-linear-gradient(bottom, rgb(33,67,122) 32%, rgb(51,101,186) 66%);
+	background-image: -webkit-linear-gradient(bottom, rgb(33,67,122) 32%, rgb(51,101,186) 66%);
+	background-image: -ms-linear-gradient(bottom, rgb(33,67,122) 32%, rgb(51,101,186) 66%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.3, rgb(33,67,122)),
+		color-stop(0.6, rgb(51,101,186))
+	);
+}
+
+.ac-button-red {
+	background-image: linear-gradient(bottom, rgb(133,0,0) 32%, rgb(203,0,0) 66%);
+	background-image: -o-linear-gradient(bottom, rgb(133,0,0) 32%, rgb(203,0,0) 66%);
+	background-image: -moz-linear-gradient(bottom, rgb(133,0,0) 32%, rgb(203,0,0) 66%);
+	background-image: -webkit-linear-gradient(bottom, rgb(133,0,0) 32%, rgb(203,0,0) 66%);
+	background-image: -ms-linear-gradient(bottom, rgb(133,0,0) 32%, rgb(203,0,0) 66%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.3, rgb(133,0,0)),
+		color-stop(0.6, rgb(203,0,0))
+	);
+}
+
+.ac-button-green {
+	background-color: #3cb878;
+	background-image: linear-gradient(bottom, rgb(39,120,78) 22%, rgb(60,184,120) 61%);
+	background-image: -o-linear-gradient(bottom, rgb(39,120,78) 22%, rgb(60,184,120) 61%);
+	background-image: -moz-linear-gradient(bottom, rgb(39,120,78) 22%, rgb(60,184,120) 61%);
+	background-image: -webkit-linear-gradient(bottom, rgb(39,120,78) 22%, rgb(60,184,120) 61%);
+	background-image: -ms-linear-gradient(bottom, rgb(39,120,78) 22%, rgb(60,184,120) 61%);
+
+	background-image: -webkit-gradient(
+		linear,
+		left bottom,
+		left top,
+		color-stop(0.22, rgb(39,120,78)),
+		color-stop(0.61, rgb(60,184,120))
+	);	
+}
+
+.ac-button-wrap {
+	position: relative;
+}
+
+.ac-button-title, .ac-button-body {
+	float: left;
+}
+
+
+.ac-button-title {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.ac-button-body {
+	font-size: .9em;
+}
+
+/* Power Arrows */
+
+.ac-arrow {
+	float: right;
+}
+
+/* Tooltip Magic */
+
+.mw-ac-tooltip {
+	position: absolute;
+	left: 290px;
+	background-color: #3cb878;
+	border-radius: 2px;
+	padding: 2px;
+}
+
+.mw-ac-tooltip-pointy {
+	background: url(images/ac-tooltip-pointy.png) left top no-repeat;
+	height: 22px;
+	width: 12px;
+	left: -10px;
+	position: absolute;
+
+}
+
+.mw-ac-tooltip-innards {
+	background-color: #f5f5f5;
+	padding: 10px;
+}
+
+.mw-ac-tooltip-title {
+	font-size: 1.1em;
+	font-weight: bold;
+}
+
+.ac-clearfix {
+	clear: both;
+}
