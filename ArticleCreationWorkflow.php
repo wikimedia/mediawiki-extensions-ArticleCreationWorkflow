@@ -12,17 +12,23 @@ $wgExtensionCredits['other'][] = array(
 	'path' => __FILE__,
 );
 
-$articleCreationDir = dirname(__FILE__) . '/';
+$articleCreationDir = dirname( __FILE__ ) . '/';
+
+/* Object model */
+$wgAutoloadClasses['ArticleCreationTemplates'] = $articleCreationDir . 'includes/ArticleCreationTemplates.php';
+
+/* Special Pages */
+$wgAutoloadClasses['SpecialArticleCreationLanding'] = $articleCreationDir . 'SpecialArticleCreationLanding.php';
+$wgSpecialPages['ArticleCreationLanding'] = 'SpecialArticleCreationLanding';
 
 /* Hooks */
-$wgAutoloadClasses['ArticleCreationHooks'] = $articleCreationDir . 'ArticleCreation.hooks.php';
+$wgAutoloadClasses['ArticleCreationHooks'] = $articleCreationDir . 'ArticleCreationWorkflow.hooks.php';
 $wgHooks['ShowMissingArticle'][] = 'ArticleCreationHooks::loadArticleCreationModules';
-/* Resources */ 
 
 /* Internationalization */
-$wgExtensionMessageFiles['ArticleCreation'] = $articleCreationDir . 'ArticleCreation.i18n.php';
+$wgExtensionMessagesFiles['ArticleCreation'] = $articleCreationDir . 'ArticleCreationWorkflow.i18n.php';
 
-// Resources
+/* Resources */
 $acResourceTemplate = array(
 	'localBasePath' => $articleCreationDir . 'modules',
 	'remoteExtPath' => 'ArticleCreation/modules'
