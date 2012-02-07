@@ -28,15 +28,11 @@ class SpecialArticleCreationLanding extends SpecialPage {
 			return;
 		}
 		
+		$wgOut->setPageTitle( wfMsg('ac-landing-page-title' ) );
 		$wgOut->setRobotPolicy( 'noindex,nofollow' );
-
-		if ( $wgUser->isAnon() && !$wgGroupPermissions['*']['edit'] ) {
-			$wgOut->addHtml( ArticleCreationTemplates::loadRequestAccountModules( $par ) );		
-		} else {
-			$wgOut->addModules( 'ext.articleCreation.core' );
-			$wgOut->addModules( 'ext.articleCreation.user' );
-			$wgOut->addHtml( ArticleCreationTemplates::loadArticleCreationModules( $par ) );	
-		}	
+		$wgOut->addModules( 'ext.articleCreation.core' );
+		$wgOut->addModules( 'ext.articleCreation.user' );
+		$wgOut->addHtml( ArticleCreationTemplates::getLandingPage() );
 	}
 	
 }

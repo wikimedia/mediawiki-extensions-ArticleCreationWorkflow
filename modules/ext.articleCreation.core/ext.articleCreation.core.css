@@ -15,17 +15,21 @@
 
 /* Buttons */
 .ac-article-button {
+	width: 250px !important;
+}
+
+.ac-button {
 	display: inline-block;
 	border-radius: 5px;
 	color: #FFFFFF;
 	padding: 5px 10px;
 	margin: 8px 0;
-    width: 250px;
-    cursor: pointer;
-    text-decoration: none;
+	cursor: pointer;
+	text-decoration: none;
+	width: 150px;
 }
 
-.ac-article-button:hover {
+.ac-button:hover {
 	text-decoration: none;
 }
 
@@ -116,7 +120,7 @@
 
 /* Tooltip Magic */
 
-.mw-ac-tooltip {
+.mw-ac-tip {
 	position: absolute;
 	left: 290px;
 	background-color: #3cb878;
@@ -145,4 +149,13 @@
 
 .ac-clearfix {
 	clear: both;
+}
+
+.ac-action-button {
+	float: right;
+}
+
+.mw-ac-help {
+	float: right;
+	font-size: 90%;
 }

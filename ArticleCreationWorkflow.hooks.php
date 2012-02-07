@@ -53,4 +53,11 @@ class ArticleCreationHooks {
 		return false;
 	}
 
+	public static function resourceLoaderGetConfigVars( &$vars ) {
+		global $wgArticleCreationConfig;
+		
+		$vars['acConfig'] = $wgArticleCreationConfig;
+	
+		return true;
+	}
 }

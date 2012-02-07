@@ -5,65 +5,68 @@
  */
 class ArticleCreationTemplates {
 
-	public static function loadArticleCreationModules() {
+	public static function getLandingPage() {
 		$action = wfMessage( 'ac-action-indicator' )->escaped();
-		$createArticle = wfMessage( 'ac-action-create-article' )->escaped();
-		$createArticleSubtitle = wfMessage( 'ac-action-create-article-subtitle' )->escaped();
-		$stepByStep = wfMessage( 'ac-action-step-by-step' )->escaped(); 
-		$stepByStepSubtitle = wfMessage( 'ac-action-step-by-step-subtitle' )->escaped();
-		$redirect = wfMessage( 'ac-action-redirect' )->escaped();
-		$redirectSubtitle = wfMessage( 'ac-action-redirect-subtitle' )->escaped();
-		
+
+		global $wgUser, $wgArticleCreationButtons;
+
+		$buttons = array();
+		if ( $wgUser->isAnon() ) {
+			$buttons = $wgArticleCreationButtons['anonymous'];
+		} else {
+			$buttons = $wgArticleCreationButtons['logged-in'];
+		}
+
+		$buttons = self::formatButtons( $buttons );
+
 		$html = <<<HTML
 			<span class="article-creation-heading">$action</span>
 			<div id="article-creation-panel">
-				<div class="ac-button-wrap">
-					<a class="ac-article-button ac-button-blue ac-article-create" data-ac-button="normal">
-						<div class="ac-arrow ac-arrow-forward">&nbsp;</div>
-						<div class="ac-button-text">
-							<div class="ac-button-title">$createArticle</div>
-							<div class="ac-button-body">$createArticleSubtitle</div>
-						</div>
-					</a>
-				</div>
-				<div class="ac-button-wrap">
-					<a class="ac-article-button ac-button-blue ac-article-wizard" data-ac-button="wizard">
-						<div class="ac-arrow ac-arrow-forward">&nbsp;</div>
-						<div class="ac-button-text">
-							<div class="ac-button-title">$stepByStep</div>	
-							<div class="ac-button-body">$stepByStepSubtitle</div>
-						</div>
-					</a>
-				</div>
-				<div class="ac-button-wrap">
-					<a class="ac-article-button ac-button-red" data-ac-button="getOut">
-						<div class="ac-arrow ac-arrow-backward">&nbsp;</div>
-						<div class="ac-button-text">
-							<div class="ac-button-title">$redirect</div>
-							<div class="ac-button-body">$redirectSubtitle</div>
-						</div>
-					</a>
-				</div>
+				$buttons
 			</div>
 HTML;
 
 		return $html;
 	}
-	
-	public static function loadRequestAccountModules( $par ) {
 
-		$returnTo = 'returnto=' . SpecialPage::getTitleFor( 'ArticleCreationLanding', $par );
-		
-		$loginLink = Html::element( 'a', array( 'href' => SpecialPage::getTitleFor( 'UserLogin' )->getLocalURL( $returnTo ) ),
-						wfMessage( 'ac-action-login' )->text() );
-		
-		$registerLink = Html::element( 'a', array( 'href' => SpecialPage::getTitleFor( 'UserLogin' )->getLocalURL( 'type=signup&' . $returnTo ) ),
-						wfMessage( 'ac-action-register' )->text() );
-		
-		
+	public static function formatButtons( $description ) {
+		$buttons = '';
+
+		foreach ( $description as $button => $info ) {
+			$buttons .= self::formatButton(
+				$button,
+				wfMessage($info['title']),
+				wfMessage($info['text'])
+			);
+		}
+
+		return $buttons;
+	}
+
+	public static function formatButton( $button, $buttonTitle, $buttonText ) {
+		if ( $buttonTitle instanceof Message ) {
+			$buttonTitle = $buttonTitle->escaped();
+		}
+
+		if ( $buttonText instanceof Message ) {
+			$buttonText = $buttonText->escaped();
+		}
+
+		global $wgArticleCreationConfig;
+
+		//$target = htmlspecialchars( $wgArticleCreationConfig['action-url'][$button] );
+		$target = '#';
+
 		return <<<HTML
-				<div>$loginLink</div>
-				<div>$registerLink</div>
+		<div class="ac-button-wrap">
+			<a class="ac-article-button ac-button ac-button-blue ac-article-$button" data-ac-button="$button" href="$target">
+				<div class="ac-arrow ac-arrow-forward">&nbsp;</div>
+				<div class="ac-button-text">
+					<div class="ac-button-title">$buttonTitle</div>	
+					<div class="ac-button-body">$buttonText</div>
+				</div>
+			</a>
+		</div>
 HTML;
 	}
 	
