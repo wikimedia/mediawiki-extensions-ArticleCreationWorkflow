@@ -41,16 +41,22 @@ class ArticleCreationHooks {
 	 * Customized html that shows an article doesn't exist
 	 */
 	public static function BeforeDisplayNoArticleText( $article, &$text, $errors, $wgUser, &$wikiText ) {
-		global $wgGroupPermissions;
+		// global $wgGroupPermissions;
+		//
+		// // Show the custom page if there is no error or the user is not loggin and anonmyous edit 
+		// // is not allowed
+		// if ( !count( $errors ) || ( $wgUser->isAnon() && !$wgGroupPermissions['*']['edit'] ) ) {			
+		// 	$text = ArticleCreationTemplates::showMissingPage( $article );
+		// 	$wikiText = false;
+		// }
 
-		// Show the custom page if there is no error or the user is not loggin and anonmyous edit 
-		// is not allowed
-		if ( !count( $errors ) || ( $wgUser->isAnon() && !$wgGroupPermissions['*']['edit'] ) ) {			
-			$text = ArticleCreationTemplates::showMissingPage( $article );
-			$wikiText = false;
-		}
+		// return false;
 
-		return false;
+		global $wgOut;
+
+		$wgOut->addModules( array( 'ext.articleCreation.init' ) );
+
+		return true;
 	}
 
 	public static function resourceLoaderGetConfigVars( &$vars ) {

@@ -38,6 +38,10 @@ $acResourceTemplate = array(
 	'remoteExtPath' => 'ArticleCreationWorkflow/modules'
 );
 
+$wgResourceModules['ext.articleCreation.init'] = $acResourceTemplate + array(
+	'scripts' => 'ext.articleCreation.init/ext.articleCreation.init.js',
+);
+
 $wgResourceModules['ext.articleCreation.core'] = $acResourceTemplate + array (
 	'styles' 	=> 'ext.articleCreation.core/ext.articleCreation.core.css',
 	'scripts'	=> 'ext.articleCreation.core/ext.articleCreation.core.js',
