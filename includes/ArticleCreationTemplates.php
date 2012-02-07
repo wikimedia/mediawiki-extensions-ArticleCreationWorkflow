@@ -50,6 +50,34 @@ HTML;
 		return $html;
 	}
 	
+	public static function loadRequestAccountModules( $par ) {
+
+		$returnTo = 'returnto=' . SpecialPage::getTitleFor( 'ArticleCreationLanding', $par );
+		
+		$loginLink = Html::element( 'a', array( 'href' => SpecialPage::getTitleFor( 'UserLogin' )->getLocalURL( $returnTo ) ),
+						wfMessage( 'ac-action-login' )->text() );
+		
+		$registerLink = Html::element( 'a', array( 'href' => SpecialPage::getTitleFor( 'UserLogin' )->getLocalURL( 'type=signup&' . $returnTo ) ),
+						wfMessage( 'ac-action-register' )->text() );
+		
+		
+		return <<<HTML
+				<div>$loginLink</div>
+				<div>$registerLink</div>
+HTML;
+	}
+	
+	public static function showMissingPage( $article ) {
+		$link = wfMessage( 'ac-link-create-article' )->params( 
+					SpecialPage::getTitleFor( 'ArticleCreationLanding', $article->getTitle()->getPrefixedText() 
+					)->getPrefixedText() )->parse();
+		return <<<HTML
+				<div>
+					$link
+				</div>
+HTML;
+	}
+	
 }
 
 

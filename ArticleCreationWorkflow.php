@@ -23,7 +23,9 @@ $wgSpecialPages['ArticleCreationLanding'] = 'SpecialArticleCreationLanding';
 
 /* Hooks */
 $wgAutoloadClasses['ArticleCreationHooks'] = $articleCreationDir . 'ArticleCreationWorkflow.hooks.php';
-$wgHooks['ShowMissingArticle'][] = 'ArticleCreationHooks::loadArticleCreationModules';
+$wgHooks['BeforeDisplayNoArticleText'][] = 'ArticleCreationHooks::BeforeDisplayNoArticleText';
+$wgHooks['BeforeWelcomeCreation'][] = 'ArticleCreationHooks::BeforeWelcomeCreation';
+$wgHooks['AlternateEdit'][] = 'ArticleCreationHooks::AlternateEdit';
 
 /* Internationalization */
 $wgExtensionMessagesFiles['ArticleCreation'] = $articleCreationDir . 'ArticleCreationWorkflow.i18n.php';

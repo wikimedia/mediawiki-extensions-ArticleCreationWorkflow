@@ -25,4 +25,10 @@ $messages['en'] = array(
 	'ac-action-step-by-step-subtitle' => 'I\'ll use the article creation wizard',
 	'ac-action-redirect' => 'Get out of here',
 	'ac-action-redirect-subtitle' => 'Oops. This isn\'t what I wanted',
+	'ac-action-login' => 'Login',
+	'ac-action-register' => 'Create account',
+	
+	//links
+	'ac-link-create-article' => '[[$1|Create article]]',
+	
 );
