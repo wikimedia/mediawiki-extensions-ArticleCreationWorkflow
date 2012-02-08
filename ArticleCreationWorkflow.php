@@ -71,6 +71,7 @@ $wgResourceModules['ext.articleCreation.user'] = $acResourceTemplate + array (
 	),
 	'dependencies' => array(
 		'ext.articleCreation.core',
+		'jquery.localize',
 	),
 );
 
@@ -79,39 +80,86 @@ $wgArticleCreationButtons = array(
 		'login' => array(
 			'title' => 'ac-action-login',
 			'text' => 'ac-action-login-subtitle',
+			'tooltip' => array(
+				'title' => 'ac-hover-tooltip-title',
+				'text' => 'ac-hover-tooltip-body-login',
+			),
 		),
 		'signup' => array(
 			'title' => 'ac-action-signup',
 			'text' => 'ac-action-signup-subtitle',
+			'tooltip' => array(
+				'title' => 'ac-hover-tooltip-title',
+				'text' => 'ac-hover-tooltip-body-signup',
+			),
 		),
 		'request' => array(
 			'title' => 'ac-action-request',
 			'text' => 'ac-action-request-subtitle-anon',
+			'tooltip' => array(
+				'title' => 'ac-hover-tooltip-title',
+				'text' => 'ac-hover-tooltip-body-request',
+			),
 		),
 	),
 	'logged-in' => array(
 		'request' => array(
 			'title' => 'ac-action-request',
 			'text' => 'ac-action-request-subtitle',
+			'tooltip' => array(
+				'title' => 'ac-hover-tooltip-title',
+				'text' => 'ac-hover-tooltip-body-request',
+			),
 		),
 		'draft' => array(
 			'title' => 'ac-action-draft',
 			'text' => 'ac-action-draft-subtitle',
+			'tooltip' => array(
+				'title' => 'ac-hover-tooltip-title',
+				'text' => 'ac-hover-tooltip-body-draft',
+			),
 		),
 		'create' => array(
 			'title' => 'ac-action-create',
 			'text' => 'ac-action-create-subtitle',
+			'tooltip' => array(
+				'title' => 'ac-hover-tooltip-title',
+				'text' => 'ac-hover-tooltip-body-create',
+			),
+			'interstitial' => <<<HTML
+				<a class="mw-ac-help" href="http://www.google.com"><html:msg key="ac-create-help" /></a>
+				<div class="mw-ac-tooltip-title"><html:msg key="ac-click-tip-title-create" /></div>
+				<div class="mw-ac-tooltip-body">
+					<div class="mw-ac-create-verbiage"><html:msg key="ac-create-warning-create" /></div>
+					<div class="ac-button-wrap">
+						<a class="ac-button-green ac-button ac-action-button" data-ac-action="create">
+							<div class="ac-arrow ac-arrow-forward">&nbsp;</div>
+							<div class="ac-button-text">
+								<div class="ac-button-title"><html:msg key="ac-create-button" /></div>
+								<div class="ac-button-text"></div>
+							</div>
+						</a>
+					</div>
+					<input 
+						type="checkbox" 
+						id="mw-ac-create-dismiss" />
+					<label for="mw-ac-create-dismiss">
+						<html:msg key="ac-create-dismiss" />
+					</label>
+					<div style="clear: both"></div>
+				</div>
+HTML
 		),
 	),
 );
 
 $wgArticleCreationConfig = array(
-	'create-help-url' => 'http://www.google.com',
 	'action-url' => array(
 		'draft' => '{{SCRIPT}}?title=User:{{USER}}/{{PAGE}}&action=edit',
 		'create' => '{{SCRIPT}}?title={{PAGE}}&action=edit',
 		'login' => '{{SCRIPT}}?title=Special:Userlogin&returnto=Special:ArticleCreationLanding/{{PAGE}}',
 		'signup' => '{{SCRIPT}}?title=Special:Userlogin/signup&returnto=Special:ArticleCreationLanding/{{PAGE}}',
 		'request' => 'http://google.com/?q={{PAGE}}'
-	)
+	),
+	'buttons' => $wgArticleCreationButtons,
 );

@@ -41,10 +41,10 @@ $messages['en'] = array(
 	'ac-action-create' => 'Create this article myself',
 	'ac-action-create-subtitle' => 'I know what I\'m doing.',
 	'ac-create-warning-create' => "Articles may be deleted immediately if:
-	<ul><li>they copy from other sources, or</li>
-	<li>are overly promotional, or</li>
-	<li>lack context, or</li>
-	<li>fail to explain why their subject is notable.</li></ul>
+	they copy from other sources, or
+	are overly promotional, or
+	lack context, or
+	fail to explain why their subject is notable.
 	",
 	'ac-create-button' => "Let's Go",
 	'ac-hover-tooltip-body-create' => "<ul><li>You have created articles before, and</li>
@@ -52,6 +52,8 @@ $messages['en'] = array(
 		<li>You <b><i>do not</i></b> have a <i>conflict of interest</i> regarding the subject matter of the article, and</li>
 		<li>You have several references about the subject.</li></ul>
 	",
+
+	'ac-landing-login-required' => 'In order to create an article, you need to have a Wikipedia user account.',
 
 	'ac-create-dismiss' => 'I want to skip this step in the future',
 

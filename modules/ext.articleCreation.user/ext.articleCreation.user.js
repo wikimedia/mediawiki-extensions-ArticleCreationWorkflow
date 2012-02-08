@@ -9,6 +9,8 @@
 			//store a reference to the panel
 			ac.panel = $('#article-creation-panel');
 
+			ac.setupTooltips();
+
 			//setup button hover states
 			ac.panel
 				.find( '.ac-article-button' )
@@ -17,7 +19,6 @@
 								$tooltip;
 
 						$(this)
-							.after( ac.setupTooltips( button ) )
 							//attach other events here, just making first tooltip for now
 							//testing hover effects
 							.hover (function (){
@@ -61,10 +62,10 @@
 						});
 						
 					ac.panel
-						.find('.mw-ac-clicktip')
+						.find('.mw-ac-interstitial')
 						.hide();
 
-					if ( ! $(this).parent().find('.mw-ac-clicktip').length ) {
+					if ( ! $(this).parent().find('.mw-ac-interstitial').length ) {
 						ac.executeAction( $(this).data('ac-button' ) );
 						return;
 					}
@@ -77,7 +78,7 @@
 						.find('.mw-ac-tooltip' )
 							.hide()
 							.end()
-						.find('.mw-ac-clicktip')
+						.find('.mw-ac-interstitial')
 							.show();
 					
 				});
@@ -96,67 +97,16 @@
 
 		},
 		
-		setupTooltips: function ( button ) {
+		setupTooltips: function ( ) {
 
-			var $tooltip = $( ac.tooltip.base );
-			var $tooltipInnards = $( ac.tooltip[button+'Hover'] );
-			var $clicktip = $( ac.tooltip.base );
-			var $clicktipInnards = $( ac.tooltip[button+'Click'] );
-
-			if ( ! $tooltipInnards.length ) {
-				$tooltipInnards = $( ac.tooltip['defaultHover'] );
-			}
-
-			$tooltip
-				.find ( '.mw-ac-tooltip-innards')
-					.html( $tooltipInnards )
-				.end()
-				.find( '.mw-ac-tooltip-title' )
-					.text( mw.msg( 'ac-hover-tooltip-title' ) )
-					.end()
-				.find( '.mw-ac-tooltip-body' )
-					.html( mw.msg ( 'ac-hover-tooltip-body-' + button ) )
-					.end()
-				.hide()
-				.addClass( 'mw-ac-tooltip' );
+			ac.panel.find('.mw-ac-tip').localize();
 			
-			if ( $clicktipInnards.length ) {
-				$clicktip
-					.find( '.mw-ac-tooltip-innards' )
-						.html( $clicktipInnards )
-						.end()
-					.find( '.mw-ac-tooltip-title' )
-						.text( mw.msg('ac-click-tip-title-'+button) )
-						.end()
-					.addClass( 'mw-ac-clicktip' )
-					.hide();
-					
-				if ( button == 'create' ) {
-					$clicktip
-						.find('.ac-button-title')
-							.html( mw.msg( 'ac-create-button' ) )
-							.end()
-						.find('.mw-ac-create-verbiage')
-							.html( mw.msg( 'ac-create-warning-'+button ) )
-							.end()
-						.find('label')
-							.html( mw.msg( 'ac-create-dismiss' ) )
-							.end()
-						.find('.ac-action-button')
-							.click( function(e) {
-								e.preventDefault();
-								ac.executeAction(button);
-							} )
-							.end()
-						.find('.mw-ac-help')
-							.html( mw.msg( 'ac-create-help' ) )
-							.attr( 'href', ac.config['create-help-url'])
-							.end();
-				}
-			} else {
-				$clicktip = $('');
-			}
-			return $tooltip.add( $clicktip );
+			ac.panel.find('.ac-article-create')
+				.parent().find('.ac-action-button')
+				.click( function(e) {
+					e.preventDefault();
+					ac.executeAction($(this).data('ac-action'));
+				} );
 		},
 		
 		setupTipHeights : function( $tooltip, $button ) {
