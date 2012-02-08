@@ -5,6 +5,11 @@
  */
 class ArticleCreationTemplates {
 
+	/**
+	 * Retrieves an ArticleCreationLanding page for the given page title.
+	 * @param $page String: The page name passed on the URL.
+	 * @return String HTML
+	 */
 	public static function getLandingPage( $page ) {
 		$action = wfMessage( 'ac-action-indicator' )->escaped();
 		global $wgUser, $wgArticleCreationButtons;
@@ -32,6 +37,14 @@ HTML;
 		return $html;
 	}
 
+	/**
+	 * Formats a set of buttons from an array.
+	 * @param $description Associative array. Keys are button names,
+	 *  Values are associative arrays suitable to pass to formatButton
+	 * @param $page String: The page name passed on the URL.
+	 * @return String HTML
+	 * @see ArticleCreationTemplates::formatButton
+	 */
 	public static function formatButtons( $description, $page ) {
 		$buttons = '';
 
@@ -46,6 +59,26 @@ HTML;
 		return $buttons;
 	}
 
+	/**
+	 * Formats a single button.
+	 * @param $button String name of the button.
+	 * @param $info Associative array. Valid keys:
+	 * title: (required) Message key to use for the button's major text.
+	 * text: (required) Message key for help message to display on the
+	 *	lower part of the button.
+	 * color: (default: blue) The colour to show the button in
+	 * tooltip: Associative array with keys title and text, message keys.
+	 * 	For a tooltip that is displayed when the button is hovered over.
+	 *	Both messages will be parsed as Wikitext before display.
+	 * interstitial: HTML to be passed through jquery.localize() for an
+	 *	interstitial to be shown before going ahead with the action.
+	 * 	Should contain a button with the class ac-action-button that
+	 * 	proceeds with the action.
+	 * 	*MAY* also contain a checkbox with the class ac-dismiss-interstitial
+	 *	that will be used to dismiss that interstitial.
+	 * @param $page String: The page name passed on the URL.
+	 * @return String HTML
+	 */
 	public static function formatButton( $button, $info, $page ) {
 		global $wgArticleCreationConfig, $wgScript, $wgUser;
 		
@@ -108,6 +141,12 @@ HTML;
 HTML;
 	}
 
+	/**
+	 * Formats a tooltip for a button.
+	 * @param $titleMsg Message key for the title text of the tooltip. Will be parsed.
+	 * @param $bodyMsg Message key for the tooltip content. Will be parsed.
+	 * @return String HTML
+	 */
 	public static function formatTooltip( $titleMsg, $bodyMsg ) {
 		if ( ! $titleMsg ) {
 			return '';
@@ -132,6 +171,11 @@ HTML;
 HTML;
 	}
 
+	/**
+	 * Formats an interstitial tooltip shown when certain buttons are clicked.
+	 * @param $content String HTML content, to be passed through jQuery.localize() on the client side.
+	 * @return String HTML
+	 */
 	public static function formatInterstitial( $content ) {
 		if ( ! $content ) {
 			return '';
@@ -147,6 +191,11 @@ HTML;
 HTML;
 	}
 	
+	/**
+	 * Stub for a replacement Missing Page.
+	 * @param $article Article object for the page that was requested.
+	 * @return String HTML
+	 */
 	public static function showMissingPage( $article ) {
 		$link = wfMessage( 'ac-link-create-article' )->params( 
 					SpecialPage::getTitleFor( 'ArticleCreationLanding', $article->getTitle()->getPrefixedText() 

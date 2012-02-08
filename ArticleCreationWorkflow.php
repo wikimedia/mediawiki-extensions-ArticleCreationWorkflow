@@ -75,6 +75,10 @@ $wgResourceModules['ext.articleCreation.user'] = $acResourceTemplate + array (
 	),
 );
 
+/**
+ * Configuration for the buttons to appear on the ArticleCreationLanding page.
+ * @see ArticleCreationTemplates::formatButtons
+ **/
 $wgArticleCreationButtons = array(
 	'anonymous' => array(
 		'login' => array(
@@ -142,8 +146,9 @@ $wgArticleCreationButtons = array(
 					</div>
 					<input 
 						type="checkbox" 
-						id="mw-ac-dismiss-interstitial" />
-					<label for="mw-ac-dismiss-interstitial">
+						id="mw-ac-dismiss-create"
+						class="ac-dismiss-interstitial" />
+					<label for="mw-ac-dismiss-create">
 						<html:msg key="ac-create-dismiss" />
 					</label>
 					<div style="clear: both"></div>

@@ -123,7 +123,7 @@
 		},
 		
 		executeAction : function( action ) {
-			if ( $('#mw-ac-dismiss-interstitial').is(':checked') ) {
+			if ( $('.ac-dismiss-interstitial').is(':checked') ) {
 				ac.disableInterstitial( action );
 			}
 
