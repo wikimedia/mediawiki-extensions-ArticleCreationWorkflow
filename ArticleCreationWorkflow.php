@@ -142,8 +142,8 @@ $wgArticleCreationButtons = array(
 					</div>
 					<input 
 						type="checkbox" 
-						id="mw-ac-create-dismiss" />
-					<label for="mw-ac-create-dismiss">
+						id="mw-ac-dismiss-interstitial" />
+					<label for="mw-ac-dismiss-interstitial">
 						<html:msg key="ac-create-dismiss" />
 					</label>
 					<div style="clear: both"></div>

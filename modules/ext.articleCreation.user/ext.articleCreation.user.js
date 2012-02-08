@@ -103,8 +103,8 @@
 
 			ac.panel.find('.mw-ac-tip').localize();
 			
-			ac.panel.find('.ac-article-create')
-				.parent().find('.ac-action-button')
+			ac.panel.find('.mw-ac-interstitial')
+				.find('.ac-action-button')
 				.click( function(e) {
 					e.preventDefault();
 					ac.executeAction($(this).data('ac-action'));
@@ -123,7 +123,7 @@
 		},
 		
 		executeAction : function( action ) {
-			if ( $('#mw-ac-create-dismiss').is(':checked') ) {
+			if ( $('#mw-ac-dismiss-interstitial').is(':checked') ) {
 				ac.disableInterstitial( action );
 			}
 
