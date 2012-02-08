@@ -7,11 +7,12 @@ class ArticleCreationTemplates {
 
 	public static function getLandingPage( $page ) {
 		$action = wfMessage( 'ac-action-indicator' )->escaped();
-
 		global $wgUser, $wgArticleCreationButtons;
 
+		$title = Title::newFromText( $page );
+
 		$buttons = array();
-		if ( $wgUser->isAnon() ) {
+		if ( ! $title->userCan('create') || ! $title->userCan('edit') ) {
 			$buttons = $wgArticleCreationButtons['anonymous'];
 		} else {
 			$buttons = $wgArticleCreationButtons['logged-in'];

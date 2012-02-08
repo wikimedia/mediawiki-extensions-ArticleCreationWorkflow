@@ -48,7 +48,8 @@
 			ac.panel
 				.find('.ac-article-button')
 				.click (function () {
-						
+					e.preventDefault();
+					
 					$('.ac-article-button')
 						//remove green states and hide their tooltips
 						.removeClass('ac-button-green')
