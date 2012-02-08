@@ -21,7 +21,7 @@
 .ac-button {
 	display: inline-block;
 	border-radius: 5px;
-	color: #FFFFFF;
+	color: #FFFFFF !important;
 	padding: 5px 10px;
 	margin: 8px 0;
 	cursor: pointer;

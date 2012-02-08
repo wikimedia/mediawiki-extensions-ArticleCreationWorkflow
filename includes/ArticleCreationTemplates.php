@@ -5,7 +5,7 @@
  */
 class ArticleCreationTemplates {
 
-	public static function getLandingPage() {
+	public static function getLandingPage( $page ) {
 		$action = wfMessage( 'ac-action-indicator' )->escaped();
 
 		global $wgUser, $wgArticleCreationButtons;
@@ -17,7 +17,7 @@ class ArticleCreationTemplates {
 			$buttons = $wgArticleCreationButtons['logged-in'];
 		}
 
-		$buttons = self::formatButtons( $buttons );
+		$buttons = self::formatButtons( $buttons, $page );
 
 		$html = <<<HTML
 			<span class="article-creation-heading">$action</span>
@@ -29,21 +29,22 @@ HTML;
 		return $html;
 	}
 
-	public static function formatButtons( $description ) {
+	public static function formatButtons( $description, $page ) {
 		$buttons = '';
 
 		foreach ( $description as $button => $info ) {
 			$buttons .= self::formatButton(
 				$button,
 				wfMessage($info['title']),
-				wfMessage($info['text'])
+				wfMessage($info['text']),
+				$page
 			);
 		}
 
 		return $buttons;
 	}
 
-	public static function formatButton( $button, $buttonTitle, $buttonText ) {
+	public static function formatButton( $button, $buttonTitle, $buttonText, $page ) {
 		if ( $buttonTitle instanceof Message ) {
 			$buttonTitle = $buttonTitle->escaped();
 		}
@@ -52,10 +53,17 @@ HTML;
 			$buttonText = $buttonText->escaped();
 		}
 
-		global $wgArticleCreationConfig;
+		global $wgArticleCreationConfig, $wgScript, $wgUser;
 
-		//$target = htmlspecialchars( $wgArticleCreationConfig['action-url'][$button] );
-		$target = '#';
+		$target = htmlspecialchars( $wgArticleCreationConfig['action-url'][$button] );
+
+		$replacements = array(
+			'{{SCRIPT}}' => $wgScript,
+			'{{USER}}' => $wgUser,
+			'{{PAGE}}' => $page,
+		);
+
+		$target = strtr( $target, $replacements );
 
 		return <<<HTML
 		<div class="ac-button-wrap">

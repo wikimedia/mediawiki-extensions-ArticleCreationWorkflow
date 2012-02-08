@@ -143,6 +143,7 @@
 							.end()
 						.find('.ac-action-button')
 							.click( function(e) {
+								e.preventDefault();
 								ac.executeAction(button);
 							} )
 							.end()

@@ -112,6 +112,6 @@ $wgArticleCreationConfig = array(
 		'create' => '{{SCRIPT}}?title={{PAGE}}&action=edit',
 		'login' => '{{SCRIPT}}?title=Special:Userlogin&returnto=Special:ArticleCreationLanding/{{PAGE}}',
 		'signup' => '{{SCRIPT}}?title=Special:Userlogin/signup&returnto=Special:ArticleCreationLanding/{{PAGE}}',
-		'request' => 'http://google.com/?q=dsa'
+		'request' => 'http://google.com/?q={{PAGE}}'
 	)
 );

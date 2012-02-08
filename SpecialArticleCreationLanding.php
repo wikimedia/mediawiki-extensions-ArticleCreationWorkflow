@@ -32,7 +32,7 @@ class SpecialArticleCreationLanding extends SpecialPage {
 		$wgOut->setRobotPolicy( 'noindex,nofollow' );
 		$wgOut->addModules( 'ext.articleCreation.core' );
 		$wgOut->addModules( 'ext.articleCreation.user' );
-		$wgOut->addHtml( ArticleCreationTemplates::getLandingPage() );
+		$wgOut->addHtml( ArticleCreationTemplates::getLandingPage($par) );
 	}
 	
 }
