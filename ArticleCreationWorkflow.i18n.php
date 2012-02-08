@@ -68,7 +68,7 @@ $messages['qqq'] = array(
 	'ac-landing-page-title' =>  'The title of the landing page',
 	
 	//buttons
-	'ac-action-indicator' => 'Indicates the action the user would like to take "I want to..."',
+	'ac-action-indicator' => 'Introduction for the selection of the action that the user wants to take ("I want to...")',
 
 	'ac-action-login' => 'Prompt to log in to the wiki, goes inside the button',
 	'ac-action-login-subtitle' => 'First-person statement for the login button subtitle',
@@ -89,11 +89,11 @@ $messages['qqq'] = array(
 
 	'ac-action-create' => 'Prompt to create an article directly, goes inside the button',
 	'ac-action-create-subtitle' => 'First-person statement for the create button subtitle',
-	'ac-create-warning-create' => 'Tooltip warning about how new articles may be deleted if they don\t conform to policy',
+	'ac-create-warning-create' => 'Tooltip warning about how new articles may be deleted if they don\'t conform to policy',
 	'ac-create-button' => "OK button that goes inside the warning tooltip",
 	'ac-hover-tooltip-body-create' => 'Bullet point, explains which users should choose the create button.  Goes inside a tooltip.',
 
-	'ac-create-dismiss' => 'Checkbox prompt to skip this step',
+	'ac-create-dismiss' => 'Checkbox prompt to skip this step in future',
 
 	'ac-create-help' => 'Link text for article creation help, goes in tooltip above text.',
 	'ac-click-tip-title-create' => 'Title for reasons that an article might be deleted',
