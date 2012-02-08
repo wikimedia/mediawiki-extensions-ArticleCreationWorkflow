@@ -6,7 +6,7 @@
 $wgExtensionCredits['other'][] = array(
 	'author' => array( 'Rob Moen', 'Benny Situ' ),
 	'descriptionmsg' => 'article-creation-desc',
-	'name' => 'ArticleCreation',
+	'name' => 'ArticleCreationWorkflow',
 	'url' => 'http://www.mediawiki.org/wiki/Article_Creation_Landing_System',
 	'version' => '0.1',
 	'path' => __FILE__,
