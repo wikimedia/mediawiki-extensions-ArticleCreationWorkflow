@@ -65,7 +65,9 @@
 						.find('.mw-ac-interstitial')
 						.hide();
 
-					if ( ! $(this).parent().find('.mw-ac-interstitial').length ) {
+					if ( ! $(this).parent().find('.mw-ac-interstitial').length ||
+						ac.isInterstitialDisabled($(this).data('ac-button'))
+					) {
 						ac.executeAction( $(this).data('ac-button' ) );
 						return;
 					}
@@ -121,6 +123,10 @@
 		},
 		
 		executeAction : function( action ) {
+			if ( $('#mw-ac-create-dismiss').is(':checked') ) {
+				ac.disableInterstitial( action );
+			}
+
 			var article = wgPageName.substr( wgPageName.indexOf('/') + 1 );
 			var urlTemplate = ac.config['action-url'][action];
 
@@ -129,6 +135,19 @@
 			urlTemplate = urlTemplate.replace( '{{SCRIPT}}', wgScript );
 
 			window.location.href = urlTemplate;
+		},
+
+		disableInterstitial : function(button) {
+			$.cookie( 'mw:ac:disabled-interstitial:'+button, 1,
+				{ expires : 365, path : '/' } );
+		},
+
+		isInterstitialDisabled : function(button) {
+			if ( $.cookie('mw:ac:disabled-interstitial:'+button) ) {
+				return true;
+			}
+
+			return false;
 		}
 
 	});
