@@ -46,51 +46,51 @@
 }
 
 .ac-button-blue {
-	background-image: linear-gradient(bottom, rgb(33,67,122) 32%, rgb(51,101,186) 66%);
-	background-image: -o-linear-gradient(bottom, rgb(33,67,122) 32%, rgb(51,101,186) 66%);
-	background-image: -moz-linear-gradient(bottom, rgb(33,67,122) 32%, rgb(51,101,186) 66%);
-	background-image: -webkit-linear-gradient(bottom, rgb(33,67,122) 32%, rgb(51,101,186) 66%);
-	background-image: -ms-linear-gradient(bottom, rgb(33,67,122) 32%, rgb(51,101,186) 66%);
+	background-image: linear-gradient(bottom, #21437a 10%, #3366bb 90%);
+	background-image: -o-linear-gradient(bottom, #21437a 10%, #3366bb 90%);
+	background-image: -moz-linear-gradient(bottom, #21437a 10%, #3366bb 90%);
+	background-image: -webkit-linear-gradient(bottom, #21437a 10%, #3366bb 90%);
+	background-image: -ms-linear-gradient(bottom, #21437a 10%, #3366bb 90%);
 
 	background-image: -webkit-gradient(
 		linear,
 		left bottom,
 		left top,
-		color-stop(0.3, rgb(33,67,122)),
-		color-stop(0.6, rgb(51,101,186))
+		color-stop(0.1, #21437a),
+		color-stop(0.9, #3366bb)
 	);
 }
 
 .ac-button-red {
-	background-image: linear-gradient(bottom, rgb(133,0,0) 32%, rgb(203,0,0) 66%);
-	background-image: -o-linear-gradient(bottom, rgb(133,0,0) 32%, rgb(203,0,0) 66%);
-	background-image: -moz-linear-gradient(bottom, rgb(133,0,0) 32%, rgb(203,0,0) 66%);
-	background-image: -webkit-linear-gradient(bottom, rgb(133,0,0) 32%, rgb(203,0,0) 66%);
-	background-image: -ms-linear-gradient(bottom, rgb(133,0,0) 32%, rgb(203,0,0) 66%);
+	background-image: linear-gradient(bottom, #850000 10%, #CC0000 90%);
+	background-image: -o-linear-gradient(bottom, #850000 10%, #CC0000 90%);
+	background-image: -moz-linear-gradient(bottom, #850000 10%, #CC0000 90%);
+	background-image: -webkit-linear-gradient(bottom, #850000 10%, #CC0000 90%);
+	background-image: -ms-linear-gradient(bottom, #850000 10%, #CC0000 90%);
 
 	background-image: -webkit-gradient(
 		linear,
 		left bottom,
 		left top,
-		color-stop(0.3, rgb(133,0,0)),
-		color-stop(0.6, rgb(203,0,0))
+		color-stop(0.1, #850000),
+		color-stop(0.9, #CC0000)
 	);
 }
 
 .ac-button-green {
 	background-color: #3cb878;
-	background-image: linear-gradient(bottom, rgb(39,120,78) 22%, rgb(60,184,120) 61%);
-	background-image: -o-linear-gradient(bottom, rgb(39,120,78) 22%, rgb(60,184,120) 61%);
-	background-image: -moz-linear-gradient(bottom, rgb(39,120,78) 22%, rgb(60,184,120) 61%);
-	background-image: -webkit-linear-gradient(bottom, rgb(39,120,78) 22%, rgb(60,184,120) 61%);
-	background-image: -ms-linear-gradient(bottom, rgb(39,120,78) 22%, rgb(60,184,120) 61%);
+	background-image: linear-gradient(bottom, #27784e 10%, #3cb878 90%);
+	background-image: -o-linear-gradient(bottom, #27784e 10%, #3cb878 90%);
+	background-image: -moz-linear-gradient(bottom, #27784e 10%, #3cb878 90%);
+	background-image: -webkit-linear-gradient(bottom, #27784e 10%, #3cb878 90%);
+	background-image: -ms-linear-gradient(bottom, #27784e 10%, #3cb878 90%);
 
 	background-image: -webkit-gradient(
 		linear,
 		left bottom,
 		left top,
-		color-stop(0.22, rgb(39,120,78)),
-		color-stop(0.61, rgb(60,184,120))
+		color-stop(0.1, #27784e),
+		color-stop(0.9, #3cb878)
 	);	
 }
 

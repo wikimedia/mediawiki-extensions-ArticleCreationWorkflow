@@ -40,7 +40,12 @@ $messages['en'] = array(
 
 	'ac-action-create' => 'Create this article myself',
 	'ac-action-create-subtitle' => 'I know what I\'m doing.',
-	'ac-create-warning-create' => 'Your article may be deleted immediately if it does not conform to our policies.',
+	'ac-create-warning-create' => "Articles may be deleted immediately if:
+	<ul><li>they copy from other sources, or</li>
+	<li>are overly promotional, or</li>
+	<li>lack context, or</li>
+	<li>fail to explain why their subject is notable.</li></ul>
+	",
 	'ac-create-button' => "Let's Go",
 	'ac-hover-tooltip-body-create' => "<ul><li>You have created articles before, and</li>
 		<li>You are familiar with Wikipedia's policies, and</li>
