@@ -63,12 +63,26 @@ class ArticleCreationHooks {
 	}
 
 	public static function resourceLoaderGetConfigVars( &$vars ) {
-		global $wgArticleCreationConfig;
+		global $wgArticleCreationConfig, $wgUser;
 		
 		$vars['acConfig'] = $wgArticleCreationConfig + 
-					array('tracking-turned-on' =>  ArticleCreationUtil::trackingEnabled(),
-						'tracking-code-prefix' => ArticleCreationUtil::trackingCodePrefix() );
+					array(
+						'tracking-turned-on' =>  ArticleCreationUtil::trackingEnabled(),
+						'tracking-code-prefix' => ArticleCreationUtil::trackingCodePrefix(),
+						'enabled' => $wgUser->getOption('ac-enable'),
+					);
 	
+		return true;
+	}
+
+	public static function getPreferences( $user, &$preferences ) {
+		$preferences['ac-enable'] = array(
+			'section' => 'editing/labs',
+			'label-message' => 'ac-preference-enable',
+			'type' => 'toggle',
+			'default' => 0,
+		);
+
 		return true;
 	}
 

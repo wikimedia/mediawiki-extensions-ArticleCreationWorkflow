@@ -59,6 +59,8 @@ $messages['en'] = array(
 
 	'ac-create-help' => 'Learn more',
 	'ac-click-tip-title-create' => 'I know that…',
+
+	'ac-preference-enable' => 'Enable new article creation workflow (experimental)',
 );
 
 $messages['qqq'] = array(
@@ -97,4 +99,6 @@ $messages['qqq'] = array(
 
 	'ac-create-help' => 'Link text for article creation help, goes in tooltip above text.',
 	'ac-click-tip-title-create' => 'Title for reasons that an article might be deleted',
+
+	'ac-preference-enable' => 'Name of preference for enabling this extension for a user',
 );

@@ -27,6 +27,7 @@ $wgAutoloadClasses['ArticleCreationHooks'] = $articleCreationDir . 'ArticleCreat
 $wgHooks['BeforeDisplayNoArticleText'][] = 'ArticleCreationHooks::BeforeDisplayNoArticleText';
 $wgHooks['BeforeWelcomeCreation'][] = 'ArticleCreationHooks::BeforeWelcomeCreation';
 $wgHooks['AlternateEdit'][] = 'ArticleCreationHooks::AlternateEdit';
+$wgHooks['GetPreferences'][] = 'ArticleCreationHooks::getPreferences';
 
 $wgHooks['ResourceLoaderGetConfigVars'][] = 'ArticleCreationHooks::resourceLoaderGetConfigVars';
 
