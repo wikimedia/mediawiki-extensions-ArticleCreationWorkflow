@@ -41,6 +41,9 @@ $acResourceTemplate = array(
 
 $wgResourceModules['ext.articleCreation.init'] = $acResourceTemplate + array(
 	'scripts' => 'ext.articleCreation.init/ext.articleCreation.init.js',
+	'dependencies' => array(
+		'mediawiki.user',
+		),
 );
 
 $wgResourceModules['ext.articleCreation.core'] = $acResourceTemplate + array (
