@@ -34,7 +34,7 @@ class SpecialArticleCreationLanding extends SpecialPage {
 		$wgOut->addModules( 'ext.articleCreation.user' );
 		$wgOut->addHtml( ArticleCreationTemplates::getLandingPage($par) );
 
-		ArticleCreationUtil::TrackSpecialLandingPage( $wgRequest, $wgUser );		
+		ArticleCreationUtil::TrackSpecialLandingPage( $wgRequest, $wgUser, $par );		
 	}
 	
 }

@@ -24,8 +24,9 @@ class ArticleCreationUtil {
 	 * Track the page stats to the special article creation landing page
 	 * @param $request Object
 	 * @param $user Object
+	 * @param $par string - the title for the non-existing article
 	 */
-	public static function TrackSpecialLandingPage( $request, $user ) {
+	public static function TrackSpecialLandingPage( $request, $user, $par ) {
 		if ( $user->isAnon() ) {
 			$event = 'landingpage-anonymous';
 		} else {
@@ -38,15 +39,16 @@ class ArticleCreationUtil {
 			}
 		}
 			
-		self::clickTracking( $event, SpecialPage::getTitleFor( 'ArticleCreationLanding' ) );
+		self::clickTracking( $event, SpecialPage::getTitleFor( 'ArticleCreationLanding' ), $par );
 	}
 
 	/**
 	 * Tracking code that calls ClickTracking 
 	 * @param $event string the event name
 	 * @param $title Object
+	 * @param $info string - additional info for click tracking
 	 */
-	private static function clickTracking( $event, $title ) {		
+	private static function clickTracking( $event, $title, $info = '' ) {		
 		// check if ClickTracking API is enabled
 		if ( !self::trackingEnabled() ) {
 			return;	
@@ -56,7 +58,8 @@ class ArticleCreationUtil {
 			'action' => 'clicktracking',
 			'eventid' => self::trackingCodePrefix() . $event,
 			'token' => wfGenerateToken(),
-			'namespacenumber' => $title->getNamespace()
+			'namespacenumber' => $title->getNamespace(),
+			'additional' => $info
 		) );
 		$api = new ApiMain( $params, true );
 		$api->execute();
