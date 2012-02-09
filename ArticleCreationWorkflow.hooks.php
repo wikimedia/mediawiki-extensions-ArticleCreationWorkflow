@@ -4,6 +4,8 @@ class ArticleCreationHooks {
 
 	/**
 	 * Redirect users to a page specified by returnto upon successful account creation
+	 * @param $welcome_creation_msg - string
+	 * @param $injected_html - html string
 	 */
 	public static function BeforeWelcomeCreation( &$welcome_creation_msg, &$injected_html ) {
 		global $wgRequest, $wgOut;
@@ -24,6 +26,7 @@ class ArticleCreationHooks {
 	
 	/**
 	 * If the edit page is coming from red link, redirect users to article-non-existing page
+	 * @param $editPage - Object
 	 */
 	public static function AlternateEdit( $editPage ) {
 		global $wgRequest, $wgOut;

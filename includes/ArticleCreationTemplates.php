@@ -190,7 +190,7 @@ HTML;
 			</div>
 HTML;
 	}
-	
+
 	/**
 	 * Stub for a replacement Missing Page.
 	 * @param $article Article object for the page that was requested.
@@ -206,8 +206,5 @@ HTML;
 				</div>
 HTML;
 	}
-	
+
 }
-
-
-

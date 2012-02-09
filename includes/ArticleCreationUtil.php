@@ -4,22 +4,24 @@
  * Utility class for Article Creation
  */
 class ArticleCreationUtil {
-	
+
 	/**
-	 * Check if tracking is enabled
+	 * Check if tracking is enabled, in this case - ClickTracking
+	 * @return bool
 	 */
 	public static function trackingEnabled() {
 		return class_exists( 'ApiClickTracking' );
 	}
-	
+
 	/**
-	 * Generate tracking code prefix
+	 * Generate tracking code prefix for this campaign
+	 * @return string - the prefix text for clickTracking
 	 */
 	public static function trackingCodePrefix() {
 		global $wgExtensionCredits;
-		return 'ext.articlecreationworkflow@' . $wgExtensionCredits['other'][0]['version'] . '-';	
+		return 'ext.articlecreationworkflow@' . $wgExtensionCredits['other'][0]['version'] . '-';
 	}
-	
+
 	/**
 	 * Track the page stats to the special article creation landing page
 	 * @param $request Object
@@ -31,27 +33,27 @@ class ArticleCreationUtil {
 			$event = 'landingpage-anonymous';
 		} else {
 			$event = 'landingpage-loggedin';
-			
+
 			if ( $request->getBool( 'fromlogin' ) ) {
 				$event .= '-fromlogin';
 			} elseif ( $request->getBool( 'fromsignup' ) ) {
-				$event .= '-fromsignup';	
+				$event .= '-fromsignup';
 			}
 		}
-			
+
 		self::clickTracking( $event, SpecialPage::getTitleFor( 'ArticleCreationLanding' ), $par );
 	}
 
 	/**
-	 * Tracking code that calls ClickTracking 
+	 * Tracking code that calls ClickTracking
 	 * @param $event string the event name
 	 * @param $title Object
 	 * @param $info string - additional info for click tracking
 	 */
-	private static function clickTracking( $event, $title, $info = '' ) {		
+	private static function clickTracking( $event, $title, $info = '' ) {
 		// check if ClickTracking API is enabled
 		if ( !self::trackingEnabled() ) {
-			return;	
+			return;
 		}
 
 		$params = new FauxRequest( array(
@@ -64,6 +66,5 @@ class ArticleCreationUtil {
 		$api = new ApiMain( $params, true );
 		$api->execute();
 	}
-	
-}
 
+}
