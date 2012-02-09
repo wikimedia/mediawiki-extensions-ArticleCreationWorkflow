@@ -52,14 +52,10 @@ class ArticleCreationHooks {
 		// 	$text = ArticleCreationTemplates::showMissingPage( $article );
 		// 	$wikiText = false;
 		// }
-
 		// return false;
+		global $wgOut;
 
-		global $wgOut, $wgUser, $wgArticleCreationRegistrationCutoff;
-
-		$userRegistration = wfTimestamp( TS_MW, $wgUser->getRegistration() );
-
-		if ( !$userRegistration || $userRegistration > $wgArticleCreationRegistrationCutoff ) {
+		if ( ArticleCreationUtil::isEnabled() ) {
 			$wgOut->addModules( array( 'ext.articleCreation.init' ) );
 		}
 

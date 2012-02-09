@@ -6,6 +6,37 @@
 class ArticleCreationUtil {
 
 	/**
+	 * Is ArticleCreation enabled for the current user?
+	 *
+	 * 
+	 * @return bool whether or not it is.
+	 */
+	public static function isEnabled() {
+		return true;
+		global $wgUser, $wgArticleCreationRegistrationCutoff;
+
+		$userRegistration = wfTimestamp( TS_MW, $wgUser->getRegistration() );
+
+		$bucketConfig = array(
+			'buckets' => array(
+				'on' => 1,
+				'off' => 99,
+			),
+			'version' => 1,
+		);
+
+		if ( !$userRegistration ||
+			$userRegistration > $wgArticleCreationRegistrationCutoff
+		) {
+			$bucket = PHPBucket::getBucket( 'ac-enabled', $bucketConfig );
+
+			return $bucket === 'on';
+		} else {
+			return false;
+		}
+	}
+
+	/**
 	 * Check if tracking is enabled, in this case - ClickTracking
 	 * @return bool
 	 */
