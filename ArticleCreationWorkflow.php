@@ -17,6 +17,7 @@ $articleCreationDir = dirname( __FILE__ ) . '/';
 /* Object model */
 $wgAutoloadClasses['ArticleCreationTemplates'] = $articleCreationDir . 'includes/ArticleCreationTemplates.php';
 $wgAutoloadClasses['ArticleCreationUtil'] = $articleCreationDir . 'includes/ArticleCreationUtil.php';
+$wgAutoloadClasses['PHPBucket'] = $articleCreationDir . 'includes/PHPBucket.php';
 
 /* Special Pages */
 $wgAutoloadClasses['SpecialArticleCreationLanding'] = $articleCreationDir . 'SpecialArticleCreationLanding.php';
