@@ -31,6 +31,10 @@ class ArticleCreationHooks {
 	public static function AlternateEdit( $editPage ) {
 		global $wgRequest, $wgOut;
 
+		if ( ! ArticleCreationUtil::isEnabled() ) {
+			return true;
+		}
+
 		$title = $editPage->mArticle->getTitle();
 
 		if ( $wgRequest->getBool( 'redlink' ) ) {

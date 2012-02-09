@@ -12,7 +12,6 @@ class ArticleCreationUtil {
 	 * @return bool whether or not it is.
 	 */
 	public static function isEnabled() {
-		return true;
 		global $wgUser, $wgArticleCreationRegistrationCutoff;
 
 		$userRegistration = wfTimestamp( TS_MW, $wgUser->getRegistration() );
