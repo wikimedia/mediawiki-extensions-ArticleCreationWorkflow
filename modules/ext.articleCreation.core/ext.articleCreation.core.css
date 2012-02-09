@@ -116,6 +116,13 @@
 
 .ac-arrow {
 	float: right;
+	width: 16px;
+	height: 16px;
+}
+
+.ac-arrow-forward {
+	/* @embed */
+	background: url(images/arrow_right.png) no-repeat;
 }
 
 /* Tooltip Magic */
@@ -129,6 +136,7 @@
 }
 
 .mw-ac-tooltip-pointy {
+	/* @embed */
 	background: url(images/ac-tooltip-pointy.png) left top no-repeat;
 	height: 22px;
 	width: 12px;
