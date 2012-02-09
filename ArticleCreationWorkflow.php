@@ -136,7 +136,7 @@ $wgArticleCreationButtons = array(
 				<a class="mw-ac-help" href="http://www.google.com"><html:msg key="ac-create-help" /></a>
 				<div class="mw-ac-tooltip-title"><html:msg key="ac-click-tip-title-create" /></div>
 				<div class="mw-ac-tooltip-body">
-					<div class="mw-ac-create-verbiage"><html:msg key="ac-create-warning-create" /></div>
+					<div class="mw-ac-create-verbiage"><html:msg raw="1" key="ac-create-warning-create" /></div>
 					<div class="ac-button-wrap">
 						<a class="ac-button-green ac-button ac-action-button" data-ac-action="create">
 							<div class="ac-arrow ac-arrow-forward">&nbsp;</div>

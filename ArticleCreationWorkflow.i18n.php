@@ -41,10 +41,10 @@ $messages['en'] = array(
 	'ac-action-create' => 'Create this article myself',
 	'ac-action-create-subtitle' => 'I know what I\'m doing.',
 	'ac-create-warning-create' => "Articles may be deleted immediately if:
-	they copy from other sources, or
-	are overly promotional, or
-	lack context, or
-	fail to explain why their subject is notable.
+	<ul><li>they copy from other sources, or</li>
+		<li>are overly promotional, or</li>
+		<li>lack context, or</li>
+		<li>fail to explain why their subject is notable.</li></ul>
 	",
 	'ac-create-button' => "Let's Go",
 	'ac-hover-tooltip-body-create' => "<ul><li>You have created articles before, and</li>

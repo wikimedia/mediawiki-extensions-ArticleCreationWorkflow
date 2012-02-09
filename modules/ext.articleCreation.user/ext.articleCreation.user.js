@@ -11,6 +11,22 @@
 
 			ac.setupTooltips();
 
+			$(document).click( function(e) {
+				$('.ac-article-button')
+					//remove green states and hide their tooltips
+					.removeClass('ac-button-green')
+					.removeClass('ac-button-selected')
+					.each ( function (i, e) {
+						$(this) .parent()
+							.find('.mw-ac-tooltip')
+							.hide();
+					});
+					
+				ac.panel
+					.find('.mw-ac-interstitial')
+					.hide();
+			} );
+
 			//setup button hover states
 			ac.panel
 				.find( '.ac-article-button' )
@@ -22,7 +38,7 @@
 							//attach other events here, just making first tooltip for now
 							//testing hover effects
 							.hover (function (){
-								if ( $(this).hasClass('ac-button-selected') )
+								if ( $('.ac-button-selected') )
 									return;
 									
 								$( this ).parent()
@@ -50,6 +66,7 @@
 				.find('.ac-article-button')
 				.click (function (e) {
 					e.preventDefault();
+					e.stopPropagation();
 
 					$('.ac-article-button')
 						//remove green states and hide their tooltips
@@ -109,6 +126,7 @@
 				.find('.ac-action-button')
 				.click( function(e) {
 					e.preventDefault();
+					e.stopPropagation();
 					ac.executeAction($(this).data('ac-action'));
 				} );
 		},
