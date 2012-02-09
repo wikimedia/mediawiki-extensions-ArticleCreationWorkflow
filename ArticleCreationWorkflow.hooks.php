@@ -55,9 +55,13 @@ class ArticleCreationHooks {
 
 		// return false;
 
-		global $wgOut;
+		global $wgOut, $wgUser, $wgArticleCreationRegistrationCutoff;
 
-		$wgOut->addModules( array( 'ext.articleCreation.init' ) );
+		$userRegistration = wfTimestamp( TS_MW, $wgUser->getRegistration() );
+
+		if ( !$userRegistration || $userRegistration > $wgArticleCreationRegistrationCutoff ) {
+			$wgOut->addModules( array( 'ext.articleCreation.init' ) );
+		}
 
 		return true;
 	}
@@ -69,20 +73,8 @@ class ArticleCreationHooks {
 					array(
 						'tracking-turned-on' =>  ArticleCreationUtil::trackingEnabled(),
 						'tracking-code-prefix' => ArticleCreationUtil::trackingCodePrefix(),
-						'enabled' => $wgUser->getOption('ac-enable'),
 					);
 	
-		return true;
-	}
-
-	public static function getPreferences( $user, &$preferences ) {
-		$preferences['ac-enable'] = array(
-			'section' => 'editing/labs',
-			'label-message' => 'ac-preference-enable',
-			'type' => 'toggle',
-			'default' => 0,
-		);
-
 		return true;
 	}
 
