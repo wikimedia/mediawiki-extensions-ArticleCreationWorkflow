@@ -62,8 +62,11 @@ class ArticleCreationHooks {
 	public static function resourceLoaderGetConfigVars( &$vars ) {
 		global $wgArticleCreationConfig;
 		
-		$vars['acConfig'] = $wgArticleCreationConfig;
+		$vars['acConfig'] = $wgArticleCreationConfig + 
+					array('tracking-turned-on' =>  ArticleCreationUtil::trackingEnabled(),
+						'tracking-code-prefix' => ArticleCreationUtil::trackingCodePrefix() );
 	
 		return true;
 	}
+
 }

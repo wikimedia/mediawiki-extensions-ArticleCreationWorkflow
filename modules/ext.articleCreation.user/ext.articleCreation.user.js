@@ -72,6 +72,10 @@
 						return;
 					}
 
+					if ( ac.config['tracking-turned-on'] ) {
+						jQuery.trackAction( ac.config['tracking-code-prefix'] + $(this).data('ac-button' ) + '-tooltip' );
+					}
+
 					$( this )
 						//make it green
 						.addClass('ac-button-green')
@@ -133,7 +137,11 @@
 			urlTemplate = urlTemplate.replace( '{{PAGE}}', encodeURIComponent( article ) );
 			urlTemplate = urlTemplate.replace( '{{USER}}', encodeURIComponent( wgUserName ) );
 			urlTemplate = urlTemplate.replace( '{{SCRIPT}}', wgScript );
-
+			
+			if ( ac.config['tracking-turned-on'] ) {
+				jQuery.trackAction( ac.config['tracking-code-prefix'] + action );
+			}
+			
 			window.location.href = urlTemplate;
 		},
 
