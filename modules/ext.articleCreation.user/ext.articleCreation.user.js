@@ -72,9 +72,7 @@
 						return;
 					}
 
-					if ( ac.config['tracking-turned-on'] ) {
-						jQuery.trackAction( ac.config['tracking-code-prefix'] + $(this).data('ac-button' ) + '-tooltip' );
-					}
+					ac.trackAction( $(this).data('ac-button' ) + '-interstitial' );
 
 					$( this )
 						//make it green
@@ -138,9 +136,7 @@
 			urlTemplate = urlTemplate.replace( '{{USER}}', encodeURIComponent( wgUserName ) );
 			urlTemplate = urlTemplate.replace( '{{SCRIPT}}', wgScript );
 			
-			if ( ac.config['tracking-turned-on'] ) {
-				jQuery.trackAction( ac.config['tracking-code-prefix'] + action );
-			}
+			ac.trackAction(article, action);
 			
 			window.location.href = urlTemplate;
 		},
@@ -156,6 +152,30 @@
 			}
 
 			return false;
+		},
+
+		trackAction : function(article, action) {
+			if ( ac.config['tracking-turned-on'] ) {
+				// Split up article into namespace and title
+				var	namespace = article.substr( 0, article.indexOf(':') ),
+					title = article.substr( article.indexOf(':') + 1 ),
+					namespaceNumber;
+
+				namespace = namespace.toLowerCase();
+				namespaceNumber = mw.config.get('wgNamespaceIds')[namespace];
+
+				if ( typeof namespaceNumber === 'undefined' ) {
+					namespace = '';
+					namespaceNumber = 0;
+					title = article;
+				}
+
+				jQuery.trackActionWithOptions( {
+					id : ac.config['tracking-code-prefix'] + action,
+					namespace : namespaceNumber,
+					info : title
+				} );
+			}
 		}
 
 	});
