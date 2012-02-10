@@ -25,7 +25,8 @@ abstract class PHPBucket {
 
 		$options = $options + $defaults;
 
-		$cookieName = 'phpbucket:'.$key.':'.$options['version'];
+		$cookieName = 'phpbucket:'.$key.':'
+			.$options['version'].':'. $wgUser->getId();
 
 		$selectedBucket = $wgRequest->getCookie( $cookieName );
 
