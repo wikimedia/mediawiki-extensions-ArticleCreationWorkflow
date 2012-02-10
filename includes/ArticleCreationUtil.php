@@ -71,16 +71,15 @@ class ArticleCreationUtil {
 			}
 		}
 
-		self::clickTracking( $event, SpecialPage::getTitleFor( 'ArticleCreationLanding' ), $par );
+		self::clickTracking( $event, Title::newFromText( $par ) );
 	}
 
 	/**
 	 * Tracking code that calls ClickTracking
 	 * @param $event string the event name
 	 * @param $title Object
-	 * @param $info string - additional info for click tracking
 	 */
-	private static function clickTracking( $event, $title, $info = '' ) {
+	private static function clickTracking( $event, $title ) {
 		// check if ClickTracking API is enabled
 		if ( !self::trackingEnabled() ) {
 			return;
@@ -91,7 +90,7 @@ class ArticleCreationUtil {
 			'eventid' => self::trackingCodePrefix() . $event,
 			'token' => wfGenerateToken(),
 			'namespacenumber' => $title->getNamespace(),
-			'additional' => $info
+			'additional' => $title->getDBkey(),
 		) );
 		$api = new ApiMain( $params, true );
 		$api->execute();
