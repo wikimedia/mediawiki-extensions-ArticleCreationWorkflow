@@ -171,4 +171,4 @@ $wgArticleCreationConfig = array(
 	'buttons' => $wgArticleCreationButtons,
 );
 
-$wgArticleCreationCutoff = '20110205';
+$wgArticleCreationRegistrationCutoff = '20110205121212';
