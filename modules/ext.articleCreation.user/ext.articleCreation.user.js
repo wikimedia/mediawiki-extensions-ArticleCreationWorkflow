@@ -12,20 +12,22 @@
 			ac.setupTooltips();
 
 			$(document).click( function(e) {
-				$('.ac-article-button')
-					//remove green states and hide their tooltips
-					.removeClass('ac-button-green')
-					.removeClass('ac-button-selected')
-					.each ( function (i, e) {
-						$(this) .parent()
-							.find('.mw-ac-tooltip')
-							.hide();
-					});
+				if ( $(e.target).is('.mw-ac-interstitial *' ) ) {
+					return;
+				}
+
+				ac.hideInterstitial( $('.ac-article-button') );
 					
 				ac.panel
 					.find('.mw-ac-interstitial')
 					.hide();
 			} );
+
+			$(document).keydown( function(e) {
+				if ( e.keyCode == 27 ) {// ESC
+					ac.hideInterstitial( $('.ac-article-button') );
+				}
+			});
 
 			//setup button hover states
 			ac.panel
@@ -68,19 +70,20 @@
 					e.preventDefault();
 					e.stopPropagation();
 
-					$('.ac-article-button')
-						//remove green states and hide their tooltips
-						.removeClass('ac-button-green')
-						.removeClass('ac-button-selected')
-						.each ( function (i, e) {
-							$(this) .parent()
-								.find('.mw-ac-tooltip')
-								.hide();
-						});
-						
+					var alreadySelected = $(this)
+						.hasClass('ac-button-selected');
+
+					ac.hideInterstitial($('.ac-article-button'));
+					$('.ac-article-button').not($(this))
+								.addClass('ac-faded');
+					
 					ac.panel
 						.find('.mw-ac-interstitial')
 						.hide();
+
+					if ( alreadySelected ) {
+						return;
+					}
 
 					if ( ! $(this).parent().find('.mw-ac-interstitial').length ||
 						ac.isInterstitialDisabled($(this).data('ac-button'))
@@ -93,6 +96,7 @@
 
 					$( this )
 						//make it green
+						.removeClass('ac-button-blue')
 						.addClass('ac-button-green')
 						.addClass('ac-button-selected')
 						.parent()
@@ -110,10 +114,11 @@
 				.hover (function (){
 					$( '.ac-article-button' )
 						.not( this )
-						.addClass( 'ac-faded' );
+						.removeClass( 'ac-button-hover' );
+					$(this).addClass('ac-button-hover');
 				}, function(){
 					$( '.ac-article-button' )
-						.removeClass( 'ac-faded' );
+						.removeClass( 'ac-button-hover' );
 				});
 
 		},
@@ -188,12 +193,31 @@
 					title = article;
 				}
 
+				// Normalise title
+				title = title.charAt(0).toUpperCase() + title.substr(1);
+				title = title.replace(' ', '_' );
+
 				jQuery.trackActionWithOptions( {
 					id : ac.config['tracking-code-prefix'] + action,
 					namespace : namespaceNumber,
 					info : title
 				} );
 			}
+		},
+
+		hideInterstitial : function($elements) {
+			//remove green states and hide their tooltips
+			$elements
+				.removeClass('ac-button-green')
+				.removeClass('ac-button-selected')
+				.each ( function (i, e) {
+					var color = $(this).data('ac-color');
+					$(this) .addClass( 'ac-button-'+color )
+						.parent()
+						.find('.mw-ac-tooltip,.mw-ac-interstitial')
+						.hide();
+				});
+			$('.ac-article-button').removeClass('ac-faded');
 		}
 
 	});

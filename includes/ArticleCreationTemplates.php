@@ -129,7 +129,9 @@ HTML;
 
 		return <<<HTML
 		<div class="ac-button-wrap">
-			<a class="ac-article-button ac-button ac-button-$color ac-article-$button" data-ac-button="$button" href="$target">
+			<a class="ac-article-button ac-button ac-button-$color
+					ac-article-$button" data-ac-button="$button"
+					data-ac-color="$color" href="$target">
 				<div class="ac-arrow ac-arrow-forward">&nbsp;</div>
 				<div class="ac-button-text">
 					<div class="ac-button-title">$buttonTitle</div>	
