@@ -47,16 +47,7 @@ class ArticleCreationHooks {
 	/**
 	 * Customized html that shows an article doesn't exist
 	 */
-	public static function BeforeDisplayNoArticleText( $article, &$text, $errors, $wgUser, &$wikiText ) {
-		// global $wgGroupPermissions;
-		//
-		// // Show the custom page if there is no error or the user is not loggin and anonmyous edit 
-		// // is not allowed
-		// if ( !count( $errors ) || ( $wgUser->isAnon() && !$wgGroupPermissions['*']['edit'] ) ) {			
-		// 	$text = ArticleCreationTemplates::showMissingPage( $article );
-		// 	$wikiText = false;
-		// }
-		// return false;
+	public static function BeforeDisplayNoArticleText( $article ) {
 		global $wgOut;
 
 		if ( ArticleCreationUtil::isEnabled() ) {
@@ -71,6 +62,7 @@ class ArticleCreationHooks {
 		
 		$vars['acConfig'] = $wgArticleCreationConfig + 
 					array(
+						'enabled' => ArticleCreationUtil::isEnabled(),
 						'tracking-turned-on' =>  ArticleCreationUtil::trackingEnabled(),
 						'tracking-code-prefix' => ArticleCreationUtil::trackingCodePrefix(),
 					);

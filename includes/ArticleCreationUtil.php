@@ -18,8 +18,8 @@ class ArticleCreationUtil {
 
 		$bucketConfig = array(
 			'buckets' => array(
-				'on' => 1,
-				'off' => 99,
+				'on' => 99,
+				'off' => 1,
 			),
 			'version' => 1,
 		);
