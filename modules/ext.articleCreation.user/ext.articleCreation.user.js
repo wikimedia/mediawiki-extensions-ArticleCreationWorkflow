@@ -160,9 +160,10 @@
 			urlTemplate = urlTemplate.replace( '{{USER}}', encodeURIComponent( wgUserName ) );
 			urlTemplate = urlTemplate.replace( '{{SCRIPT}}', wgScript );
 			
-			ac.trackAction(article, action);
-			
-			window.location.href = urlTemplate;
+			ac.trackAction(article, action)
+				.complete( function() {
+					window.location.href = urlTemplate;
+				});
 		},
 
 		disableInterstitial : function(button) {
@@ -198,7 +199,7 @@
 				title = title.charAt(0).toUpperCase() + title.substr(1);
 				title = title.replace(' ', '_' );
 
-				jQuery.trackActionWithOptions( {
+				return jQuery.trackActionWithOptions( {
 					id : ac.config['tracking-code-prefix'] + action,
 					namespace : namespaceNumber,
 					info : title
