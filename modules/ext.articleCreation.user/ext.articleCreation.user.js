@@ -92,7 +92,8 @@
 						return;
 					}
 
-					ac.trackAction( $(this).data('ac-button' ) + '-interstitial' );
+					var article = wgPageName.substr( wgPageName.indexOf('/') + 1 );
+					ac.trackAction( article, $(this).data('ac-button' ) + '-interstitial' );
 
 					$( this )
 						//make it green
