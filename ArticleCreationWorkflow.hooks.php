@@ -78,4 +78,26 @@ class ArticleCreationHooks {
 		return true;
 	}
 
+	public static function configSearchTitle( &$vars ) {
+		global $wgRequest;
+
+		$vars['acSearch'] = $wgRequest->getVal( 'search' );
+
+		return true;
+	}
+
+	/**
+	 * Alter 'Create' Link behavior in search result page
+	 */
+	public static function SpecialSearchCreateLink( $title, &$params ) {
+		global $wgOut, $wgHooks;
+
+		if ( ArticleCreationUtil::isEnabled() ) {
+			$wgHooks['MakeGlobalVariablesScript'][] = 'ArticleCreationHooks::configSearchTitle';
+			$wgOut->addModules( array( 'ext.articleCreation.searchResult' ) );
+		}
+
+		return true;
+	}
+
 }

@@ -28,6 +28,7 @@ $wgAutoloadClasses['ArticleCreationHooks'] = $articleCreationDir . 'ArticleCreat
 $wgHooks['BeforeDisplayNoArticleText'][] = 'ArticleCreationHooks::BeforeDisplayNoArticleText';
 $wgHooks['BeforeWelcomeCreation'][] = 'ArticleCreationHooks::BeforeWelcomeCreation';
 $wgHooks['AlternateEdit'][] = 'ArticleCreationHooks::AlternateEdit';
+$wgHooks['SpecialSearchCreateLink'][] = 'ArticleCreationHooks::SpecialSearchCreateLink';
 
 $wgHooks['ResourceLoaderGetConfigVars'][] = 'ArticleCreationHooks::resourceLoaderGetConfigVars';
 
@@ -42,6 +43,10 @@ $acResourceTemplate = array(
 
 $wgResourceModules['ext.articleCreation.init'] = $acResourceTemplate + array(
 	'scripts' => 'ext.articleCreation.init/ext.articleCreation.init.js',
+);
+
+$wgResourceModules['ext.articleCreation.searchResult'] = $acResourceTemplate + array(
+	'scripts' => 'ext.articleCreation.searchResult/ext.articleCreation.searchResult.js',
 );
 
 $wgResourceModules['ext.articleCreation.core'] = $acResourceTemplate + array (
