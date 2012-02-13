@@ -176,4 +176,12 @@ $wgArticleCreationConfig = array(
 	'buttons' => $wgArticleCreationButtons,
 );
 
+$wgArticleCreationBucketConfig = array(
+	'buckets' => array(
+		'on' => 1,
+		'off' => 99,
+	),
+	'version' => 1,
+);
+
 $wgArticleCreationRegistrationCutoff = '20110205121212';

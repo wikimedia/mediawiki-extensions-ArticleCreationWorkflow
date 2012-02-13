@@ -12,22 +12,15 @@ class ArticleCreationUtil {
 	 * @return bool whether or not it is.
 	 */
 	public static function isEnabled() {
-		global $wgUser, $wgArticleCreationRegistrationCutoff;
+		global $wgUser, $wgArticleCreationRegistrationCutoff,
+			$wgArticleCreationBucketConfig;
 
 		$userRegistration = wfTimestamp( TS_MW, $wgUser->getRegistration() );
-
-		$bucketConfig = array(
-			'buckets' => array(
-				'on' => 99,
-				'off' => 1,
-			),
-			'version' => 1,
-		);
 
 		if ( !$userRegistration ||
 			$userRegistration > $wgArticleCreationRegistrationCutoff
 		) {
-			$bucket = PHPBucket::getBucket( 'ac-enabled', $bucketConfig );
+			$bucket = PHPBucket::getBucket( 'ac-enabled', $wgArticleCreationBucketConfig );
 
 			return $bucket === 'on';
 		} else {
