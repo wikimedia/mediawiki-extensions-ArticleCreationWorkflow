@@ -84,7 +84,8 @@ class ArticleCreationHooks {
 	public static function SpecialSearchCreateLink( $title, &$params ) {
 		global $wgOut, $wgHooks;
 
-		if ( ArticleCreationUtil::isEnabled() ) {
+		if ( ArticleCreationUtil::isEnabled() && $title->userCan( 'create' ) &&
+			$title->userCan('edit') ) {
 			$wgHooks['MakeGlobalVariablesScript'][] = 'ArticleCreationHooks::configSearchTitle';
 			$wgOut->addModules( array( 'ext.articleCreation.searchResult' ) );
 		}
