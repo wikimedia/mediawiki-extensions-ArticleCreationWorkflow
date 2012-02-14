@@ -78,10 +78,19 @@ class ArticleCreationUtil {
 			return;
 		}
 
+		global $wgRequest;
+
+		// try to grab the token generated from clickTracking
+		$token = $wgRequest->getCookie( 'clicktracking-session', '' );
+
+		if ( !$token ) {
+			$token = wfGenerateToken();
+		}
+
 		$params = new FauxRequest( array(
 			'action' => 'clicktracking',
 			'eventid' => self::trackingCodePrefix() . $event,
-			'token' => wfGenerateToken(),
+			'token' => $token,
 			'namespacenumber' => $title->getNamespace(),
 			'additional' => $title->getDBkey(),
 		) );
