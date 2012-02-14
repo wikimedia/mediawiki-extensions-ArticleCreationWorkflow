@@ -19,13 +19,13 @@ $messages['en'] = array(
 	//buttons
 	'ac-action-indicator' => 'I want to...',
 
-	'ac-action-login' => 'Log in to Wikipedia',
-	'ac-action-login-subtitle' => 'I have a Wikipedia account.',
+	'ac-action-login' => 'Log in to {{SITENAME}}',
+	'ac-action-login-subtitle' => 'I have a {{SITENAME}} account.',
 	'ac-hover-tooltip-body-login' => "<ul><li>You already have a user account and wish to edit under that name.</li></ul>",
 
-	'ac-action-signup' => 'Create a Wikipedia account',
-	'ac-action-signup-subtitle' => 'A Wikipedia account allows you to create new articles.',
-	'ac-hover-tooltip-body-signup' => "<ul><li>You <b><i>do not</i></b> have a Wikipedia account.</li></ul>",
+	'ac-action-signup' => 'Create a {{SITENAME}} account',
+	'ac-action-signup-subtitle' => 'A {{SITENAME}} account allows you to create new articles.',
+	'ac-hover-tooltip-body-signup' => "<ul><li>You <b><i>do not</i></b> have a {{SITENAME}} account.</li></ul>",
 
 	'ac-action-request' => 'Request this article',
 	'ac-action-request-subtitle' => "I'll submit a request that it be written.",
@@ -34,7 +34,7 @@ $messages['en'] = array(
 	<li>You do not wish to write it yourself.</li></ul>",
 
 	'ac-action-draft' => 'Create a draft',
-	'ac-action-draft-subtitle' => 'I want to make a draft of this article before I publish it to Wikipedia.',
+	'ac-action-draft-subtitle' => 'I want to make a draft of this article before I publish it to {{SITENAME}}.',
 	'ac-hover-tooltip-body-draft' => "<ul><li>You haven't created an article before, or</li>
 		<li>You want to work on your article a bit before it's ready to publish</li></ul>",
 
@@ -48,12 +48,12 @@ $messages['en'] = array(
 	",
 	'ac-create-button' => "Let's Go",
 	'ac-hover-tooltip-body-create' => "<ul><li>You have created articles before, and</li>
-		<li>You are familiar with Wikipedia's policies, and</li>
+		<li>You are familiar with {{SITENAME}}'s policies, and</li>
 		<li>You <b><i>do not</i></b> have a <i>conflict of interest</i> regarding the subject matter of the article, and</li>
 		<li>You have several references about the subject.</li></ul>
 	",
 
-	'ac-landing-login-required' => 'In order to create an article, you need to have a Wikipedia user account.',
+	'ac-landing-login-required' => 'In order to create an article, you need to have a {{SITENAME}} user account.',
 
 	'ac-create-dismiss' => 'I want to skip this step in the future',
 
