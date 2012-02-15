@@ -29,30 +29,31 @@
 				}
 			});
 
+			ac.panel.find('.ac-button').button( {} );
+			ac.panel.find('.ac-action-button').addClass('ui-button-green');
+
 			//setup button hover states
 			ac.panel
 				.find( '.ac-article-button' )
+					.addClass('ui-button-blue')
+					//attach other events here, just making first tooltip for now
+					//testing hover effects
+					.hover (function (){
+						if ( $('.ac-button-selected') )
+							return;
+							
+						$( this ).parent()
+						.find('.mw-ac-tooltip')
+						.show();
+					}, function(){
+						if ( $(this).hasClass('ac-button-selected') )
+							return;
+						$( this ).parent()
+						.find('.mw-ac-tooltip')
+						.hide();
+					})
 					.each( function (i, e) {
-						var		button = $(this).data('ac-button'),
-								$tooltip;
-
-						$(this)
-							//attach other events here, just making first tooltip for now
-							//testing hover effects
-							.hover (function (){
-								if ( $('.ac-button-selected') )
-									return;
-									
-								$( this ).parent()
-								.find('.mw-ac-tooltip')
-								.show();
-							}, function(){
-								if ( $(this).hasClass('ac-button-selected') )
-									return;
-								$( this ).parent()
-								.find('.mw-ac-tooltip')
-								.hide();
-							});
+						var		button = $(this).data('ac-button');
 
 						//set the pointy position
 						var $button = $(this);
@@ -61,11 +62,8 @@
 							function() {
 								ac.setupTipHeights( $(this), $button );
 							} );
-					});
-
-			// setup button click states
-			ac.panel
-				.find('.ac-article-button')
+					})
+				// Click states
 				.click (function (e) {
 					e.preventDefault();
 					e.stopPropagation();
@@ -97,8 +95,8 @@
 
 					$( this )
 						//make it green
-						.removeClass('ac-button-blue')
-						.addClass('ac-button-green')
+						.removeClass('ui-button-blue')
+						.addClass('ui-button-green')
 						.addClass('ac-button-selected')
 						.parent()
 						.find('.mw-ac-tooltip' )
@@ -107,11 +105,8 @@
 						.find('.mw-ac-interstitial')
 							.show();
 					
-				});
-
-			//setup hover / fade effects
-			ac.panel
-				.find('.ac-article-button')
+				})
+				// Hover states
 				.hover (function (){
 					$( '.ac-article-button' )
 						.not( this )
@@ -210,11 +205,11 @@
 		hideInterstitial : function($elements) {
 			//remove green states and hide their tooltips
 			$elements
-				.removeClass('ac-button-green')
+				.removeClass('ui-button-green')
 				.removeClass('ac-button-selected')
 				.each ( function (i, e) {
 					var color = $(this).data('ac-color');
-					$(this) .addClass( 'ac-button-'+color )
+					$(this) .addClass( 'ui-button-'+color )
 						.parent()
 						.find('.mw-ac-tooltip,.mw-ac-interstitial')
 						.hide();

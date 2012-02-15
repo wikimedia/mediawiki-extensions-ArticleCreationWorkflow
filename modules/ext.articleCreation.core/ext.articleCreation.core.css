@@ -18,15 +18,16 @@
 	width: 250px !important;
 }
 
+.ac-action-button {
+	width: 150px !important;
+}
+
 .ac-button {
-	display: inline-block;
-	border-radius: 5px;
-	color: #FFFFFF !important;
 	padding: 5px 10px;
 	margin: 8px 0;
 	cursor: pointer;
 	text-decoration: none;
-	width: 150px;
+	text-align: left;
 }
 
 .ac-button:hover {
@@ -35,79 +36,6 @@
 
 .ac-faded {
 	opacity: .5;
-}
-
-.ac-create-article {
-	background-color: #3365ba;
-}
-
-.ac-article-wizard {
-	background-color: #3365ba;
-}
-
-.ac-button-blue {
-	background-image: linear-gradient(bottom, #21437a 10%, #3366bb 90%);
-	background-image: -o-linear-gradient(bottom, #21437a 10%, #3366bb 90%);
-	background-image: -moz-linear-gradient(bottom, #21437a 10%, #3366bb 90%);
-	background-image: -webkit-linear-gradient(bottom, #21437a 10%, #3366bb 90%);
-	background-image: -ms-linear-gradient(bottom, #21437a 10%, #3366bb 90%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.1, #21437a),
-		color-stop(0.9, #3366bb)
-	);
-}
-
-.ac-button-blue.ac-button-hover {
-	background-image: linear-gradient(bottom, #43649c 10%, #6699ee 90%);
-	background-image: -o-linear-gradient(bottom, #43649c 10%, #6699ee 90%);
-	background-image: -moz-linear-gradient(bottom, #43649c 10%, #6699ee 90%);
-	background-image: -webkit-linear-gradient(bottom, #43649c 10%, #6699ee 90%);
-	background-image: -ms-linear-gradient(bottom, #43649c 10%, #6699ee 90%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.1, #43649c),
-		color-stop(0.9, #6699ee)
-	);
-}
-
-.ac-button-red {
-	background-image: linear-gradient(bottom, #850000 10%, #CC0000 90%);
-	background-image: -o-linear-gradient(bottom, #850000 10%, #CC0000 90%);
-	background-image: -moz-linear-gradient(bottom, #850000 10%, #CC0000 90%);
-	background-image: -webkit-linear-gradient(bottom, #850000 10%, #CC0000 90%);
-	background-image: -ms-linear-gradient(bottom, #850000 10%, #CC0000 90%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.1, #850000),
-		color-stop(0.9, #CC0000)
-	);
-}
-
-.ac-button-green {
-	background-color: #3cb878;
-	background-image: linear-gradient(bottom, #27784e 10%, #3cb878 90%);
-	background-image: -o-linear-gradient(bottom, #27784e 10%, #3cb878 90%);
-	background-image: -moz-linear-gradient(bottom, #27784e 10%, #3cb878 90%);
-	background-image: -webkit-linear-gradient(bottom, #27784e 10%, #3cb878 90%);
-	background-image: -ms-linear-gradient(bottom, #27784e 10%, #3cb878 90%);
-
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.1, #27784e),
-		color-stop(0.9, #3cb878)
-	);	
 }
 
 .ac-button-wrap {

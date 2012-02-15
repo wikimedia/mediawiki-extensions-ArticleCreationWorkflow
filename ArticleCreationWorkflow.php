@@ -79,6 +79,7 @@ $wgResourceModules['ext.articleCreation.user'] = $acResourceTemplate + array (
 	'dependencies' => array(
 		'ext.articleCreation.core',
 		'jquery.localize',
+		'jquery.ui.button',
 	),
 );
 
@@ -142,6 +143,13 @@ $wgArticleCreationButtons = array(
 				<div class="mw-ac-tooltip-title"><html:msg key="ac-click-tip-title-create" /></div>
 				<div class="mw-ac-tooltip-body">
 					<div class="mw-ac-create-verbiage"><html:msg raw="1" key="ac-create-warning-create" /></div>
+					<input 
+						type="checkbox" 
+						id="mw-ac-dismiss-create"
+						class="ac-dismiss-interstitial" />
+					<label for="mw-ac-dismiss-create">
+						<html:msg key="ac-create-dismiss" />
+					</label>
 					<div class="ac-button-wrap">
 						<a class="ac-button-green ac-button ac-action-button" data-ac-action="create">
 							<div class="ac-arrow ac-arrow-forward">&nbsp;</div>
@@ -151,13 +159,6 @@ $wgArticleCreationButtons = array(
 							</div>
 						</a>
 					</div>
-					<input 
-						type="checkbox" 
-						id="mw-ac-dismiss-create"
-						class="ac-dismiss-interstitial" />
-					<label for="mw-ac-dismiss-create">
-						<html:msg key="ac-create-dismiss" />
-					</label>
 					<div style="clear: both"></div>
 				</div>
 HTML
