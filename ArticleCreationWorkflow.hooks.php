@@ -93,4 +93,44 @@ class ArticleCreationHooks {
 		return true;
 	}
 
+	/**
+	 * Pushes the tracking fields into the edit page
+	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/EditPage::showEditForm:fields
+	 * @param $editPage EditPage
+	 * @param $output OutputPage
+	 * @return bool
+	 */
+	public static function pushTrackingFieldsToEdit( $editPage, $output ) {
+		$fromacw = $output->getRequest()->getVal( 'fromacw' );
+
+		if ( $fromacw ) {
+			$editPage->editFormTextAfterContent .= Html::hidden( 'fromacw', '1' );	
+		}
+
+		return true;
+	}
+	
+	/**
+	 * Tracks successful edits
+	 *
+	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/ArticleSaveComplete
+	 * @param $article WikiPage
+	 * @param $user
+	 * @param $text
+	 * @param $summary
+	 * @param $minoredit
+	 * @param $watchthis
+	 * @param $sectionanchor
+	 * @param $flags
+	 * @param $revision
+	 * @param $status
+	 * @param $baseRevId
+	 * @return bool
+	 */
+	public static function trackEditSuccess( &$article, &$user, $text,
+			$summary, $minoredit, $watchthis, $sectionanchor, &$flags,
+			$revision, &$status, $baseRevId /*, &$redirect */ ) { // $redirect not passed in 1.18wmf1
+		ArticleCreationUtil::trackCompleteSave( $article->getTitle() );
+		return true;
+	}
 }

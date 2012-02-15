@@ -29,6 +29,8 @@ $wgHooks['BeforeDisplayNoArticleText'][] = 'ArticleCreationHooks::BeforeDisplayN
 $wgHooks['BeforeWelcomeCreation'][] = 'ArticleCreationHooks::BeforeWelcomeCreation';
 $wgHooks['AlternateEdit'][] = 'ArticleCreationHooks::AlternateEdit';
 $wgHooks['SpecialSearchCreateLink'][] = 'ArticleCreationHooks::SpecialSearchCreateLink';
+$wgHooks['EditPage::showEditForm:fields'][] = 'ArticleCreationHooks::pushTrackingFieldsToEdit';
+$wgHooks['ArticleSaveComplete'][] = 'ArticleCreationHooks::trackEditSuccess';
 
 $wgHooks['ResourceLoaderGetConfigVars'][] = 'ArticleCreationHooks::resourceLoaderGetConfigVars';
 
@@ -168,8 +170,8 @@ HTML
 
 $wgArticleCreationConfig = array(
 	'action-url' => array(
-		'draft' => '{{SCRIPT}}?title=User:{{USER}}/{{PAGE}}&action=edit',
-		'create' => '{{SCRIPT}}?title={{PAGE}}&action=edit',
+		'draft' => '{{SCRIPT}}?title=User:{{USER}}/{{PAGE}}&action=edit&fromacw=1',
+		'create' => '{{SCRIPT}}?title={{PAGE}}&action=edit&fromacw=1',
 		'login' => '{{SCRIPT}}?title=Special:Userlogin&returnto=Special:ArticleCreationLanding/{{PAGE}}&returntoquery=' . urlencode( 'fromlogin=1' ),
 		'signup' => '{{SCRIPT}}?title=Special:Userlogin/signup&returnto=Special:ArticleCreationLanding/{{PAGE}}&returntoquery=' . urlencode( 'fromsignup=1' ),
 		'request' => 'http://google.com/?q={{PAGE}}'
