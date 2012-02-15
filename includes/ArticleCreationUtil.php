@@ -99,12 +99,14 @@ class ArticleCreationUtil {
 			$token = wfGenerateToken();
 		}
 
+		$pageId = $title->getArticleID();
+
 		$params = new FauxRequest( array(
 			'action' => 'clicktracking',
 			'eventid' => self::trackingCodePrefix() . $event,
 			'token' => $token,
 			'namespacenumber' => $title->getNamespace(),
-			'additional' => $title->getDBkey(),
+			'additional' => $title->getDBkey() . ( $pageId ? '|' . $pageId : '' ),
 		) );
 		$api = new ApiMain( $params, true );
 		$api->execute();
