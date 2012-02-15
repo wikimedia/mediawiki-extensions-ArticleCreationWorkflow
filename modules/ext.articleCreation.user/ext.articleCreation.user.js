@@ -121,7 +121,20 @@
 		
 		setupTooltips: function ( ) {
 
-			ac.panel.find('.mw-ac-tip').localize();
+			ac.panel.find('.mw-ac-interstitial')
+				.each( function() {
+					var button = $(this)
+						.parent()
+						.find('.ac-article-button')
+						.data('ac-button');
+
+					var $content = $( ac.config.buttons[ac.config.variant][button].interstitial );
+
+					$content.localize();
+
+					$(this).find('.mw-ac-tooltip-innards')
+						.append($content);
+				} );
 			
 			ac.panel.find('.mw-ac-interstitial')
 				.find('.ac-action-button')
@@ -138,8 +151,8 @@
 				.css('top', (( $tooltip.height() / 2) -10) + 'px' )
 				.end();
 			//set the tooltip position
-			var newPosition = ($button.height() / 2) -
-					($tooltip.height() / 2 ) + 10;
+			var newPosition = ($tooltip.height() / 2 ) -
+					($button.height() / 2) - 10;
 			$tooltip.css('top',  newPosition+'px');
 		},
 		

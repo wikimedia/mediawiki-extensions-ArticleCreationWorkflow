@@ -18,12 +18,13 @@ class ArticleCreationTemplates {
 
 		$html = '';
 		$buttons = array();
-		if ( ! $title->userCan('create') || ! $title->userCan('edit') ) {
+		$variant = self::getLandingVariant( $title );
+
+		if ( $variant == 'anonymous' ) {
 			$html .= wfMessage( 'ac-landing-login-required' )->parse();
-			$buttons = $wgArticleCreationButtons['anonymous'];
-		} else {
-			$buttons = $wgArticleCreationButtons['logged-in'];
 		}
+
+		$buttons = $wgArticleCreationButtons[$variant];
 
 		$buttons = self::formatButtons( $buttons, $page );
 
@@ -35,6 +36,33 @@ class ArticleCreationTemplates {
 HTML;
 
 		return $html;
+	}
+
+	/**
+	 * Decides which ArticleCreationLanding page to show.
+	 * 
+	 * @return String key for $wgArticleCreationButtons
+	 */
+	public static function getLandingVariant( $title = null ) {
+		global $wgUser;
+
+		if ( $title && $title->isSpecial('ArticleCreationLanding') ) {
+			list($specialTitle, $par) = SpecialPageFactory::resolveAlias( $title );
+			$title = Title::newFromText($par);
+		}
+
+		if ( !$title ) {
+			$title = Title::newFromText( '!ACW permissions test!' );
+		}
+
+		if (
+			$wgUser->isAnon() &&
+			(! $title->userCan('create') || ! $title->userCan('edit') )
+		) {
+			return 'anonymous';
+		} else {
+			return 'logged-in';
+		}
 	}
 
 	/**
@@ -113,7 +141,7 @@ HTML;
 
 		if ( ! empty($info['interstitial'] ) ) {
 			$content = $info['interstitial'];
-			$tips .= self::formatInterstitial( $content );
+			$tips .= self::formatInterstitial( );
 		}
 
 		// Get the action URL
@@ -135,8 +163,8 @@ HTML;
 					data-ac-color="$color" href="$target">
 				<div class="ac-arrow ac-arrow-forward">&nbsp;</div>
 				<div class="ac-button-text">
-					<div class="ac-button-title">$buttonTitle</div>	
-					<div class="ac-button-body">$buttonText</div>
+					<span class="ac-button-title">$buttonTitle</span><br/>	
+					<span class="ac-button-body">$buttonText</span>
 				</div>
 			</a>
 			$tips
@@ -176,19 +204,15 @@ HTML;
 
 	/**
 	 * Formats an interstitial tooltip shown when certain buttons are clicked.
-	 * @param $content String HTML content, to be passed through jQuery.localize() on the client side.
+	 * Returns an empty shell which is filled in JS for IE<9 support.
+	 *
 	 * @return String HTML
 	 */
-	public static function formatInterstitial( $content ) {
-		if ( ! $content ) {
-			return '';
-		}
-
+	public static function formatInterstitial( ) {
 		return <<<HTML
 			<div class="mw-ac-tip mw-ac-interstitial" style="display: none;">
 				<div class="mw-ac-tooltip-pointy"></div>
 				<div class="mw-ac-tooltip-innards">
-				$content
 				</div>
 			</div>
 HTML;
