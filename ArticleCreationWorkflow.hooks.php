@@ -6,6 +6,7 @@ class ArticleCreationHooks {
 	 * Redirect users to a page specified by returnto upon successful account creation
 	 * @param $welcome_creation_msg - string
 	 * @param $injected_html - html string
+	 * @return bool
 	 */
 	public static function BeforeWelcomeCreation( &$welcome_creation_msg, &$injected_html ) {
 		global $wgRequest, $wgOut;
@@ -26,7 +27,8 @@ class ArticleCreationHooks {
 	
 	/**
 	 * If the edit page is coming from red link, redirect users to article-non-existing page
-	 * @param $editPage - Object
+	 * @param $editPage EditPage
+	 * @return bool
 	 */
 	public static function AlternateEdit( $editPage ) {
 		global $wgRequest, $wgOut;
@@ -46,6 +48,8 @@ class ArticleCreationHooks {
 
 	/**
 	 * Customized html that shows an article doesn't exist
+	 * @param $article Article
+	 * @return bool
 	 */
 	public static function BeforeDisplayNoArticleText( $article ) {
 		global $wgOut;
@@ -80,6 +84,9 @@ class ArticleCreationHooks {
 
 	/**
 	 * Alter 'Create' Link behavior in search result page
+	 * @param $title Title
+	 * @param $params array
+	 * @return bool
 	 */
 	public static function SpecialSearchCreateLink( $title, &$params ) {
 		global $wgOut, $wgHooks;
@@ -109,9 +116,9 @@ class ArticleCreationHooks {
 
 		return true;
 	}
-	
+
 	/**
-	 * Tracks successful edits
+	 * Tracks successful save from article creation workflow
 	 *
 	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/ArticleSaveComplete
 	 * @param $article WikiPage
@@ -130,7 +137,30 @@ class ArticleCreationHooks {
 	public static function trackEditSuccess( &$article, &$user, $text,
 			$summary, $minoredit, $watchthis, $sectionanchor, &$flags,
 			$revision, &$status, $baseRevId /*, &$redirect */ ) { // $redirect not passed in 1.18wmf1
-		ArticleCreationUtil::trackCompleteSave( $article->getTitle() );
+
+		global $wgRequest;
+
+		if ( $wgRequest->getVal( 'fromacw' ) ) {
+			ArticleCreationUtil::clickTracking( 'created-from-article-creation', $article->getTitle() );
+		}
+		
+		return true;
+	}
+
+	/**
+	 * Tracks save attempt from article creation workflow
+	 *
+	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/EditPage::attemptSave
+	 * @param $editpage EditPage
+	 * @return bool
+	 */
+	public static function trackEditAttempt( $editpage ) {
+		global $wgRequest;
+		
+		if ( $wgRequest->getVal( 'fromacw' ) ) {
+			ArticleCreationUtil::clickTracking( 'attempt-save-from-article-creation', $editpage->getArticle()->getTitle() );
+		}
+		
 		return true;
 	}
 }

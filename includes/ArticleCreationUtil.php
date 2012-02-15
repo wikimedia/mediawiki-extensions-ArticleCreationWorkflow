@@ -66,25 +66,13 @@ class ArticleCreationUtil {
 
 		self::clickTracking( $event, Title::newFromText( $par ) );
 	}
-	
-	/**
-	 * Track pages created from article creation
-	 * @param $title Title
-	 */
-	public static function TrackCompleteSave( $title ) {
-		global $wgRequest;
-
-		if ( $wgRequest->getVal( 'fromacw' ) ) {
-			self::clickTracking( 'created-from-article-creation', $title );
-		}
-	}
 
 	/**
 	 * Tracking code that calls ClickTracking
 	 * @param $event string the event name
 	 * @param $title Object
 	 */
-	private static function clickTracking( $event, $title ) {
+	public static function clickTracking( $event, $title ) {
 		// check if ClickTracking API is enabled
 		if ( !self::trackingEnabled() ) {
 			return;

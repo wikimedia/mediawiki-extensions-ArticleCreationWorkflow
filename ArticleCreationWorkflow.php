@@ -31,6 +31,7 @@ $wgHooks['AlternateEdit'][] = 'ArticleCreationHooks::AlternateEdit';
 $wgHooks['SpecialSearchCreateLink'][] = 'ArticleCreationHooks::SpecialSearchCreateLink';
 $wgHooks['EditPage::showEditForm:fields'][] = 'ArticleCreationHooks::pushTrackingFieldsToEdit';
 $wgHooks['ArticleSaveComplete'][] = 'ArticleCreationHooks::trackEditSuccess';
+$wgHooks['EditPage::attemptSave'][] = 'ArticleCreationHooks::trackEditAttempt';
 
 $wgHooks['ResourceLoaderGetConfigVars'][] = 'ArticleCreationHooks::resourceLoaderGetConfigVars';
 
