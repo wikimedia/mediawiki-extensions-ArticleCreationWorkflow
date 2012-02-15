@@ -167,8 +167,8 @@ HTML;
 			<div class="mw-ac-tip mw-ac-tooltip" style="display: none;">
 				<div class="mw-ac-tooltip-pointy"></div>
 				<div class="mw-ac-tooltip-innards">
-					<div class="mw-ac-tooltip-title">$title</div><br/>
-					<div class="mw-ac-tooltip-body">$contents</div>
+					<span class="mw-ac-tooltip-title">$title</span><br/>
+					<span class="mw-ac-tooltip-body">$contents</span>
 				</div>
 			</div>
 HTML;
