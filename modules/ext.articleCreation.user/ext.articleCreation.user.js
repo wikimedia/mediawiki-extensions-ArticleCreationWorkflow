@@ -91,7 +91,7 @@
 					}
 
 					var article = wgPageName.substr( wgPageName.indexOf('/') + 1 );
-					ac.trackAction( article, $(this).data('ac-button' ) + '-interstitial' );
+					ac.trackAction( article, $(this).data('ac-button' ) + '_button_click' );
 
 					$( this )
 						//make it green
@@ -160,6 +160,21 @@
 			if ( $('.ac-dismiss-interstitial').is(':checked') ) {
 				ac.disableInterstitial( action );
 			}
+			
+			var acwsource = '';
+			var buttonType = 'button_click';
+			if ( action === 'create' ) {
+				if ( ac.panel.find('.mw-ac-interstitial').is(':visible') ) {
+					buttonType = 'submit';
+					if ( $('.ac-dismiss-interstitial').is(':checked') ) {
+						acwsource = 'skip';
+						buttonType = acwsource + '_' + buttonType;
+					}
+				} else {
+					acwsource = 'direct';
+					buttonType = acwsource + '_' + buttonType;
+				}
+			}
 
 			var article = wgPageName.substr( wgPageName.indexOf('/') + 1 );
 			var urlTemplate = ac.config['action-url'][action];
@@ -167,8 +182,12 @@
 			urlTemplate = urlTemplate.replace( '{{PAGE}}', encodeURIComponent( article ) );
 			urlTemplate = urlTemplate.replace( '{{USER}}', encodeURIComponent( wgUserName ) );
 			urlTemplate = urlTemplate.replace( '{{SCRIPT}}', wgScript );
+			if ( action === 'create' ) {
+				urlTemplate = urlTemplate.replace( '{{BUCKETID}}', encodeURIComponent( ac.config['acwbucket'] ) );
+				urlTemplate = urlTemplate.replace( '{{SOURCE}}', encodeURIComponent( acwsource ) );
+			}
 			
-			ac.trackAction(article, action)
+			ac.trackAction(article, action + '_' + buttonType)
 				.complete( function() {
 					window.location.href = urlTemplate;
 				});
@@ -208,7 +227,7 @@
 				title = title.replace(' ', '_' );
 
 				return jQuery.trackActionWithOptions( {
-					id : ac.config['tracking-code-prefix'] + action,
+					id : ac.config['tracking-code-prefix'] + ac.config['acwbucket'] + '-' + action,
 					namespace : namespaceNumber,
 					info : title
 				} );

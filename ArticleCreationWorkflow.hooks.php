@@ -74,6 +74,7 @@ class ArticleCreationHooks {
 				'tracking-turned-on' =>  ArticleCreationUtil::trackingEnabled(),
 				'tracking-code-prefix' => ArticleCreationUtil::trackingCodePrefix(),
 				'variant' => ArticleCreationTemplates::getLandingVariant( $wgTitle ),
+				'acwbucket' => ArticleCreationUtil::trackingBucket(),
 			);
 	
 		return true;
@@ -113,10 +114,10 @@ class ArticleCreationHooks {
 	 * @return bool
 	 */
 	public static function pushTrackingFieldsToEdit( $editPage, $output ) {
-		$fromacw = $output->getRequest()->getVal( 'fromacw' );
-
-		if ( $fromacw ) {
-			$editPage->editFormTextAfterContent .= Html::hidden( 'fromacw', '1' );	
+		$res = self::validateTrackingBucketSource();
+		if ( $res ) {
+			$editPage->editFormTextAfterContent .= Html::hidden( 'acwbucket', $res['bucket'] );
+			$editPage->editFormTextAfterContent .= Html::hidden( 'acwsource', $res['source'] );
 		}
 
 		return true;
@@ -124,7 +125,6 @@ class ArticleCreationHooks {
 
 	/**
 	 * Tracks successful save from article creation workflow
-	 *
 	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/ArticleSaveComplete
 	 * @param $article WikiPage
 	 * @param $user
@@ -143,10 +143,13 @@ class ArticleCreationHooks {
 			$summary, $minoredit, $watchthis, $sectionanchor, &$flags,
 			$revision, &$status, $baseRevId /*, &$redirect */ ) { // $redirect not passed in 1.18wmf1
 
-		global $wgRequest;
+		$res = self::validateTrackingBucketSource();
 
-		if ( $wgRequest->getVal( 'fromacw' ) ) {
-			ArticleCreationUtil::clickTracking( 'created-from-article-creation', $article->getTitle() );
+		if ( $res ) {
+			if ( $res['source'] ) {
+				$res['source'] .= '_';
+			}
+			ArticleCreationUtil::clickTracking( $res['bucket'] . '-' . 'create_' . $res['source'] . 'edit_success', $article->getTitle() );
 		}
 		
 		return true;
@@ -154,18 +157,37 @@ class ArticleCreationHooks {
 
 	/**
 	 * Tracks save attempt from article creation workflow
-	 *
 	 * @see http://www.mediawiki.org/wiki/Manual:Hooks/EditPage::attemptSave
 	 * @param $editpage EditPage
 	 * @return bool
 	 */
 	public static function trackEditAttempt( $editpage ) {
-		global $wgRequest;
-		
-		if ( $wgRequest->getVal( 'fromacw' ) ) {
-			ArticleCreationUtil::clickTracking( 'attempt-save-from-article-creation', $editpage->getArticle()->getTitle() );
+		$res = self::validateTrackingBucketSource();
+
+		if ( $res ) {
+			if ( $res['source'] ) {
+				$res['source'] .= '_';
+			}
+			ArticleCreationUtil::clickTracking( $res['bucket'] . '-' . 'create_' . $res['source'] . 'edit_attempt', $editpage->getArticle()->getTitle() );
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * Validate the tracking bucket and source
+	 * @return array|bool
+	 */
+	private static function validateTrackingBucketSource() {
+		global $wgRequest;
+		$bucket  = $wgRequest->getVal( 'acwbucket' );
+		$source  = $wgRequest->getVal( 'acwsource' );
+		
+		if ( in_array( $bucket, ArticleCreationUtil::getValidTrackingBucket(), true ) &&
+			in_array( $source, ArticleCreationUtil::getValidTrackingSource(), true ) ) {
+			return array( 'bucket' => $bucket, 'source' => $source );
+		} else {
+			return false;		
+		}
 	}
 }

@@ -171,9 +171,9 @@ HTML
 
 $wgArticleCreationConfig = array(
 	'action-url' => array(
-		'draft' => '{{SCRIPT}}?title=User:{{USER}}/{{PAGE}}&action=edit&fromacw=1',
-		'create' => '{{SCRIPT}}?title={{PAGE}}&action=edit&fromacw=1',
-		'login' => '{{SCRIPT}}?title=Special:Userlogin&returnto=Special:ArticleCreationLanding/{{PAGE}}&returntoquery=' . urlencode( 'fromlogin=1' ),
+		'draft' => '{{SCRIPT}}?title=User:{{USER}}/{{PAGE}}&action=edit',
+		'create' => '{{SCRIPT}}?title={{PAGE}}&action=edit&acwbucket={{BUCKETID}}&acwsource={{SOURCE}}',
+		'login' => '{{SCRIPT}}?title=Special:Userlogin&returnto=Special:ArticleCreationLanding/{{PAGE}}',
 		'signup' => '{{SCRIPT}}?title=Special:Userlogin/signup&returnto=Special:ArticleCreationLanding/{{PAGE}}&returntoquery=' . urlencode( 'fromsignup=1' ),
 		'request' => 'http://google.com/?q={{PAGE}}'
 	),

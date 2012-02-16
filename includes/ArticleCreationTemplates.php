@@ -151,6 +151,8 @@ HTML;
 			'{{SCRIPT}}' => $wgScript,
 			'{{USER}}' => $wgUser,
 			'{{PAGE}}' => $page,
+			'{{BUCKETID}}' => ArticleCreationUtil::trackingBucket(),
+			'{{SOURCE}}' => 'direct',
 		);
 
 		$target = strtr( $target, $replacements );

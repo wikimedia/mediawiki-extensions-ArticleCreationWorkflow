@@ -38,11 +38,45 @@ class ArticleCreationUtil {
 
 	/**
 	 * Generate tracking code prefix for this campaign
-	 * @return string - the prefix text for clickTracking
+	 * @return string
 	 */
 	public static function trackingCodePrefix() {
 		global $wgExtensionCredits;
-		return 'ext.articlecreationworkflow@' . $wgExtensionCredits['other'][0]['version'] . '-';
+		return 'ext.articleCreationWorkflow@' . $wgExtensionCredits['other'][0]['version'] . '-';
+	}
+	
+	/**
+	 * Generate a tracking code bucket for this campaign
+	 * @return string
+	 */
+	public static function trackingBucket() {
+		global $wgRequest, $wgUser;
+		
+		if ( $wgUser->isAnon() ) {
+			return 'anon';
+		} else {
+			if ( $wgRequest->getVal( 'fromsignup' ) ) {
+				return 'new';
+			} else {
+				return 'reg';
+			}
+		}
+	}
+	
+	/**
+	 * Valid tracking bucket
+	 * @return array
+	 */
+	public static function getValidTrackingBucket() {
+		return array( 'anon', 'new', 'reg' );	
+	}
+	
+	/**
+	 * Valid tracking source
+	 * @return array
+	 */
+	public static function getValidTrackingSource() {
+		return array( '', 'skip', 'direct' );
 	}
 
 	/**
@@ -52,17 +86,8 @@ class ArticleCreationUtil {
 	 * @param $par string - the title for the non-existing article
 	 */
 	public static function TrackSpecialLandingPage( $request, $user, $par ) {
-		if ( $user->isAnon() ) {
-			$event = 'landingpage-anonymous';
-		} else {
-			$event = 'landingpage-loggedin';
-
-			if ( $request->getBool( 'fromlogin' ) ) {
-				$event .= '-fromlogin';
-			} elseif ( $request->getBool( 'fromsignup' ) ) {
-				$event .= '-fromsignup';
-			}
-		}
+		
+		$event = self::trackingBucket() . '-impression';
 
 		self::clickTracking( $event, Title::newFromText( $par ) );
 	}
@@ -87,14 +112,14 @@ class ArticleCreationUtil {
 			$token = wfGenerateToken();
 		}
 
-		$pageId = $title->getArticleID();
+		$revId = $title->getLatestRevID();
 
 		$params = new FauxRequest( array(
 			'action' => 'clicktracking',
 			'eventid' => self::trackingCodePrefix() . $event,
 			'token' => $token,
 			'namespacenumber' => $title->getNamespace(),
-			'additional' => $title->getDBkey() . ( $pageId ? '|' . $pageId : '' ),
+			'additional' => $title->getDBkey() . ( $revId ? '|' . $revId : '' ),
 		) );
 		$api = new ApiMain( $params, true );
 		$api->execute();
