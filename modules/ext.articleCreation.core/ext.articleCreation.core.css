@@ -9,7 +9,7 @@
 /* Article Creation Panel */
 #article-creation-panel {
 	position: relative;
-	margin-left: 100px;
+	margin-left: 80px;
 }
 
 
@@ -76,6 +76,8 @@
 	left: 290px;
 	background-color: #3cb878;
 	border-radius: 2px;
+	-moz-border-radius: 2px;
+	-webkit-border-radius: 2px;
 	padding: 2px;
 }
 
@@ -92,6 +94,7 @@
 .mw-ac-tooltip-innards {
 	background-color: #f5f5f5;
 	padding: 10px;
+	max-width: 350px;
 }
 
 .mw-ac-tooltip-title {
