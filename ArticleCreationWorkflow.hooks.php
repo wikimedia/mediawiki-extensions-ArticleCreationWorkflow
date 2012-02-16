@@ -149,7 +149,8 @@ class ArticleCreationHooks {
 			if ( $res['source'] ) {
 				$res['source'] .= '_';
 			}
-			ArticleCreationUtil::clickTracking( $res['bucket'] . '-' . 'create_' . $res['source'] . 'edit_success', $article->getTitle() );
+			ArticleCreationUtil::clickTracking( $res['bucket'] . '-' . 'create_' . 
+								$res['source'] . 'edit_success', $article->getTitle() );
 		}
 		
 		return true;
@@ -168,7 +169,8 @@ class ArticleCreationHooks {
 			if ( $res['source'] ) {
 				$res['source'] .= '_';
 			}
-			ArticleCreationUtil::clickTracking( $res['bucket'] . '-' . 'create_' . $res['source'] . 'edit_attempt', $editpage->getArticle()->getTitle() );
+			ArticleCreationUtil::clickTracking( $res['bucket'] . '-' . 'create_' . $res['source'] . 
+								'edit_attempt', $editpage->getArticle()->getTitle() );
 		}
 		
 		return true;
