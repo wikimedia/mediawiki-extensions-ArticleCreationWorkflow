@@ -35,7 +35,7 @@
 			//setup button hover states
 			ac.panel
 				.find( '.ac-article-button' )
-					.addClass('ui-button-blue')
+					.addClass('ui-button-blue-large')
 					//attach other events here, just making first tooltip for now
 					//testing hover effects
 					.hover (function (){
@@ -95,8 +95,8 @@
 
 					$( this )
 						//make it green
-						.removeClass('ui-button-blue')
-						.addClass('ui-button-green')
+						.removeClass('ui-button-blue-large')
+						.addClass('ui-button-green-large')
 						.addClass('ac-button-selected')
 						.parent()
 						.find('.mw-ac-tooltip' )
@@ -237,11 +237,11 @@
 		hideInterstitial : function($elements) {
 			//remove green states and hide their tooltips
 			$elements
-				.removeClass('ui-button-green')
+				.removeClass('ui-button-green-large')
 				.removeClass('ac-button-selected')
 				.each ( function (i, e) {
 					var color = $(this).data('ac-color');
-					$(this) .addClass( 'ui-button-'+color )
+					$(this) .addClass( 'ui-button-'+color+'-large' )
 						.parent()
 						.find('.mw-ac-tooltip,.mw-ac-interstitial')
 						.hide();
