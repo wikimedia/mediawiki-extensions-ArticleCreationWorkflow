@@ -38,10 +38,6 @@
 	opacity: .5;
 }
 
-.ac-button-wrap {
-	/*position: relative;*/
-}
-
 .ac-button-title, .ac-button-body {
 	float: left;
 }
