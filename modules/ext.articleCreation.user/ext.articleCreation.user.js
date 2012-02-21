@@ -251,6 +251,8 @@
 
 	});
 
-	ac.init();
+	$(document).ready( function() {
+		ac.init();
+	} );
 
 })( jQuery, window.mw );
