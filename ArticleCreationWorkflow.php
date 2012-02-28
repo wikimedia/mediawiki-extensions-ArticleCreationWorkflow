@@ -80,6 +80,7 @@ $wgResourceModules['ext.articleCreation.user'] = $acResourceTemplate + array (
 		'ac-create-help',
 	),
 	'dependencies' => array(
+		'jquery.clickTracking',
 		'ext.articleCreation.core',
 		'jquery.localize',
 		'jquery.ui.button',
