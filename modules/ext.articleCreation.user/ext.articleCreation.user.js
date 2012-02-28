@@ -29,13 +29,18 @@
 				}
 			});
 
+			// Make links into jQuery UI buttons
 			ac.panel.find('.ac-button').button( {} );
+			// Designate article buttons as large buttons (to get different button graphics)
+			ac.panel.find('.ac-article-button').addClass('ui-button-large');
+			// Make action buttons green and give them an arrow icon (these are regular size buttons)
 			ac.panel.find('.ac-action-button').addClass('ui-button-green');
+			ac.panel.find('.ac-action-button').button( 'option', 'icons', {secondary:'ui-icon-triangle-1-e'} );
 
 			//setup button hover states
 			ac.panel
 				.find( '.ac-article-button' )
-					.addClass('ui-button-blue-large')
+					.addClass('ui-button-blue')
 					//attach other events here, just making first tooltip for now
 					//testing hover effects
 					.hover (function (){
@@ -95,8 +100,8 @@
 
 					$( this )
 						//make it green
-						.removeClass('ui-button-blue-large')
-						.addClass('ui-button-green-large')
+						.removeClass('ui-button-blue')
+						.addClass('ui-button-green')
 						.addClass('ac-button-selected')
 						.parent()
 						.find('.mw-ac-tooltip' )
@@ -237,11 +242,11 @@
 		hideInterstitial : function($elements) {
 			//remove green states and hide their tooltips
 			$elements
-				.removeClass('ui-button-green-large')
+				.removeClass('ui-button-green')
 				.removeClass('ac-button-selected')
 				.each ( function (i, e) {
 					var color = $(this).data('ac-color');
-					$(this) .addClass( 'ui-button-'+color+'-large' )
+					$(this) .addClass( 'ui-button-'+color )
 						.parent()
 						.find('.mw-ac-tooltip,.mw-ac-interstitial')
 						.hide();

@@ -58,6 +58,7 @@ $wgResourceModules['ext.articleCreation.core'] = $acResourceTemplate + array (
 	'dependencies' => array(
 		'mediawiki.util',
 		'jquery.localize',
+		'jquery.ui.button',
 		'user.tokens',
 	),
 );
@@ -164,13 +165,7 @@ $wgArticleCreationButtons = array(
 						<html:msg key="ac-create-dismiss" />
 					</label>
 					<div class="ac-button-wrap">
-						<a class="ac-button-green ac-button ac-action-button" data-ac-action="create">
-							<div class="ac-arrow ac-arrow-forward">&nbsp;</div>
-							<div class="ac-button-text">
-								<div class="ac-button-title"><html:msg key="ac-create-button" /></div>
-								<div class="ac-button-text"></div>
-							</div>
-						</a>
+						<a class="ac-button ac-action-button" data-ac-action="create"><html:msg key="ac-create-button" /></a>
 					</div>
 					<div style="clear: both"></div>
 				</div>

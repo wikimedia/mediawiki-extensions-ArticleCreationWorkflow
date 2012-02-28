@@ -23,7 +23,6 @@
 }
 
 .ac-button {
-	padding: 5px 10px;
 	margin: 8px 0;
 	cursor: pointer;
 	text-decoration: none;
@@ -104,6 +103,7 @@
 
 .ac-action-button {
 	float: right;
+	font-weight: bold;
 }
 
 .mw-ac-help {
