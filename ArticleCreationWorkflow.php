@@ -72,6 +72,7 @@ $wgResourceModules['ext.articleCreation.user'] = $acResourceTemplate + array (
 		'ac-hover-tooltip-body-draft',
 		'ac-hover-tooltip-body-signup',
 		'ac-hover-tooltip-body-login',
+		'ac-hover-tooltip-body-exit',
 		'ac-create-warning-create',
 		'ac-create-warning-wizard',
 		'ac-create-button',
@@ -115,6 +116,14 @@ $wgArticleCreationButtons = array(
 			'tooltip' => array(
 				'title' => 'ac-hover-tooltip-title',
 				'text' => 'ac-hover-tooltip-body-request',
+			),
+		),
+		'exit' => array(
+			'title' => 'ac-action-exit',
+			'text' => 'ac-action-exit-subtitle-anon',
+			'tooltip' => array(
+				'title' => 'ac-hover-tooltip-title',
+				'text' => 'ac-hover-tooltip-body-exit',
 			),
 		),
 	),
@@ -167,6 +176,14 @@ $wgArticleCreationButtons = array(
 				</div>
 HTML
 		),
+		'exit' => array(
+			'title' => 'ac-action-exit',
+			'text' => 'ac-action-exit-subtitle',
+			'tooltip' => array(
+				'title' => 'ac-hover-tooltip-title',
+				'text' => 'ac-hover-tooltip-body-exit',
+			),
+		),
 	),
 );
 
@@ -176,7 +193,8 @@ $wgArticleCreationConfig = array(
 		'create' => '{{SCRIPT}}?title={{PAGE}}&action=edit&acwbucket={{BUCKETID}}&acwsource={{SOURCE}}',
 		'login' => '{{SCRIPT}}?title=Special:Userlogin&returnto=Special:ArticleCreationLanding/{{PAGE}}',
 		'signup' => '{{SCRIPT}}?title=Special:Userlogin/signup&returnto=Special:ArticleCreationLanding/{{PAGE}}&returntoquery=' . urlencode( 'fromsignup=1' ),
-		'request' => 'http://google.com/?q={{PAGE}}'
+		'request' => 'http://google.com/?q={{PAGE}}',
+		'exit' => 'javascript:history.go(-1)',
 	),
 	'buttons' => $wgArticleCreationButtons,
 );

@@ -33,6 +33,11 @@ $messages['en'] = array(
 	'ac-hover-tooltip-body-request' => "<ul><li> You want to see the article exist, and</li>
 	<li>You do not wish to write it yourself.</li></ul>",
 
+	'ac-action-exit' => 'Get out of here.',
+	'ac-action-exit-subtitle' => 'Oops.  This isn\'t what I wanted.',
+	'ac-action-exit-subtitle-anon' => 'Oops.  This isn\'t what I wanted.',
+	'ac-hover-tooltip-body-exit' => '<ul><li>You want to go back to previous page.</li></ul>',
+
 	'ac-action-draft' => 'Create a draft',
 	'ac-action-draft-subtitle' => 'I want to make a draft of this article before I publish it to {{SITENAME}}.',
 	'ac-hover-tooltip-body-draft' => "<ul><li>You haven't created an article before, or</li>
@@ -82,6 +87,11 @@ $messages['qqq'] = array(
 	'ac-action-request-subtitle' => 'First-person statement for the article request button subtitle',
 	'ac-action-request-subtitle-anon' => 'Explanation that AfC does not require an account',
 	'ac-hover-tooltip-body-request' => "Bullet point, explains why the user might want to create a draft",
+
+	'ac-action-exit' => 'Prompt to get out of Article Creation Workflow landing page',
+	'ac-action-exit-subtitle' => 'First-person statement for the exit button subtitle',
+	'ac-action-exit-subtitle-anon' => 'First-person statement for the exit button subtitle',
+	'ac-hover-tooltip-body-exit' => "Bullet point, displayed when the user wants to get out of Article Creation Workflow landing page",
 
 	'ac-action-draft' => 'Prompt to create a draft, goes inside button',
 	'ac-action-draft-subtitle' => 'First-person statement for the draft button subtitle.',
