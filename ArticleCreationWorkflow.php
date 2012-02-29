@@ -153,7 +153,7 @@ $wgArticleCreationButtons = array(
 				'text' => 'ac-hover-tooltip-body-create',
 			),
 			'interstitial' => <<<HTML
-				<a class="mw-ac-help" href="http://www.google.com"><html:msg key="ac-create-help" /></a>
+				<a class="mw-ac-help" href="/wiki/Wikipedia:Starting_an_article"><html:msg key="ac-create-help" /></a>
 				<div class="mw-ac-tooltip-title"><html:msg key="ac-click-tip-title-create" /></div>
 				<div class="mw-ac-tooltip-body">
 					<div class="mw-ac-create-verbiage"><html:msg raw="1" key="ac-create-warning-create" /></div>
@@ -188,7 +188,7 @@ $wgArticleCreationConfig = array(
 		'create' => '{{SCRIPT}}?title={{PAGE}}&action=edit&acwbucket={{BUCKETID}}&acwsource={{SOURCE}}',
 		'login' => '{{SCRIPT}}?title=Special:Userlogin&returnto=Special:ArticleCreationLanding/{{PAGE}}',
 		'signup' => '{{SCRIPT}}?title=Special:Userlogin/signup&returnto=Special:ArticleCreationLanding/{{PAGE}}&returntoquery=' . urlencode( 'fromsignup=1' ),
-		'request' => 'http://google.com/?q={{PAGE}}',
+		'request' => '{{SCRIPT}}?title=Wikipedia:Article_wizard',
 		'exit' => 'javascript:history.go(-1)',
 	),
 	'buttons' => $wgArticleCreationButtons,

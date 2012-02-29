@@ -14,10 +14,10 @@ $messages['en'] = array(
 	'article-creation-desc' => 'Adds a more user-friendly article creation pageflow.',
 	
 	'ac-hover-tooltip-title' => 'Select this if...',
-	'ac-landing-page-title' =>  'Article creation landing page',
+	'ac-landing-page-title' =>  'Create an article about "$1" on {{SITENAME}}',
 	
 	//buttons
-	'ac-action-indicator' => 'I want to...',
+	'ac-action-indicator' => 'To create an article on {{SITENAME}}, you may...',
 
 	'ac-action-login' => 'Log in to {{SITENAME}}',
 	'ac-action-login-subtitle' => 'I have a {{SITENAME}} account.',
@@ -27,9 +27,9 @@ $messages['en'] = array(
 	'ac-action-signup-subtitle' => 'A {{SITENAME}} account allows you to create new articles.',
 	'ac-hover-tooltip-body-signup' => "<ul><li>You <b><i>do not</i></b> have a {{SITENAME}} account.</li></ul>",
 
-	'ac-action-request' => 'Request this article',
-	'ac-action-request-subtitle' => "I'll submit a request that it be written.",
-	'ac-action-request-subtitle-anon' => "I'll submit a request that it be written.",
+	'ac-action-request' => 'Use the Article Creation Wizard',
+	'ac-action-request-subtitle' => "Let the Wizard guide me through the process.",
+	'ac-action-request-subtitle-anon' => "Let the Wizard guide me through the process.",
 	'ac-hover-tooltip-body-request' => "<ul><li> You want to see the article exist, and</li>
 	<li>You do not wish to write it yourself.</li></ul>",
 
@@ -39,17 +39,18 @@ $messages['en'] = array(
 	'ac-hover-tooltip-body-exit' => '<ul><li>You want to go back to previous page.</li></ul>',
 
 	'ac-action-draft' => 'Create a draft',
-	'ac-action-draft-subtitle' => 'I want to make a draft of this article before I publish it to {{SITENAME}}.',
+	'ac-action-draft-subtitle' => "This is my first article.",
 	'ac-hover-tooltip-body-draft' => "<ul><li>You haven't created an article before, or</li>
 		<li>You want to work on your article a bit before it's ready to publish</li></ul>",
 
 	'ac-action-create' => 'Create this article myself',
-	'ac-action-create-subtitle' => 'I know what I\'m doing.',
-	'ac-create-warning-create' => "Articles may be deleted immediately if:
-	<ul><li>they copy from other sources, or</li>
+	'ac-action-create-subtitle' => 'I\'ve done this before.',
+	'ac-create-warning-create' => "We value your time and want to make sure your contributions are the kind that will improve Wikipedia.
+	Articles on Wikipedia should be about notable topics and be written in an unbiased manner.<br/><br/>
+	Articles may be deleted if:
+	<ul><li>they copy material from other sources, or</li>
 		<li>are overly promotional, or</li>
-		<li>lack context, or</li>
-		<li>fail to explain why their subject is notable.</li></ul>
+		<li>do not clearly state why the subject is important.</li></ul>
 	",
 	'ac-create-button' => "Let's Go",
 	'ac-hover-tooltip-body-create' => "<ul><li>You have created articles before, and</li>
@@ -60,7 +61,7 @@ $messages['en'] = array(
 
 	'ac-landing-login-required' => 'In order to create an article, you need to have a {{SITENAME}} user account.',
 
-	'ac-create-dismiss' => 'I want to skip this step in the future',
+	'ac-create-dismiss' => 'Skip this step in the future',
 
 	'ac-create-help' => 'Learn more',
 	'ac-click-tip-title-create' => 'I know that…',
@@ -70,7 +71,7 @@ $messages['qqq'] = array(
 	'article-creation-desc' => 'Extension description.',
 	
 	'ac-hover-tooltip-title' => 'The title for the tooltip displayed next to the buttons',
-	'ac-landing-page-title' =>  'The title of the landing page',
+	'ac-landing-page-title' =>  'The title of the landing page.  Parameter is the title of the article the user is attempting to create.',
 	
 	//buttons
 	'ac-action-indicator' => 'Introduction for the selection of the action that the user wants to take ("I want to...")',

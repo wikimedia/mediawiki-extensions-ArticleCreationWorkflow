@@ -7,10 +7,11 @@ class SpecialArticleCreationLanding extends SpecialPage {
 	public function __construct() {
 		//Do not list this special page under Special:SpecialPages
 		parent::__construct( 'ArticleCreationLanding', '', false );
+		$this->pageTitle = null;
 	}
 	
 	public function getDescription() {
-		return wfMessage( 'ac-landing-page-title' )->plain();
+		return wfMessage( $this->pageTitle )->plain();
 	}
 
 	public function execute( $par ) {
@@ -28,7 +29,8 @@ class SpecialArticleCreationLanding extends SpecialPage {
 			return;
 		}
 		
-		$wgOut->setPageTitle( wfMsg('ac-landing-page-title' ) );
+		$this->pageTitle = wfMsg( 'ac-landing-page-title', $title );
+		$wgOut->setPageTitle( $this->pageTitle );
 		$wgOut->setRobotPolicy( 'noindex,nofollow' );
 		$wgOut->addModules( 'ext.articleCreation.core' );
 		$wgOut->addModules( 'ext.articleCreation.user' );
