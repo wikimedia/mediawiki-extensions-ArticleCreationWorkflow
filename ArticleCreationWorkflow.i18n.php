@@ -17,7 +17,7 @@ $messages['en'] = array(
 	'ac-landing-page-title' =>  'Create an article about "$1" on {{SITENAME}}',
 	
 	//buttons
-	'ac-action-indicator' => 'To create an article on {{SITENAME}}, you may...',
+	'ac-action-indicator' => 'I want to...',
 
 	'ac-action-login' => 'Log in to {{SITENAME}}',
 	'ac-action-login-subtitle' => 'I have a {{SITENAME}} account.',
@@ -29,7 +29,7 @@ $messages['en'] = array(
 
 	'ac-action-request' => 'Use the Article Wizard',
 	'ac-action-request-subtitle' => "Guide me through the process of creating an article.",
-	'ac-action-request-subtitle-anon' => "Guide me through the process of creating an article.",
+	'ac-action-request-subtitle-anon' => "Guide me through creating an article.",
 	'ac-hover-tooltip-body-request' => "<ul><li> You want to see the article exist, and</li>
 	<li>You do not wish to write it yourself.</li></ul>",
 
