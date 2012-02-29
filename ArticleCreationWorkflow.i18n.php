@@ -27,15 +27,15 @@ $messages['en'] = array(
 	'ac-action-signup-subtitle' => 'A {{SITENAME}} account allows you to create new articles.',
 	'ac-hover-tooltip-body-signup' => "<ul><li>You <b><i>do not</i></b> have a {{SITENAME}} account.</li></ul>",
 
-	'ac-action-request' => 'Use the Article Creation Wizard',
-	'ac-action-request-subtitle' => "Let the Wizard guide me through the process.",
-	'ac-action-request-subtitle-anon' => "Let the Wizard guide me through the process.",
+	'ac-action-request' => 'Use the Article Wizard',
+	'ac-action-request-subtitle' => "Guide me through the process of creating an article.",
+	'ac-action-request-subtitle-anon' => "Guide me through the process of creating an article.",
 	'ac-hover-tooltip-body-request' => "<ul><li> You want to see the article exist, and</li>
 	<li>You do not wish to write it yourself.</li></ul>",
 
-	'ac-action-exit' => 'Get out of here.',
-	'ac-action-exit-subtitle' => 'Oops.  This isn\'t what I wanted.',
-	'ac-action-exit-subtitle-anon' => 'Oops.  This isn\'t what I wanted.',
+	'ac-action-exit' => 'Go back',
+	'ac-action-exit-subtitle' => 'Oops. This isn\'t what I wanted.',
+	'ac-action-exit-subtitle-anon' => 'Oops. This isn\'t what I wanted.',
 	'ac-hover-tooltip-body-exit' => '<ul><li>You want to go back to previous page.</li></ul>',
 
 	'ac-action-draft' => 'Create a draft',
