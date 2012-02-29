@@ -28,7 +28,7 @@ $messages['en'] = array(
 	'ac-hover-tooltip-body-signup' => "<ul><li>You <b><i>do not</i></b> have a {{SITENAME}} account.</li></ul>",
 
 	'ac-action-request' => 'Use the Article Wizard',
-	'ac-action-request-subtitle' => "Guide me through the process of creating an article.",
+	'ac-action-request-subtitle' => "Guide me through creating an article.",
 	'ac-action-request-subtitle-anon' => "Guide me through creating an article.",
 	'ac-hover-tooltip-body-request' => "<ul><li> You want to see the article exist, and</li>
 	<li>You do not wish to write it yourself.</li></ul>",
