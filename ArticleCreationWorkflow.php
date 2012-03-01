@@ -33,8 +33,6 @@ $wgHooks['EditPage::showEditForm:fields'][] = 'ArticleCreationHooks::pushTrackin
 $wgHooks['ArticleSaveComplete'][] = 'ArticleCreationHooks::trackEditSuccess';
 $wgHooks['EditPage::attemptSave'][] = 'ArticleCreationHooks::trackEditAttempt';
 
-$wgHooks['MakeGlobalVariablesScript'][] = 'ArticleCreationHooks::getGlobalVariables';
-
 /* Internationalization */
 $wgExtensionMessagesFiles['ArticleCreation'] = $articleCreationDir . 'ArticleCreationWorkflow.i18n.php';
 

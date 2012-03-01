@@ -33,9 +33,27 @@ class SpecialArticleCreationLanding extends SpecialPage {
 		$out->setRobotPolicy( 'noindex,nofollow' );
 		$out->addModules( 'ext.articleCreation.core' );
 		$out->addModules( 'ext.articleCreation.user' );
+		$out->addJsConfigVars( 'acConfig', $this->getConfigVars() );
 		$out->addHtml( ArticleCreationTemplates::getLandingPage($par) );
 
 		ArticleCreationUtil::TrackSpecialLandingPage( $par );
+	}
+
+	/**
+	 * Returns the javascript configuration
+	 *
+	 * @return array
+	 */
+	protected function getConfigVars() {
+		global $wgArticleCreationConfig;
+
+		return $wgArticleCreationConfig + array(
+				'enabled' => ArticleCreationUtil::isEnabled(),
+				'tracking-turned-on' =>  ArticleCreationUtil::trackingEnabled(),
+				'tracking-code-prefix' => ArticleCreationUtil::trackingCodePrefix(),
+				'variant' => ArticleCreationTemplates::getLandingVariant( $this->getTitle() ),
+				'acwbucket' => ArticleCreationUtil::trackingBucket(),
+			);
 	}
 	
 }

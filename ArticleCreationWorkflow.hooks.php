@@ -61,25 +61,6 @@ class ArticleCreationHooks {
 		return true;
 	}
 
-	public static function getGlobalVariables( &$vars ) {
-		global $wgArticleCreationConfig, $wgUser, $wgArticleCreationButtons, $wgTitle;
-
-		if ( ! $wgTitle->isSpecial( 'ArticleCreationLanding' ) ) {
-			return true;
-		}
-
-		$vars['acConfig'] = $wgArticleCreationConfig + 
-			array(
-				'enabled' => ArticleCreationUtil::isEnabled(),
-				'tracking-turned-on' =>  ArticleCreationUtil::trackingEnabled(),
-				'tracking-code-prefix' => ArticleCreationUtil::trackingCodePrefix(),
-				'variant' => ArticleCreationTemplates::getLandingVariant( $wgTitle ),
-				'acwbucket' => ArticleCreationUtil::trackingBucket(),
-			);
-	
-		return true;
-	}
-
 	public static function configSearchTitle( &$vars ) {
 		global $wgRequest;
 
