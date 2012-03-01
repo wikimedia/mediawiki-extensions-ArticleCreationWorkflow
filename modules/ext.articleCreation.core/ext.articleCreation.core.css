@@ -55,9 +55,12 @@
 /* Power Arrows */
 
 .ac-arrow {
-	float: right;
+	position: absolute;
+	top: 50%;
+	right: 16px;
 	width: 16px;
 	height: 16px;
+	margin-top: -9px;
 }
 
 .ac-arrow-forward {
