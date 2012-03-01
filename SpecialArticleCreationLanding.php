@@ -15,8 +15,6 @@ class SpecialArticleCreationLanding extends SpecialPage {
 	}
 
 	public function execute( $par ) {
-		global $wgUser, $wgRequest;
-
 		$out = $this->getOutput();
 		$title = Title::newFromText( $par );
 
@@ -37,7 +35,7 @@ class SpecialArticleCreationLanding extends SpecialPage {
 		$out->addModules( 'ext.articleCreation.user' );
 		$out->addHtml( ArticleCreationTemplates::getLandingPage($par) );
 
-		ArticleCreationUtil::TrackSpecialLandingPage( $wgRequest, $wgUser, $par );
+		ArticleCreationUtil::TrackSpecialLandingPage( $par );
 	}
 	
 }

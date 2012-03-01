@@ -81,11 +81,10 @@ class ArticleCreationUtil {
 
 	/**
 	 * Track the page stats to the special article creation landing page
-	 * @param $request Object
-	 * @param $user Object
+	 *
 	 * @param $par string - the title for the non-existing article
 	 */
-	public static function TrackSpecialLandingPage( $request, $user, $par ) {
+	public static function TrackSpecialLandingPage( $par ) {
 		
 		$event = self::trackingBucket() . '-impression';
 
