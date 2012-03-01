@@ -17,7 +17,7 @@ $messages['en'] = array(
 	'ac-landing-page-title' =>  'Create an article about "$1" on {{SITENAME}}',
 	
 	//buttons
-	'ac-action-indicator' => '{{SITENAME}} doesn\'t have an article called <b>"$1"</b>. To create it, I want to...',
+	'ac-action-indicator' => '{{SITENAME}} doesn\'t have an article called <b>"$1"</b>. I want to...',
 
 	'ac-action-login' => 'Log in to {{SITENAME}}',
 	'ac-action-login-subtitle' => 'I have a {{SITENAME}} account.',
