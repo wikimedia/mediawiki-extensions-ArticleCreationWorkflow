@@ -24,7 +24,7 @@ $messages['en'] = array(
 	'ac-hover-tooltip-body-login' => "<ul><li>You already have a user account and wish to edit under that name.</li></ul>",
 
 	'ac-action-signup' => 'Create a {{SITENAME}} account',
-	'ac-action-signup-subtitle' => 'I\'d like to sign up so I can create new articles.',
+	'ac-action-signup-subtitle' => 'I\'d like to sign up and create articles.',
 	'ac-hover-tooltip-body-signup' => "<ul><li>You <b><i>do not</i></b> have a {{SITENAME}} account.</li></ul>",
 
 	'ac-action-request' => 'Use the Article Wizard',
@@ -48,7 +48,7 @@ $messages['en'] = array(
 	'ac-create-warning-create' => "Articles may be deleted <i><b>immediately</b></i> if:
 	<ul><li>they copy material from other sources</li>
 		<li>are overly promotional</li>
-		<li>do not clearly state why the subject is important.</li></ul>
+		<li>do not clearly state why the subject is important</li></ul>
 	",
 	'ac-create-button' => "Let's Go",
 	'ac-hover-tooltip-body-create' => "<ul><li>You have created articles before, and</li>
