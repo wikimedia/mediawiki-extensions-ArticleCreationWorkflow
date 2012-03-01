@@ -130,6 +130,12 @@ HTML;
 		if ( !empty($info['color']) ) {
 			$color = $info['color'];
 		}
+		
+		// Ensure direction is set correctly
+		$direction = 'forward';
+		if ( !empty($info['direction']) ) {
+			$direction = $info['direction'];
+		}
 
 		// Work out tooltips
 		$tips = '';
@@ -164,7 +170,7 @@ HTML;
 					ac-article-$button ui-button-$color" data-ac-button="$button"
 					data-ac-label="$buttonTitle"
 					data-ac-color="$color" href="$target">
-				<div class="ac-arrow ac-arrow-forward">&nbsp;</div>
+				<div class="ac-arrow ac-arrow-$direction">&nbsp;</div>
 				<div class="ac-button-text">
 					<span class="ac-button-title">$buttonTitle</span><br/>	
 					<span class="ac-button-body">$buttonText</span>

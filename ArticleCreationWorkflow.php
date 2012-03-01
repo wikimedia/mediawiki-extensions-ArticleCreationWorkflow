@@ -125,6 +125,7 @@ $wgArticleCreationButtons = array(
 				'text' => 'ac-hover-tooltip-body-exit',
 			),
 			'color' => 'red',
+			'direction' => 'back',
 		),
 	),
 	'logged-in' => array(
@@ -180,6 +181,7 @@ HTML
 				'text' => 'ac-hover-tooltip-body-exit',
 			),
 			'color' => 'red',
+			'direction' => 'back',
 		),
 	),
 );

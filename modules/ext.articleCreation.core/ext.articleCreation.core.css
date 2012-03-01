@@ -67,6 +67,10 @@
 	/* @embed */
 	background: url(images/arrow_right.png) no-repeat;
 }
+.ac-arrow-back {
+	/* @embed */
+	background: url(images/arrow_left.png) no-repeat;
+}
 
 /* Tooltip Magic */
 
