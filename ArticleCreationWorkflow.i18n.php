@@ -17,7 +17,7 @@ $messages['en'] = array(
 	'ac-landing-page-title' =>  'Create an article about "$1" on {{SITENAME}}',
 	
 	//buttons
-	'ac-action-indicator' => 'I want to create an article on {{SITENAME}}...',
+	'ac-action-indicator' => '{{SITENAME}} doesn\'t have an article called <b>"$1"</b>. To create it, I want to...',
 
 	'ac-action-login' => 'Log in to {{SITENAME}}',
 	'ac-action-login-subtitle' => 'I have a {{SITENAME}} account.',
@@ -45,11 +45,9 @@ $messages['en'] = array(
 
 	'ac-action-create' => 'Create this article myself',
 	'ac-action-create-subtitle' => 'I\'ve done this before.',
-	'ac-create-warning-create' => "We value your time and want to make sure your contributions are the kind that will improve Wikipedia.
-	Articles on Wikipedia should be about notable topics and be written in an unbiased manner.<br/><br/>
-	Articles may be deleted if:
-	<ul><li>they copy material from other sources, or</li>
-		<li>are overly promotional, or</li>
+	'ac-create-warning-create' => "Articles may be deleted <i><b>immediately</b></i> if:
+	<ul><li>they copy material from other sources</li>
+		<li>are overly promotional</li>
 		<li>do not clearly state why the subject is important.</li></ul>
 	",
 	'ac-create-button' => "Let's Go",

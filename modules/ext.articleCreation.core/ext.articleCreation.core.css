@@ -1,9 +1,10 @@
 /* Article Creation Text */
 .article-creation-heading {
-	font-size: 2.5em;
-	font-weight: 590;
 	display: block;
-	margin: 20px 0;
+	font-size: 1.1em;
+	margin-left: 80px;
+	margin-top: 10px;
+	margin-bottom: 10px;
 }
 
 /* Article Creation Panel */
@@ -109,4 +110,10 @@
 .mw-ac-help {
 	float: right;
 	font-size: 90%;
+}
+
+.mw-ac-create-dismiss-skip-control {
+	font-size: .5em;
+	float: left;
+	padding-top: 1em;
 }

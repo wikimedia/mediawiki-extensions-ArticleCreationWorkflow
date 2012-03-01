@@ -157,14 +157,16 @@ $wgArticleCreationButtons = array(
 				<div class="mw-ac-tooltip-title"><html:msg key="ac-click-tip-title-create" /></div>
 				<div class="mw-ac-tooltip-body">
 					<div class="mw-ac-create-verbiage"><html:msg raw="1" key="ac-create-warning-create" /></div>
-					<input 
-						type="checkbox" 
-						id="mw-ac-dismiss-create"
-						class="ac-dismiss-interstitial" />
-					<label for="mw-ac-dismiss-create">
-						<html:msg key="ac-create-dismiss" />
-					</label>
 					<div class="ac-button-wrap">
+						<div class="mw-ac-create-dismiss-skip-control">
+							<input 
+								type="checkbox" 
+								id="mw-ac-dismiss-create"
+								class="ac-dismiss-interstitial" />
+							<label for="mw-ac-dismiss-create">
+								<html:msg key="ac-create-dismiss" />
+							</label>
+						</div>
 						<a class="ac-button ac-action-button" data-ac-action="create"><html:msg key="ac-create-button" /></a>
 					</div>
 					<div style="clear: both"></div>

@@ -11,10 +11,11 @@ class ArticleCreationTemplates {
 	 * @return String HTML
 	 */
 	public static function getLandingPage( $page ) {
-		$action = wfMessage( 'ac-action-indicator' )->escaped();
 		global $wgUser, $wgArticleCreationButtons;
 
 		$title = Title::newFromText( $page );
+
+		$action = wfMessage( 'ac-action-indicator', $title )->parse();
 
 		$html = '';
 		$buttons = array();
