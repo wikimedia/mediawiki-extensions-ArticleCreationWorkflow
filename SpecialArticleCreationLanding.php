@@ -15,8 +15,9 @@ class SpecialArticleCreationLanding extends SpecialPage {
 	}
 
 	public function execute( $par ) {
-		global $wgOut, $wgUser, $wgRequest;
+		global $wgUser, $wgRequest;
 
+		$out = $this->getOutput();
 		$title = Title::newFromText( $par );
 
 		// bad title 
@@ -25,18 +26,18 @@ class SpecialArticleCreationLanding extends SpecialPage {
 		}
 		// title exists
 		if ( $title->exists() ) {
-			$wgOut->redirect( $title->getFullURL() );
+			$out->redirect( $title->getFullURL() );
 			return;
 		}
 		
 		$this->pageTitle = wfMsg( 'ac-landing-page-title', $title );
-		$wgOut->setPageTitle( $this->pageTitle );
-		$wgOut->setRobotPolicy( 'noindex,nofollow' );
-		$wgOut->addModules( 'ext.articleCreation.core' );
-		$wgOut->addModules( 'ext.articleCreation.user' );
-		$wgOut->addHtml( ArticleCreationTemplates::getLandingPage($par) );
+		$out->setPageTitle( $this->pageTitle );
+		$out->setRobotPolicy( 'noindex,nofollow' );
+		$out->addModules( 'ext.articleCreation.core' );
+		$out->addModules( 'ext.articleCreation.user' );
+		$out->addHtml( ArticleCreationTemplates::getLandingPage($par) );
 
-		ArticleCreationUtil::TrackSpecialLandingPage( $wgRequest, $wgUser, $par );		
+		ArticleCreationUtil::TrackSpecialLandingPage( $wgRequest, $wgUser, $par );
 	}
 	
 }
