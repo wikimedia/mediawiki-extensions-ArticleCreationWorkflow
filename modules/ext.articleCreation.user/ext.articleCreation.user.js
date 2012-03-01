@@ -156,8 +156,8 @@
 				.css('top', (( $tooltip.height() / 2) -10) + 'px' )
 				.end();
 			//set the tooltip position
-			var newPosition = ($tooltip.height() / 2 ) -
-					($button.height() / 2) - 10;
+			var newPosition = ( $button.position().top + ( $button.outerHeight( true ) / 2 ) ) - 
+				( $tooltip.outerHeight() / 2 );
 			$tooltip.css('top',  newPosition+'px');
 		},
 		
