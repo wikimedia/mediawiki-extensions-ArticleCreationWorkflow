@@ -204,11 +204,7 @@
 		},
 
 		isInterstitialDisabled : function(button) {
-			if ( $.cookie('mw:ac:disabled-interstitial:'+button) ) {
-				return true;
-			}
-
-			return false;
+			return $.cookie('mw:ac:disabled-interstitial:' + button);
 		},
 
 		trackAction : function(article, action) {
