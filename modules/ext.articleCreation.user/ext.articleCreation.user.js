@@ -40,7 +40,7 @@
 			//setup button hover states
 			ac.panel
 				.find( '.ac-article-button' )
-					.addClass('ui-button-blue')
+					//.addClass('ui-button-blue')
 					//attach other events here, just making first tooltip for now
 					//testing hover effects
 					.hover (function (){

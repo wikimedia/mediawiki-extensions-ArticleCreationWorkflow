@@ -161,7 +161,7 @@ HTML;
 		return <<<HTML
 		<div class="ac-button-wrap">
 			<a class="ac-article-button ac-button
-					ac-article-$button" data-ac-button="$button"
+					ac-article-$button ui-button-$color" data-ac-button="$button"
 					data-ac-label="$buttonTitle"
 					data-ac-color="$color" href="$target">
 				<div class="ac-arrow ac-arrow-forward">&nbsp;</div>
