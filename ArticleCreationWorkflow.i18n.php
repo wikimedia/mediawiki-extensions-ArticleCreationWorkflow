@@ -17,14 +17,14 @@ $messages['en'] = array(
 	'ac-landing-page-title' =>  'Create an article about "$1" on {{SITENAME}}',
 	
 	//buttons
-	'ac-action-indicator' => 'I want to...',
+	'ac-action-indicator' => 'I want to create an article on {{SITENAME}}...',
 
 	'ac-action-login' => 'Log in to {{SITENAME}}',
 	'ac-action-login-subtitle' => 'I have a {{SITENAME}} account.',
 	'ac-hover-tooltip-body-login' => "<ul><li>You already have a user account and wish to edit under that name.</li></ul>",
 
 	'ac-action-signup' => 'Create a {{SITENAME}} account',
-	'ac-action-signup-subtitle' => 'A {{SITENAME}} account allows you to create new articles.',
+	'ac-action-signup-subtitle' => 'I\'d like to sign up so I can create new articles.',
 	'ac-hover-tooltip-body-signup' => "<ul><li>You <b><i>do not</i></b> have a {{SITENAME}} account.</li></ul>",
 
 	'ac-action-request' => 'Use the Article Wizard',
