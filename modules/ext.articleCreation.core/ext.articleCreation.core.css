@@ -16,7 +16,10 @@
 
 /* Buttons */
 .ac-article-button {
-	width: 250px !important;
+	width: 220px !important;
+}
+.ui-button-large {
+	padding: 5px 35px 7px 5px !important;
 }
 
 .ac-action-button {
