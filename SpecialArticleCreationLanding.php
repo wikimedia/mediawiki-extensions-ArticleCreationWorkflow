@@ -11,7 +11,7 @@ class SpecialArticleCreationLanding extends SpecialPage {
 	}
 	
 	public function getDescription() {
-		return wfMessage( $this->pageTitle )->plain();
+		return $this->pageTitle;
 	}
 
 	public function execute( $par ) {
