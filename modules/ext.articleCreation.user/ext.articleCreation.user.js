@@ -98,11 +98,13 @@
 					var article = wgPageName.substr( wgPageName.indexOf('/') + 1 );
 					ac.trackAction( article, $(this).data('ac-button' ) + '_button_click' );
 
+					// make button green
 					$( this )
-						//make it green
 						.removeClass('ui-button-blue')
 						.addClass('ui-button-green')
-						.addClass('ac-button-selected')
+						.addClass('ac-button-selected');
+					// show interstitial
+					$( this )
 						.parent()
 						.find('.mw-ac-tooltip' )
 							.hide()

@@ -16,7 +16,7 @@
 
 /* Buttons */
 .ac-article-button {
-	width: 220px !important;
+	width: 225px !important;
 }
 .ui-button-large {
 	padding: 5px 35px 7px 5px !important;
@@ -60,10 +60,10 @@
 .ac-arrow {
 	position: absolute;
 	top: 50%;
-	right: 16px;
-	width: 16px;
-	height: 16px;
-	margin-top: -9px;
+	right: 15px;
+	width: 23px;
+	height: 23px;
+	margin-top: -12px;
 }
 
 .ac-arrow-forward {
@@ -73,6 +73,55 @@
 .ac-arrow-back {
 	/* @embed */
 	background: url(images/arrow_left.png) no-repeat;
+}
+
+.ui-button-blue.ui-button-large .ac-arrow-forward {
+	/* @embed */
+	background: url(images/right-arrow-blue.png) no-repeat;
+}
+.ui-button-blue.ui-button-large:hover .ac-arrow-forward {
+	/* @embed */
+	background: url(images/right-arrow-blue-hover.png) no-repeat;
+}
+.ui-button-blue.ui-button-large .ac-arrow-back {
+	/* @embed */
+	background: url(images/left-arrow-blue.png) no-repeat;
+}
+.ui-button-blue.ui-button-large:hover .ac-arrow-back {
+	/* @embed */
+	background: url(images/left-arrow-blue-hover.png) no-repeat;
+}
+.ui-button-green.ui-button-large .ac-arrow-forward {
+	/* @embed */
+	background: url(images/right-arrow-green.png) no-repeat;
+}
+.ui-button-green.ui-button-large:hover .ac-arrow-forward {
+	/* @embed */
+	background: url(images/right-arrow-green-hover.png) no-repeat;
+}
+.ui-button-green.ui-button-large .ac-arrow-back {
+	/* @embed */
+	background: url(images/left-arrow-green.png) no-repeat;
+}
+.ui-button-green.ui-button-large:hover .ac-arrow-back {
+	/* @embed */
+	background: url(images/left-arrow-green-hover.png) no-repeat;
+}
+.ui-button-red.ui-button-large .ac-arrow-forward {
+	/* @embed */
+	background: url(images/right-arrow-red.png) no-repeat;
+}
+.ui-button-red.ui-button-large:hover .ac-arrow-forward {
+	/* @embed */
+	background: url(images/right-arrow-red-hover.png) no-repeat;
+}
+.ui-button-red.ui-button-large .ac-arrow-back {
+	/* @embed */
+	background: url(images/left-arrow-red.png) no-repeat;
+}
+.ui-button-red.ui-button-large:hover .ac-arrow-back {
+	/* @embed */
+	background: url(images/left-arrow-red-hover.png) no-repeat;
 }
 
 /* Tooltip Magic */
