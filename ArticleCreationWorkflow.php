@@ -1,10 +1,11 @@
 <?php
-/* 	MediaWiki ArticleCreation Extension
-	Authors: Rob Moen, Benny Situ, Brandon Harris 
-*/
+/**
+ * MediaWiki ArticleCreation Extension
+ * See https://www.mediawiki.org/wiki/Extension:ArticleCreationWorkflow
+ */
 
 $wgExtensionCredits['other'][] = array(
-	'author' => array( 'Rob Moen', 'Benny Situ', 'Andrew Garrett', 'Ian Baker' ),
+	'author' => array( 'Rob Moen', 'Benny Situ', 'Andrew Garrett', 'Ian Baker', 'Ryan Kaldari' ),
 	'descriptionmsg' => 'article-creation-desc',
 	'name' => 'ArticleCreationWorkflow',
 	'url' => 'http://www.mediawiki.org/wiki/Article_Creation_Landing_System',
