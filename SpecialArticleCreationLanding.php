@@ -51,7 +51,7 @@ class SpecialArticleCreationLanding extends SpecialPage {
 				'enabled' => ArticleCreationUtil::isEnabled(),
 				'tracking-turned-on' =>  ArticleCreationUtil::trackingEnabled(),
 				'tracking-code-prefix' => ArticleCreationUtil::trackingCodePrefix(),
-				'variant' => ArticleCreationTemplates::getLandingVariant( $this->getTitle() ),
+				'variant' => ArticleCreationTemplates::getLandingVariant( $this->getPageTitle() ),
 				'acwbucket' => ArticleCreationUtil::trackingBucket(),
 			);
 	}
