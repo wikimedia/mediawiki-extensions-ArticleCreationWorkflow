@@ -8,7 +8,7 @@ class ArticleCreationUtil {
 	/**
 	 * Is ArticleCreation enabled for the current user?
 	 *
-	 * 
+	 *
 	 * @return bool whether or not it is.
 	 */
 	public static function isEnabled() {
@@ -44,14 +44,14 @@ class ArticleCreationUtil {
 		global $wgExtensionCredits;
 		return 'ext.articleCreationWorkflow@' . $wgExtensionCredits['other'][0]['version'] . '-';
 	}
-	
+
 	/**
 	 * Generate a tracking code bucket for this campaign
 	 * @return string
 	 */
 	public static function trackingBucket() {
 		global $wgRequest, $wgUser;
-		
+
 		if ( $wgUser->isAnon() ) {
 			return 'anon';
 		} else {
@@ -62,15 +62,15 @@ class ArticleCreationUtil {
 			}
 		}
 	}
-	
+
 	/**
 	 * Valid tracking bucket
 	 * @return array
 	 */
 	public static function getValidTrackingBucket() {
-		return array( 'anon', 'new', 'reg' );	
+		return array( 'anon', 'new', 'reg' );
 	}
-	
+
 	/**
 	 * Valid tracking source
 	 * @return array
@@ -85,7 +85,7 @@ class ArticleCreationUtil {
 	 * @param $par string - the title for the non-existing article
 	 */
 	public static function TrackSpecialLandingPage( $par ) {
-		
+
 		$event = self::trackingBucket() . '-impression';
 
 		self::clickTracking( $event, Title::newFromText( $par ) );
@@ -108,7 +108,7 @@ class ArticleCreationUtil {
 		$token = $wgRequest->getCookie( 'clicktracking-session', '' );
 
 		if ( !$token ) {
-			$token = wfGenerateToken();
+			$token = MWCryptRand::generateHex( 32, true );
 		}
 
 		$revId = $title->getLatestRevID();
