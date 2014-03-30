@@ -9,7 +9,7 @@ $wgExtensionCredits['other'][] = array(
 	'descriptionmsg' => 'article-creation-desc',
 	'name' => 'ArticleCreationWorkflow',
 	'url' => 'http://www.mediawiki.org/wiki/Article_Creation_Landing_System',
-	'version' => '0.1',
+	'version' => '0.2.0',
 	'path' => __FILE__,
 );
 
@@ -35,6 +35,7 @@ $wgHooks['ArticleSaveComplete'][] = 'ArticleCreationHooks::trackEditSuccess';
 $wgHooks['EditPage::attemptSave'][] = 'ArticleCreationHooks::trackEditAttempt';
 
 /* Internationalization */
+$wgMessagesDirs['ArticleCreation'] = __DIR__ . '/i18n';
 $wgExtensionMessagesFiles['ArticleCreation'] = $articleCreationDir . 'ArticleCreationWorkflow.i18n.php';
 
 /* Resources */
@@ -160,8 +161,8 @@ $wgArticleCreationButtons = array(
 					<div class="mw-ac-create-verbiage"><html:msg raw="1" key="ac-create-warning-create" /></div>
 					<div class="ac-button-wrap">
 						<div class="mw-ac-create-dismiss-skip-control">
-							<input 
-								type="checkbox" 
+							<input
+								type="checkbox"
 								id="mw-ac-dismiss-create"
 								class="ac-dismiss-interstitial" />
 							<label for="mw-ac-dismiss-create">

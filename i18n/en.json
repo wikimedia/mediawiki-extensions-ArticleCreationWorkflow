@@ -1,0 +1,37 @@
+{
+    "@metadata": {
+        "authors": [
+            "Rob Moen"
+        ]
+    },
+    "article-creation-desc": "Adds a more user-friendly article creation pageflow.",
+    "ac-hover-tooltip-title": "Select this if...",
+    "ac-landing-page-title": "Create an article about \"$1\" on {{SITENAME}}",
+    "ac-action-indicator": "{{SITENAME}} doesn't have an article called <b>\"$1\"</b>. I want to...",
+    "ac-action-login": "Log in to {{SITENAME}}",
+    "ac-action-login-subtitle": "I have a {{SITENAME}} account.",
+    "ac-hover-tooltip-body-login": "<ul><li>You already have a user account and wish to edit under that name.</li></ul>",
+    "ac-action-signup": "Create a {{SITENAME}} account",
+    "ac-action-signup-subtitle": "I'd like to sign up and create articles.",
+    "ac-hover-tooltip-body-signup": "<ul><li>You <b><i>do not</i></b> have a {{SITENAME}} account.</li></ul>",
+    "ac-action-request": "Use the Article Wizard",
+    "ac-action-request-subtitle": "Guide me through creating an article.",
+    "ac-action-request-subtitle-anon": "Guide me through creating an article.",
+    "ac-hover-tooltip-body-request": "<ul><li> You want to see the article exist, and</li>\n\t<li>You do not wish to write it yourself.</li></ul>",
+    "ac-action-exit": "Go back",
+    "ac-action-exit-subtitle": "Oops. This isn't what I wanted.",
+    "ac-action-exit-subtitle-anon": "Oops. This isn't what I wanted.",
+    "ac-hover-tooltip-body-exit": "<ul><li>You want to go back to previous page.</li></ul>",
+    "ac-action-draft": "Create a draft",
+    "ac-action-draft-subtitle": "This is my first article.",
+    "ac-hover-tooltip-body-draft": "<ul><li>You haven't created an article before, or</li>\n\t\t<li>You want to work on your article a bit before it's ready to publish</li></ul>",
+    "ac-action-create": "Create this article myself",
+    "ac-action-create-subtitle": "I've done this before.",
+    "ac-create-warning-create": "Articles may be deleted <i><b>immediately</b></i> if:\n\t<ul><li>they copy material from other sources</li>\n\t\t<li>are overly promotional</li>\n\t\t<li>do not clearly state why the subject is important</li></ul>\n\t",
+    "ac-create-button": "Let's Go",
+    "ac-hover-tooltip-body-create": "<ul><li>You have created articles before, and</li>\n\t\t<li>You are familiar with {{SITENAME}}'s policies, and</li>\n\t\t<li>You <b><i>do not</i></b> have a <i>conflict of interest</i> regarding the subject matter of the article, and</li>\n\t\t<li>You have several references about the subject.</li></ul>\n\t",
+    "ac-landing-login-required": "In order to create an article, you need to have a {{SITENAME}} user account.",
+    "ac-create-dismiss": "Skip this step in the future",
+    "ac-create-help": "Learn more",
+    "ac-click-tip-title-create": "I know that…"
+}
