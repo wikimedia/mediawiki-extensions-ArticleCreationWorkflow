@@ -28,7 +28,7 @@ class SpecialArticleCreationLanding extends SpecialPage {
 			return;
 		}
 		
-		$this->pageTitle = wfMsg( 'ac-landing-page-title', $title );
+		$this->pageTitle = wfMessage( 'ac-landing-page-title', $title )->text();
 		$out->setPageTitle( $this->pageTitle );
 		$out->setRobotPolicy( 'noindex,nofollow' );
 		$out->addModules( 'ext.articleCreation.core' );
