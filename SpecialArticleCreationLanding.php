@@ -9,7 +9,11 @@ class SpecialArticleCreationLanding extends SpecialPage {
 		parent::__construct( 'ArticleCreationLanding', '', false );
 		$this->pageTitle = null;
 	}
-	
+
+	public function doesWrites() {
+		return true;
+	}
+
 	public function getDescription() {
 		return $this->pageTitle;
 	}
