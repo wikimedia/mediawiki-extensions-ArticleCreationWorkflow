@@ -1,0 +1,37 @@
+{
+	"manifest_version": 2,
+	"name": "ArticleCreationWorkflow",
+	"type": "other",
+	"author": [ "Max Semenik" ],
+	"url": "https://www.mediawiki.org/wiki/Extension:ArticleCreationWorkflow",
+	"descriptionmsg": "acw-desc",
+	"license-name": "MIT",
+	"requires": {
+		"MediaWiki": ">= 1.30.0-alpha"
+	},
+	"SpecialPages": {
+		"CreatePage": "ArticleCreationWorkflow\\SpecialCreatePage"
+	},
+	"Hooks": {
+		"AlternateEdit": "ArticleCreationWorkflow\\Hooks::onAlternateEdit"
+	},
+	"AutoloadClasses": {
+		"ArticleCreationWorkflow\\Hooks": "includes/Hooks.php",
+		"ArticleCreationWorkflow\\SpecialCreatePage": "includes/SpecialCreatePage.php",
+		"ArticleCreationWorkflow\\Workflow": "includes/Workflow.php"
+	},
+	"MessagesDirs": {
+		"ArticleCreationWorkflow": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"ArticleCreationWorkflowAliases": "ArticleCreationWorkflow.alias.php"
+	},
+	"config": {
+		"ArticleCreationWorkflows": {
+			"description": "Describes conditions when new page creation should be intercepted. See doc/config.txt for details.",
+			"value": []
+		}
+	}
+}
