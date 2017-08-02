@@ -1,3 +1,5 @@
 {
-	"acw-desc": "Customizes new page creation experience for new users"
+	"acw-desc": "Customizes new page creation experience for new users",
+	"acw-createpage": "Create page",
+	"acw-no-landing-page": "The $1 message has not been defined."
 }

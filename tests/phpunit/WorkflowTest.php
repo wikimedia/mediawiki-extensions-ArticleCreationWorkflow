@@ -6,9 +6,9 @@ use Article;
 use ArticleCreationWorkflow\Workflow;
 use DerivativeContext;
 use EditPage;
-use FauxRequest;
 use HashConfig;
 use MediaWikiTestCase;
+use MessageCache;
 use RequestContext;
 use Title;
 use User;
@@ -17,13 +17,13 @@ use User;
  * @group ArticleCreationWorkflow
  */
 class WorkflowTest extends MediaWikiTestCase {
+
 	/**
 	 * @dataProvider provideShouldInterceptEditPage
 	 *
 	 * @param User $user
 	 * @param Title $title
 	 * @param array $settings
-	 * @param string $query
 	 * @param bool $expected
 	 */
 	public function testShouldInterceptEditPage( User $user, Title $title,
@@ -38,7 +38,8 @@ class WorkflowTest extends MediaWikiTestCase {
 		$editPage = new EditPage( $article );
 		$config = new HashConfig( [ 'ArticleCreationWorkflows' => $settings ] );
 
-		$workflow = new Workflow( $config );
+		$workflow = $this->getMock( Workflow::class, [ 'getLandingPageMessage' ], [ $config ] );
+		$workflow->method( 'getLandingPageMessage' )->willReturn( wfMessage( 'search' ) );
 
 		self::assertEquals( $expected, $workflow->shouldInterceptEditPage( $editPage ) );
 	}
@@ -70,19 +71,33 @@ class WorkflowTest extends MediaWikiTestCase {
 		];
 
 		return [
-			// No config, do nothing
-			[ $anon, $mainspacePage, [], false ],
-			// Wrong NS, do nothing
-			[ $anon, $miscPage, $config, false ],
-			// Page exists, do nothing
-			[ $anon, $existingPage, $config, false ],
-			// Confirmed user, do nothing
-			[ $confirmed, $mainspacePage, $config, false ],
+			[ $anon, $mainspacePage, [], false, 'No config, do nothing' ],
+			[ $anon, $miscPage, $config, false, 'Wrong NS, do nothing' ],
+			[ $anon, $existingPage, $config, false, 'Page exists, do nothing' ],
+			[ $confirmed, $mainspacePage, $config, false, 'Confirmed user, do nothing' ],
 
-			// Anon attempting to create a page, intercept
-			[ $anon, $mainspacePage, $config, true ],
-			// Newbie attempting to create a page, intercept
-			[ $newbie, $mainspacePage, $config, true ],
+			[ $anon, $mainspacePage, $config, true, 'Anon attempting to create a page, intercept' ],
+			[ $newbie, $mainspacePage, $config, true, 'Newbie attempting to create a page, intercept' ],
 		];
 	}
+
+	public function testLandingPageTemplateExistence() {
+		$article = new Article( Title::newFromText( 'Test page' ) );
+		$editPage = new EditPage( $article );
+		$config = new HashConfig( [
+			'ArticleCreationWorkflows' => [
+				[
+					'namespaces' => [ NS_MAIN ],
+					'excludeRight' => 'autoconfirmed',
+				],
+			]
+		] );
+
+		$workflow = $this->getMock( Workflow::class, [ 'getLandingPageMessage' ], [ $config ] );
+		$workflow->method( 'getLandingPageMessage' )->willReturn( null );
+
+		// Check that it doesn't intercept if the message is empty
+		self::assertEquals( false, $workflow->shouldInterceptEditPage( $editPage ) );
+	}
+
 }

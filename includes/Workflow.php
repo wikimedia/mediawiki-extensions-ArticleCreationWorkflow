@@ -4,11 +4,14 @@ namespace ArticleCreationWorkflow;
 
 use Config;
 use EditPage;
+use Message;
 
 /**
  * Contains this extension's business logic
  */
 class Workflow {
+	const LANDING_PAGE = 'article-creation-landing-page';
+
 	/** @var Config */
 	private $config;
 
@@ -20,6 +23,20 @@ class Workflow {
 	}
 
 	/**
+	 * Returns the message defining the landing page
+	 *
+	 * @return Message|null
+	 */
+	public function getLandingPageMessage() {
+		$msg = wfMessage( self::LANDING_PAGE )->inContentLanguage();
+		if ( $msg->isDisabled() ) {
+			return null;
+		}
+
+		return $msg;
+	}
+
+	/**
 	 * Checks whether an attempt to edit a page should be intercepted and redirected to our workflow
 	 *
 	 * @param EditPage $editPage
@@ -28,12 +45,17 @@ class Workflow {
 	public function shouldInterceptEditPage( EditPage $editPage ) {
 		$title = $editPage->getTitle();
 		$user = $editPage->getContext()->getUser();
-		$request = $editPage->getContext()->getRequest();
 
 		$conditions = $this->config->get( 'ArticleCreationWorkflows' );
 
 		// We are only interested in creation
 		if ( $title->exists() ) {
+			return false;
+		}
+
+		// Don't intercept if the landing page is not configured
+		$landingPage = $this->getLandingPageMessage();
+		if ( !$landingPage ) {
 			return false;
 		}
 

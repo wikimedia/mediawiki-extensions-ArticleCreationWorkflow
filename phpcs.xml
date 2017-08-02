@@ -5,7 +5,5 @@
 		<exclude name ="MediaWiki.Commenting.FunctionComment.MissingParamComment" />
 	</rule>
 	<arg name="encoding" value="utf8" />
-	<arg name="extensions" value="php,php5,inc" />
 	<arg name="colors" />
-	<exclude-pattern>vendor</exclude-pattern>
 </ruleset>

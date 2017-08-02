@@ -20,7 +20,9 @@ class Hooks {
 	 * @return bool
 	 */
 	public static function onAlternateEdit( EditPage $editPage ) {
-		$config = MediaWikiServices::getInstance()->getMainConfig();
+		$config = MediaWikiServices::getInstance()
+			->getConfigFactory()
+			->makeConfig( 'ArticleCreationWorkflow' );
 		$workflow = new Workflow( $config );
 
 		if ( $workflow->shouldInterceptEditPage( $editPage ) ) {

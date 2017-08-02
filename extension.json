@@ -33,5 +33,8 @@
 			"description": "Describes conditions when new page creation should be intercepted. See doc/config.txt for details.",
 			"value": []
 		}
+	},
+	"ConfigRegistry": {
+		"ArticleCreationWorkflow": "GlobalVarConfig::newInstance"
 	}
 }

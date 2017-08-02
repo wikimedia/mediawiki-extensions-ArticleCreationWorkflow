@@ -1,3 +1,5 @@
 {
-	"acw-desc": "{{desc}}"
+	"acw-desc": "{{desc}}",
+	"acw-createpage": "The title of the CreatePage special page.",
+	"acw-no-landing-page": "Message shown when the landing page system message does not exist. $1 is the name of the system message."
 }
