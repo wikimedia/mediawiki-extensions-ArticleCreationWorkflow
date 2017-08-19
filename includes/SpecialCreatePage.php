@@ -38,7 +38,7 @@ class SpecialCreatePage extends UnlistedSpecialPage {
 
 		$destTitle = Title::newFromText( $subPage );
 		$destTitleText = $destTitle ? $destTitle->getPrefixedText() : '';
-		$landingPageMessage = $workflow->getLandingPageMessage()->params( $destTitleText );
+		$landingPageMessage = $workflow->getLandingPageMessage();
 
 		// If the landing page is not configured, show an error message.
 		if ( !$landingPageMessage ) {
@@ -51,6 +51,6 @@ class SpecialCreatePage extends UnlistedSpecialPage {
 			return;
 		}
 
-		$this->getOutput()->addWikiText( $landingPageMessage->text() );
+		$this->getOutput()->addWikiText( $landingPageMessage->params( $destTitleText )->text() );
 	}
 }
