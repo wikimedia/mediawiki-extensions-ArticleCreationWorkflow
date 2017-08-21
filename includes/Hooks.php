@@ -27,9 +27,9 @@ class Hooks {
 
 		if ( $workflow->shouldInterceptEditPage( $editPage ) ) {
 			$title = $editPage->getTitle();
-			$redirTo = SpecialPage::getTitleFor( 'CreatePage', $title->getPrefixedText() );
+			$redirTo = SpecialPage::getTitleFor( 'CreatePage' );
 			$output = $editPage->getContext()->getOutput();
-			$output->redirect( $redirTo->getFullURL() );
+			$output->redirect( $redirTo->getFullURL( [ 'page' => $title->getPrefixedText() ] ) );
 
 			return false;
 		}

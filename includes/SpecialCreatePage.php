@@ -36,7 +36,7 @@ class SpecialCreatePage extends UnlistedSpecialPage {
 			->makeConfig( 'ArticleCreationWorkflow' );
 		$workflow = new Workflow( $config );
 
-		$destTitle = Title::newFromText( $subPage );
+		$destTitle = Title::newFromText( $this->getRequest()->getText( 'page' ) );
 		$destTitleText = $destTitle ? $destTitle->getPrefixedText() : '';
 		$landingPageMessage = $workflow->getLandingPageMessage();
 
