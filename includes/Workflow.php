@@ -65,12 +65,7 @@ class Workflow {
 				continue;
 			}
 
-			// Filter out users who don't have these rights
-			if ( isset( $cond['redirectRight'] ) && !$user->isAllowed( $cond['redirectRight'] ) ) {
-				continue;
-			}
-
-			// Filter out people who have these rights
+			// Don't intercept users that have these rights
 			if ( isset( $cond['excludeRight'] ) && $user->isAllowed( $cond['excludeRight'] ) ) {
 				continue;
 			}
