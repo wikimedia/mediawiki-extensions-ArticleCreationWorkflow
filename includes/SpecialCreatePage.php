@@ -51,6 +51,7 @@ class SpecialCreatePage extends UnlistedSpecialPage {
 			return;
 		}
 
+		$this->getOutput()->addModules( 'ext.acw.eventlogging' );
 		$this->getOutput()->addWikiText( $landingPageMessage->params( $destTitleText )->text() );
 	}
 }

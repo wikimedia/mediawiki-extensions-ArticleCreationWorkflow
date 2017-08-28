@@ -25,6 +25,17 @@
 			"i18n"
 		]
 	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "ArticleCreationWorkflow/modules"
+	},
+	"ResourceModules": {
+		"ext.acw.eventlogging": {
+			"scripts": [
+				"acw.eventlogging.js"
+			]
+		}
+	},
 	"ExtensionMessagesFiles": {
 		"ArticleCreationWorkflowAliases": "ArticleCreationWorkflow.alias.php"
 	},
