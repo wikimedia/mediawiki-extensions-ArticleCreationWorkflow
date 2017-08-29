@@ -29,7 +29,8 @@ class SpecialCreatePage extends UnlistedSpecialPage {
 	 * @param string|null $subPage
 	 */
 	public function execute( $subPage ) {
-		parent::execute( $subPage );
+		$this->setHeaders();
+		$this->outputHeader();
 
 		$config = MediaWikiServices::getInstance()
 			->getConfigFactory()
