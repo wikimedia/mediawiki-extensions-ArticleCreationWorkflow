@@ -29,7 +29,9 @@ class Hooks {
 			// If the landing page didn't exist, we wouldn't have intercepted.
 			$redirTo = $workflow->getLandingPageTitle();
 			$output = $editPage->getContext()->getOutput();
-			$output->redirect( $redirTo->getFullURL( [ 'page' => $title->getPrefixedText() ] ) );
+			$output->redirect( $redirTo->getFullURL(
+				[ 'page' => $title->getPrefixedText(), 'wprov' => 'acww1' ]
+			) );
 
 			return false;
 		}
