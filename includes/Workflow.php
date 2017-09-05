@@ -4,13 +4,12 @@ namespace ArticleCreationWorkflow;
 
 use Config;
 use EditPage;
-use Message;
+use Title;
 
 /**
  * Contains this extension's business logic
  */
 class Workflow {
-	const LANDING_PAGE = 'article-creation-landing-page';
 
 	/** @var Config */
 	private $config;
@@ -25,15 +24,11 @@ class Workflow {
 	/**
 	 * Returns the message defining the landing page
 	 *
-	 * @return Message|null
+	 * @return Title|null
 	 */
-	public function getLandingPageMessage() {
-		$msg = wfMessage( self::LANDING_PAGE )->inContentLanguage();
-		if ( $msg->isDisabled() ) {
-			return null;
-		}
-
-		return $msg;
+	public function getLandingPageTitle() {
+		$landingPageName = $this->config->get( 'ArticleCreationLandingPage' );
+		return Title::newFromText( $landingPageName );
 	}
 
 	/**
@@ -54,8 +49,8 @@ class Workflow {
 		}
 
 		// Don't intercept if the landing page is not configured
-		$landingPage = $this->getLandingPageMessage();
-		if ( !$landingPage ) {
+		$landingPage = $this->getLandingPageTitle();
+		if ( $landingPage === null || !$landingPage->exists() ) {
 			return false;
 		}
 

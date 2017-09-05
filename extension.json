@@ -9,15 +9,11 @@
 	"requires": {
 		"MediaWiki": ">= 1.30.0-alpha"
 	},
-	"SpecialPages": {
-		"CreatePage": "ArticleCreationWorkflow\\SpecialCreatePage"
-	},
 	"Hooks": {
 		"AlternateEdit": "ArticleCreationWorkflow\\Hooks::onAlternateEdit"
 	},
 	"AutoloadClasses": {
 		"ArticleCreationWorkflow\\Hooks": "includes/Hooks.php",
-		"ArticleCreationWorkflow\\SpecialCreatePage": "includes/SpecialCreatePage.php",
 		"ArticleCreationWorkflow\\Workflow": "includes/Workflow.php"
 	},
 	"MessagesDirs": {
@@ -25,24 +21,14 @@
 			"i18n"
 		]
 	},
-	"ResourceFileModulePaths": {
-		"localBasePath": "modules",
-		"remoteExtPath": "ArticleCreationWorkflow/modules"
-	},
-	"ResourceModules": {
-		"ext.acw.eventlogging": {
-			"scripts": [
-				"acw.eventlogging.js"
-			]
-		}
-	},
-	"ExtensionMessagesFiles": {
-		"ArticleCreationWorkflowAliases": "ArticleCreationWorkflow.alias.php"
-	},
 	"config": {
 		"ArticleCreationWorkflows": {
 			"description": "Describes conditions when new page creation should be intercepted. See doc/config.txt for details.",
 			"value": []
+		},
+		"ArticleCreationLandingPage": {
+			"description": "The name of the wiki page to which users should be redirected if intercepted.",
+			"value": "Project:Article wizard"
 		}
 	},
 	"ConfigRegistry": {

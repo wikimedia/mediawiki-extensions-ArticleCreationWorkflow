@@ -4,7 +4,6 @@ namespace ArticleCreationWorkflow;
 
 use EditPage;
 use MediaWiki\MediaWikiServices;
-use SpecialPage;
 
 /**
  * Hook handlers
@@ -27,7 +26,8 @@ class Hooks {
 
 		if ( $workflow->shouldInterceptEditPage( $editPage ) ) {
 			$title = $editPage->getTitle();
-			$redirTo = SpecialPage::getTitleFor( 'CreatePage' );
+			// If the landing page didn't exist, we wouldn't have intercepted.
+			$redirTo = $workflow->getLandingPageTitle();
 			$output = $editPage->getContext()->getOutput();
 			$output->redirect( $redirTo->getFullURL( [ 'page' => $title->getPrefixedText() ] ) );
 

@@ -8,7 +8,6 @@ use DerivativeContext;
 use EditPage;
 use HashConfig;
 use MediaWikiTestCase;
-use MessageCache;
 use RequestContext;
 use Title;
 use User;
@@ -38,8 +37,10 @@ class WorkflowTest extends MediaWikiTestCase {
 		$editPage = new EditPage( $article );
 		$config = new HashConfig( [ 'ArticleCreationWorkflows' => $settings ] );
 
-		$workflow = $this->getMock( Workflow::class, [ 'getLandingPageMessage' ], [ $config ] );
-		$workflow->method( 'getLandingPageMessage' )->willReturn( wfMessage( 'search' ) );
+		$landingPage = $this->getMock( Title::class, [ 'exists' ] );
+		$landingPage->method( 'exists' )->willReturn( true );
+		$workflow = $this->getMock( Workflow::class, [ 'getLandingPageTitle' ], [ $config ] );
+		$workflow->method( 'getLandingPageTitle' )->willReturn( $landingPage );
 
 		self::assertEquals( $expected, $workflow->shouldInterceptEditPage( $editPage ) );
 	}
@@ -81,7 +82,7 @@ class WorkflowTest extends MediaWikiTestCase {
 		];
 	}
 
-	public function testLandingPageTemplateExistence() {
+	public function testLandingPageExistence() {
 		$article = new Article( Title::newFromText( 'Test page' ) );
 		$editPage = new EditPage( $article );
 		$config = new HashConfig( [
@@ -90,11 +91,12 @@ class WorkflowTest extends MediaWikiTestCase {
 					'namespaces' => [ NS_MAIN ],
 					'excludeRight' => 'autoconfirmed',
 				],
-			]
+			],
+			'ArticleCreationLandingPage' => 'Non existant page',
 		] );
 
-		$workflow = $this->getMock( Workflow::class, [ 'getLandingPageMessage' ], [ $config ] );
-		$workflow->method( 'getLandingPageMessage' )->willReturn( null );
+		$workflow = $this->getMock( Workflow::class, [ 'getLandingPageTitle' ], [ $config ] );
+		$workflow->method( 'getLandingPageTitle' )->willReturn( null );
 
 		// Check that it doesn't intercept if the message is empty
 		self::assertEquals( false, $workflow->shouldInterceptEditPage( $editPage ) );
