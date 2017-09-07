@@ -10,7 +10,8 @@
 		"MediaWiki": ">= 1.30.0-alpha"
 	},
 	"Hooks": {
-		"AlternateEdit": "ArticleCreationWorkflow\\Hooks::onAlternateEdit"
+		"AlternateEdit": "ArticleCreationWorkflow\\Hooks::onAlternateEdit",
+		"ShowMissingArticle": "ArticleCreationWorkflow\\Hooks::onShowMissingArticle"
 	},
 	"AutoloadClasses": {
 		"ArticleCreationWorkflow\\Hooks": "includes/Hooks.php",
