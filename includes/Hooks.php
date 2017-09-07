@@ -4,6 +4,7 @@ namespace ArticleCreationWorkflow;
 
 use EditPage;
 use MediaWiki\MediaWikiServices;
+use Article;
 
 /**
  * Hook handlers
@@ -11,7 +12,7 @@ use MediaWiki\MediaWikiServices;
 class Hooks {
 	/**
 	 * AlternateEdit hook handler
-	 * Redirects users attempting to create pages to Special:CreatePage, based on configuration
+	 * Redirects users attempting to create pages to the landing page, based on configuration
 	 *
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/AlternateEdit
 	 *
@@ -37,5 +38,33 @@ class Hooks {
 		}
 
 		return true;
+	}
+
+	/**
+	 * ShowMissingArticle hook handler
+	 * If article doesn't exist, redirect non-autoconfirmed users to  AfC
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ShowMissingArticle
+	 *
+	 * @param Article $article Article instance
+	 * @return bool
+	 */
+	public static function onShowMissingArticle( Article $article ) {
+		$config = MediaWikiServices::getInstance()
+			->getConfigFactory()
+			->makeConfig( 'ArticleCreationWorkflow' );
+		$workflow = new Workflow( $config );
+		$editPage = new EditPage( $article );
+		if ( $workflow->shouldInterceptEditPage( $editPage ) &&
+			!$editPage->getContext()->getUser()->isAnon()
+		) {
+			$title = $editPage->getTitle();
+			// If the landing page didn't exist, we wouldn't have intercepted.
+			$redirTo = $workflow->getLandingPageTitle();
+			$output = $editPage->getContext()->getOutput();
+			$output->redirect( $redirTo->getFullURL(
+				[ 'page' => $title->getPrefixedText(), 'wprov' => 'acww1' ]
+			) );
+		}
 	}
 }
