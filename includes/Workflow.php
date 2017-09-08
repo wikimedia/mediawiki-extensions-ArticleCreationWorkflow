@@ -3,7 +3,8 @@
 namespace ArticleCreationWorkflow;
 
 use Config;
-use EditPage;
+use Article;
+use User;
 use Title;
 
 /**
@@ -34,12 +35,12 @@ class Workflow {
 	/**
 	 * Checks whether an attempt to edit a page should be intercepted and redirected to our workflow
 	 *
-	 * @param EditPage $editPage
+	 * @param Article $article The requested page
+	 * @param User $user The user trying to load the editor
 	 * @return bool
 	 */
-	public function shouldInterceptEditPage( EditPage $editPage ) {
-		$title = $editPage->getTitle();
-		$user = $editPage->getContext()->getUser();
+	public function shouldInterceptEditPage( Article $article, User $user ) {
+		$title = $article->getTitle();
 
 		$conditions = $this->config->get( 'ArticleCreationWorkflows' );
 

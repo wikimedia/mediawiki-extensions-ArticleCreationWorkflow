@@ -34,7 +34,6 @@ class WorkflowTest extends MediaWikiTestCase {
 
 		$article = new Article( $title );
 		$article->setContext( $context );
-		$editPage = new EditPage( $article );
 		$config = new HashConfig( [ 'ArticleCreationWorkflows' => $settings ] );
 
 		$landingPage = $this->getMock( Title::class, [ 'exists' ] );
@@ -42,7 +41,7 @@ class WorkflowTest extends MediaWikiTestCase {
 		$workflow = $this->getMock( Workflow::class, [ 'getLandingPageTitle' ], [ $config ] );
 		$workflow->method( 'getLandingPageTitle' )->willReturn( $landingPage );
 
-		self::assertEquals( $expected, $workflow->shouldInterceptEditPage( $editPage ) );
+		self::assertEquals( $expected, $workflow->shouldInterceptEditPage( $article, $user ) );
 	}
 
 	public function provideShouldInterceptEditPage() {
@@ -84,7 +83,7 @@ class WorkflowTest extends MediaWikiTestCase {
 
 	public function testLandingPageExistence() {
 		$article = new Article( Title::newFromText( 'Test page' ) );
-		$editPage = new EditPage( $article );
+		$user = $this->getMock( 'User' );
 		$config = new HashConfig( [
 			'ArticleCreationWorkflows' => [
 				[
@@ -99,7 +98,7 @@ class WorkflowTest extends MediaWikiTestCase {
 		$workflow->method( 'getLandingPageTitle' )->willReturn( null );
 
 		// Check that it doesn't intercept if the message is empty
-		self::assertEquals( false, $workflow->shouldInterceptEditPage( $editPage ) );
+		self::assertEquals( false, $workflow->shouldInterceptEditPage( $article, $user ) );
 	}
 
 }

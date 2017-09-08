@@ -2,38 +2,38 @@
 
 namespace ArticleCreationWorkflow;
 
-use EditPage;
 use MediaWiki\MediaWikiServices;
 use Article;
+use User;
 
 /**
  * Hook handlers
  */
 class Hooks {
 	/**
-	 * AlternateEdit hook handler
+	 * CustomEditor hook handler
 	 * Redirects users attempting to create pages to the landing page, based on configuration
 	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/AlternateEdit
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/CustomEditor
 	 *
-	 * @param EditPage $editPage
+	 * @param Article $article The requested page
+	 * @param User $user The user trying to load the editor
 	 * @return bool
 	 */
-	public static function onAlternateEdit( EditPage $editPage ) {
+	public static function onCustomEditor( Article $article, User $user ) {
 		$config = MediaWikiServices::getInstance()
 			->getConfigFactory()
 			->makeConfig( 'ArticleCreationWorkflow' );
 		$workflow = new Workflow( $config );
 
-		if ( $workflow->shouldInterceptEditPage( $editPage ) ) {
-			$title = $editPage->getTitle();
+		if ( $workflow->shouldInterceptEditPage( $article, $user ) ) {
+			$title = $article->getTitle();
 			// If the landing page didn't exist, we wouldn't have intercepted.
 			$redirTo = $workflow->getLandingPageTitle();
-			$output = $editPage->getContext()->getOutput();
+			$output = $article->getContext()->getOutput();
 			$output->redirect( $redirTo->getFullURL(
 				[ 'page' => $title->getPrefixedText(), 'wprov' => 'acww1' ]
 			) );
-
 			return false;
 		}
 
@@ -54,14 +54,14 @@ class Hooks {
 			->getConfigFactory()
 			->makeConfig( 'ArticleCreationWorkflow' );
 		$workflow = new Workflow( $config );
-		$editPage = new EditPage( $article );
-		if ( $workflow->shouldInterceptEditPage( $editPage ) &&
-			!$editPage->getContext()->getUser()->isAnon()
+		$user = $article->getContext()->getUser();
+		if ( $workflow->shouldInterceptEditPage( $article, $user ) &&
+			!$user->isAnon()
 		) {
-			$title = $editPage->getTitle();
+			$title = $article->getTitle();
 			// If the landing page didn't exist, we wouldn't have intercepted.
 			$redirTo = $workflow->getLandingPageTitle();
-			$output = $editPage->getContext()->getOutput();
+			$output = $article->getContext()->getOutput();
 			$output->redirect( $redirTo->getFullURL(
 				[ 'page' => $title->getPrefixedText(), 'wprov' => 'acww1' ]
 			) );
