@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "ArticleCreationWorkflow",
 	"type": "other",
-	"author": [ "Max Semenik" ],
+	"author": [ "Max Semenik", "Niharika Kohli" ],
 	"url": "https://www.mediawiki.org/wiki/Extension:ArticleCreationWorkflow",
 	"descriptionmsg": "acw-desc",
 	"license-name": "MIT",
@@ -11,7 +11,8 @@
 	},
 	"Hooks": {
 		"CustomEditor": "ArticleCreationWorkflow\\Hooks::onCustomEditor",
-		"ShowMissingArticle": "ArticleCreationWorkflow\\Hooks::onShowMissingArticle"
+		"ShowMissingArticle": "ArticleCreationWorkflow\\Hooks::onShowMissingArticle",
+		"BeforePageDisplay": "ArticleCreationWorkflow\\Hooks::onBeforePageDisplay"
 	},
 	"AutoloadClasses": {
 		"ArticleCreationWorkflow\\Hooks": "includes/Hooks.php",
@@ -21,6 +22,17 @@
 		"ArticleCreationWorkflow": [
 			"i18n"
 		]
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": "modules",
+		"remoteExtPath": "ArticleCreationWorkflow/modules"
+	},
+	"ResourceModules": {
+		"ext.acw.eventlogging": {
+			"scripts": [
+				"ext.acw.eventlogging.js"
+			]
+		}
 	},
 	"config": {
 		"ArticleCreationWorkflows": {

@@ -5,6 +5,7 @@ namespace ArticleCreationWorkflow;
 use MediaWiki\MediaWikiServices;
 use Article;
 use User;
+use OutputPage;
 
 /**
  * Hook handlers
@@ -32,7 +33,7 @@ class Hooks {
 			$redirTo = $workflow->getLandingPageTitle();
 			$output = $article->getContext()->getOutput();
 			$output->redirect( $redirTo->getFullURL(
-				[ 'page' => $title->getPrefixedText(), 'wprov' => 'acww1' ]
+				[ 'page' => $title->getPrefixedText() ]
 			) );
 			return false;
 		}
@@ -63,8 +64,24 @@ class Hooks {
 			$redirTo = $workflow->getLandingPageTitle();
 			$output = $article->getContext()->getOutput();
 			$output->redirect( $redirTo->getFullURL(
-				[ 'page' => $title->getPrefixedText(), 'wprov' => 'acww1' ]
+				[ 'page' => $title->getPrefixedText() ]
 			) );
+		}
+	}
+
+	/**
+	 * BeforePageDisplay hook handler
+	 * If user is landing on our landing page, we add eventlogging
+	 *
+	 * @param OutputPage $out OutputPage instance
+	 */
+	public static function onBeforePageDisplay( OutputPage $out ) {
+		$config = MediaWikiServices::getInstance()
+			->getConfigFactory()
+			->makeConfig( 'ArticleCreationWorkflow' );
+		$workflow = new Workflow( $config );
+		if ( $out->getPageTitle() == $workflow->getLandingPageTitle() ) {
+			$out->addModules( 'ext.acw.eventlogging' );
 		}
 	}
 }
