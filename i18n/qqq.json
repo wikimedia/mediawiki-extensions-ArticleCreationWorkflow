@@ -1,4 +1,8 @@
 {
-	"@metadata": [],
-	"acw-desc": "{{desc}}"
+	"@metadata": {
+		"authors": [
+			"Liuxinyu970226"
+		]
+	},
+	"acw-desc": "{{desc|name=ArticleCreationWorkflow|url=https://www.mediawiki.org/wiki/Special:MyLanguage/Extension:ArticleCreationWorkflow}}"
 }
