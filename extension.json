@@ -12,7 +12,8 @@
 	"Hooks": {
 		"CustomEditor": "ArticleCreationWorkflow\\Hooks::onCustomEditor",
 		"ShowMissingArticle": "ArticleCreationWorkflow\\Hooks::onShowMissingArticle",
-		"BeforePageDisplay": "ArticleCreationWorkflow\\Hooks::onBeforePageDisplay"
+		"BeforePageDisplay": "ArticleCreationWorkflow\\Hooks::onBeforePageDisplay",
+		"EventLoggingRegisterSchemas": "ArticleCreationWorkflow\\Hooks::onEventLoggingRegisterSchemas"
 	},
 	"AutoloadClasses": {
 		"ArticleCreationWorkflow\\Hooks": "includes/Hooks.php",
@@ -42,6 +43,15 @@
 		"ArticleCreationLandingPage": {
 			"description": "The name of the wiki page to which users should be redirected if intercepted.",
 			"value": "Project:Article wizard"
+		},
+		"ArticleCreationEventLoggingSchemas": {
+			"value": {
+				"ArticleCreationWorkflow": {
+					"enabled": true,
+					"revision": 17145434
+				}
+			},
+			"merge_strategy": "array_plus_2d"
 		}
 	},
 	"ConfigRegistry": {
