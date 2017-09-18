@@ -49,6 +49,11 @@ class Workflow {
 			return false;
 		}
 
+		// Only intercept users who can potentially create articles otherwise
+		if ( !$user->isAllowed( 'createpage' ) ) {
+			return false;
+		}
+
 		// Don't intercept if the landing page is not configured
 		$landingPage = $this->getLandingPageTitle();
 		if ( $landingPage === null || !$landingPage->exists() ) {

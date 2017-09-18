@@ -45,15 +45,29 @@ class WorkflowTest extends MediaWikiTestCase {
 	}
 
 	public function provideShouldInterceptEditPage() {
-		$anon = User::newFromId( 0 );
+		$anon = $this->getMock( 'User' );
+		$anonmap = [
+			[ 'autoconfirmed', false ],
+			[ 'createpage', false ]
+		];
+		$anon->method( 'isAllowed' )
+			->will( $this->returnValueMap( $anonmap ) );
+
 		$newbie = $this->getMock( 'User' );
+		$newbiemap = [
+			[ 'autoconfirmed', false ],
+			[ 'createpage', true ]
+		];
 		$newbie->method( 'isAllowed' )
-			->with( 'autoconfirmed' )
-			->willReturn( false );
+			->will( $this->returnValueMap( $newbiemap ) );
+
 		$confirmed = $this->getMock( 'User' );
+		$confirmedmap = [
+			[ 'autoconfirmed', true ],
+			[ 'createpage', true ]
+		];
 		$confirmed->method( 'isAllowed' )
-			->with( 'autoconfirmed' )
-			->willReturn( true );
+			->will( $this->returnValueMap( $confirmedmap ) );
 
 		$mainspacePage = Title::newFromText( 'Some nonexistent page' );
 		$miscPage = Title::newFromText( 'Project:Nonexistent too' );
@@ -74,9 +88,9 @@ class WorkflowTest extends MediaWikiTestCase {
 			[ $anon, $mainspacePage, [], false, 'No config, do nothing' ],
 			[ $anon, $miscPage, $config, false, 'Wrong NS, do nothing' ],
 			[ $anon, $existingPage, $config, false, 'Page exists, do nothing' ],
+			[ $anon, $mainspacePage, $config, false, 'Anon attempting to create a page, do nothing' ],
 			[ $confirmed, $mainspacePage, $config, false, 'Confirmed user, do nothing' ],
 
-			[ $anon, $mainspacePage, $config, true, 'Anon attempting to create a page, intercept' ],
 			[ $newbie, $mainspacePage, $config, true, 'Newbie attempting to create a page, intercept' ],
 		];
 	}
@@ -84,6 +98,9 @@ class WorkflowTest extends MediaWikiTestCase {
 	public function testLandingPageExistence() {
 		$article = new Article( Title::newFromText( 'Test page' ) );
 		$user = $this->getMock( 'User' );
+		$user->method( 'isAllowed' )
+			->with( 'createpage' )
+			->willReturn( true );
 		$config = new HashConfig( [
 			'ArticleCreationWorkflows' => [
 				[

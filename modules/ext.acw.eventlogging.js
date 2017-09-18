@@ -12,9 +12,9 @@
 		} );
 	}
 
-	$( 'html' ).on( 'click', '#bodyContent a', function ( event ) {
+	$( 'html' ).on( 'click', '#bodyContent a', function () {
 		var link = $( this ).attr( 'href' );
 		trackData( 'click', link );
 	} );
 
-} ( jQuery, mediaWiki ) );
+}( jQuery, mediaWiki ) );

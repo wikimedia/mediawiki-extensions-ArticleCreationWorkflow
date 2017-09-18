@@ -56,9 +56,7 @@ class Hooks {
 			->makeConfig( 'ArticleCreationWorkflow' );
 		$workflow = new Workflow( $config );
 		$user = $article->getContext()->getUser();
-		if ( $workflow->shouldInterceptEditPage( $article, $user ) &&
-			!$user->isAnon()
-		) {
+		if ( $workflow->shouldInterceptEditPage( $article, $user ) ) {
 			$title = $article->getTitle();
 			// If the landing page didn't exist, we wouldn't have intercepted.
 			$redirTo = $workflow->getLandingPageTitle();
