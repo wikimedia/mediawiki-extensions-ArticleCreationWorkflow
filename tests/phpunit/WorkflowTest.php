@@ -5,7 +5,6 @@ namespace ArticleCreationWorkflow\Tests;
 use Article;
 use ArticleCreationWorkflow\Workflow;
 use DerivativeContext;
-use EditPage;
 use HashConfig;
 use MediaWikiTestCase;
 use RequestContext;
