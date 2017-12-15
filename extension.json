@@ -7,7 +7,7 @@
 	"descriptionmsg": "acw-desc",
 	"license-name": "MIT",
 	"requires": {
-		"MediaWiki": ">= 1.30.0-alpha"
+		"MediaWiki": ">= 1.31.0"
 	},
 	"Hooks": {
 		"CustomEditor": "ArticleCreationWorkflow\\Hooks::onCustomEditor",
@@ -15,9 +15,8 @@
 		"BeforePageDisplay": "ArticleCreationWorkflow\\Hooks::onBeforePageDisplay",
 		"EventLoggingRegisterSchemas": "ArticleCreationWorkflow\\Hooks::onEventLoggingRegisterSchemas"
 	},
-	"AutoloadClasses": {
-		"ArticleCreationWorkflow\\Hooks": "includes/Hooks.php",
-		"ArticleCreationWorkflow\\Workflow": "includes/Workflow.php"
+	"AutoloadNamespaces": {
+		"ArticleCreationWorkflow\\": "includes/"
 	},
 	"MessagesDirs": {
 		"ArticleCreationWorkflow": [
