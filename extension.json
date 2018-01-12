@@ -32,6 +32,11 @@
 			"scripts": [
 				"ext.acw.eventlogging.js"
 			]
+		},
+		"ext.acw.landingPageStyles": {
+			"styles": [
+				"ext.acw.landingPage.css"
+			]
 		}
 	},
 	"config": {
@@ -51,6 +56,10 @@
 				}
 			},
 			"merge_strategy": "array_plus_2d"
+		},
+		"UseCustomLandingPageStyles": {
+			"description": "Whether to load custom CSS for the landing page",
+			"value": true
 		}
 	},
 	"ConfigRegistry": {

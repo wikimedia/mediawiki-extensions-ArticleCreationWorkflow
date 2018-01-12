@@ -79,6 +79,9 @@ class Hooks {
 			->makeConfig( 'ArticleCreationWorkflow' );
 		$workflow = new Workflow( $config );
 		if ( $out->getPageTitle() == $workflow->getLandingPageTitle() ) {
+			if ( $config->get( 'UseCustomLandingPageStyles' ) ) {
+				$out->addModuleStyles( 'ext.acw.landingPageStyles' );
+			}
 			$out->addModules( 'ext.acw.eventlogging' );
 		}
 	}
