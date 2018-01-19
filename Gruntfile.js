@@ -6,6 +6,7 @@ module.exports = function ( grunt ) {
 	grunt.loadNpmTasks( 'grunt-contrib-watch' );
 	grunt.loadNpmTasks( 'grunt-eslint' );
 	grunt.loadNpmTasks( 'grunt-jsonlint' );
+	grunt.loadNpmTasks( 'grunt-stylelint' );
 
 	grunt.initConfig( {
 		eslint: {
@@ -20,8 +21,9 @@ module.exports = function ( grunt ) {
 		banana: conf.MessagesDirs,
 		watch: {
 			files: [
-				'.eslintrc.json',
-				'<%= eslint.all %>'
+				'.{stylelintrc,eslintrc}.json',
+				'<%= eslint.all %>',
+				'<%= stylelint.all %>'
 			],
 			tasks: 'test'
 		},
@@ -32,10 +34,18 @@ module.exports = function ( grunt ) {
 				'!vendor/**',
 				'!docs/**'
 			]
+		},
+		stylelint: {
+			all: [
+				'**/*.css',
+				'!node_modules/**',
+				'!vendor/**',
+				'!docs/**'
+			]
 		}
 	} );
 
-	grunt.registerTask( 'lint', [ 'eslint', 'jsonlint', 'banana' ] );
+	grunt.registerTask( 'lint', [ 'eslint', 'jsonlint', 'banana', 'stylelint' ] );
 	grunt.registerTask( 'test', 'lint' );
 	grunt.registerTask( 'default', 'test' );
 };
