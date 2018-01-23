@@ -12,6 +12,7 @@ use Title;
 use User;
 
 /**
+ * @covers \ArticleCreationWorkflow\Workflow
  * @group ArticleCreationWorkflow
  */
 class WorkflowTest extends MediaWikiTestCase {
