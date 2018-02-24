@@ -5,3 +5,4 @@ vendor
 *.kate-swp
 .*.swp
 composer.lock
+/tests/phan/issues
