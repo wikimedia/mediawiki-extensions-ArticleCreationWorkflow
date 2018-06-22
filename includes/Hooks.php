@@ -85,19 +85,4 @@ class Hooks {
 			$out->addModules( 'ext.acw.eventlogging' );
 		}
 	}
-
-	/**
-	 * EventLoggingRegisterSchemas hook handler
-	 * Register our eventlogging schema
-	 *
-	 * @param array &$schemas Schemas array for eventlogging
-	 */
-	public static function onEventLoggingRegisterSchemas( array &$schemas ) {
-		global $wgArticleCreationEventLoggingSchemas;
-		foreach ( $wgArticleCreationEventLoggingSchemas as $schema => $property ) {
-			if ( $property['enabled'] ) {
-				$schemas[$schema] = $property['revision'];
-			}
-		}
-	}
 }

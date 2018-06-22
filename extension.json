@@ -12,8 +12,7 @@
 	"Hooks": {
 		"CustomEditor": "ArticleCreationWorkflow\\Hooks::onCustomEditor",
 		"ShowMissingArticle": "ArticleCreationWorkflow\\Hooks::onShowMissingArticle",
-		"BeforePageDisplay": "ArticleCreationWorkflow\\Hooks::onBeforePageDisplay",
-		"EventLoggingRegisterSchemas": "ArticleCreationWorkflow\\Hooks::onEventLoggingRegisterSchemas"
+		"BeforePageDisplay": "ArticleCreationWorkflow\\Hooks::onBeforePageDisplay"
 	},
 	"AutoloadNamespaces": {
 		"ArticleCreationWorkflow\\": "includes/"
@@ -39,6 +38,13 @@
 			]
 		}
 	},
+	"attributes": {
+		"EventLogging": {
+			"Schemas": {
+				"ArticleCreationWorkflow": 17145434
+			}
+		}
+	},
 	"config": {
 		"ArticleCreationWorkflows": {
 			"description": "Describes conditions when new page creation should be intercepted. See doc/config.txt for details.",
@@ -47,15 +53,6 @@
 		"ArticleCreationLandingPage": {
 			"description": "The name of the wiki page to which users should be redirected if intercepted.",
 			"value": "Project:Article wizard"
-		},
-		"ArticleCreationEventLoggingSchemas": {
-			"value": {
-				"ArticleCreationWorkflow": {
-					"enabled": true,
-					"revision": 17145434
-				}
-			},
-			"merge_strategy": "array_plus_2d"
 		},
 		"UseCustomLandingPageStyles": {
 			"description": "Whether to load custom CSS for the landing page",
