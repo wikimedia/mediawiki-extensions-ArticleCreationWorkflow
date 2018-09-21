@@ -12,7 +12,8 @@
 	"Hooks": {
 		"CustomEditor": "ArticleCreationWorkflow\\Hooks::onCustomEditor",
 		"ShowMissingArticle": "ArticleCreationWorkflow\\Hooks::onShowMissingArticle",
-		"BeforePageDisplay": "ArticleCreationWorkflow\\Hooks::onBeforePageDisplay"
+		"BeforePageDisplay": "ArticleCreationWorkflow\\Hooks::onBeforePageDisplay",
+		"TitleQuickPermissions": "ArticleCreationWorkflow\\Hooks::onTitleQuickPermissions"
 	},
 	"AutoloadNamespaces": {
 		"ArticleCreationWorkflow\\": "includes/"
@@ -38,6 +39,20 @@
 			]
 		}
 	},
+	"GroupPermissions": {
+		"*": {
+			"createpagemainns": true
+		},
+		"user": {
+			"createpagemainns": true
+		},
+		"autoconfirmed": {
+			"createpagemainns": true
+		}
+	},
+	"AvailableRights": [
+		"createpagemainns"
+	],
 	"attributes": {
 		"EventLogging": {
 			"Schemas": {
@@ -46,10 +61,6 @@
 		}
 	},
 	"config": {
-		"ArticleCreationWorkflows": {
-			"description": "Describes conditions when new page creation should be intercepted. See doc/config.txt for details.",
-			"value": []
-		},
 		"ArticleCreationLandingPage": {
 			"description": "The name of the wiki page to which users should be redirected if intercepted.",
 			"value": "Project:Article wizard"
