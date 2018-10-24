@@ -4,6 +4,7 @@ namespace ArticleCreationWorkflow;
 
 use MediaWiki\MediaWikiServices;
 use Article;
+use Title;
 use User;
 use OutputPage;
 
@@ -11,6 +12,32 @@ use OutputPage;
  * Hook handlers
  */
 class Hooks {
+	/**
+	 * TitleQuickPermissions hook handler
+	 * Prohibits creating pages in main namespace for users without a special permission
+	 *
+	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/TitleQuickPermissions
+	 * @param Title $title
+	 * @param User $user
+	 * @param string $action
+	 * @param array &$errors
+	 * @return bool
+	 */
+	public static function onTitleQuickPermissions( Title $title,
+		User $user,
+		$action,
+		array &$errors
+	) {
+		if ( $action === 'create'
+			&& $title->inNamespace( NS_MAIN )
+			&& !$user->isAllowed( 'createpagemainns' )
+		) {
+			$errors[] = $user->isAnon() ? [ 'nocreatetext' ] : [ 'nocreate-loggedin' ];
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * CustomEditor hook handler
 	 * Redirects users attempting to create pages to the landing page, based on configuration
@@ -22,19 +49,12 @@ class Hooks {
 	 * @return bool
 	 */
 	public static function onCustomEditor( Article $article, User $user ) {
-		$config = MediaWikiServices::getInstance()
-			->getConfigFactory()
-			->makeConfig( 'ArticleCreationWorkflow' );
-		$workflow = new Workflow( $config );
+		$workflow = self::getWorkflow();
+		$context = $article->getContext();
+		$title = $article->getTitle();
 
-		if ( $workflow->shouldInterceptEditPage( $article, $user ) ) {
-			$title = $article->getTitle();
-			// If the landing page didn't exist, we wouldn't have intercepted.
-			$redirTo = $workflow->getLandingPageTitle();
-			$output = $article->getContext()->getOutput();
-			$output->redirect( $redirTo->getFullURL(
-				[ 'page' => $title->getPrefixedText() ]
-			) );
+		if ( $workflow->interceptIfNeeded( $title, $user, $context ) ) {
+			// Stop hook propagation, we're disallowing editing
 			return false;
 		}
 
@@ -51,20 +71,12 @@ class Hooks {
 	 * @return bool
 	 */
 	public static function onShowMissingArticle( Article $article ) {
-		$config = MediaWikiServices::getInstance()
-			->getConfigFactory()
-			->makeConfig( 'ArticleCreationWorkflow' );
-		$workflow = new Workflow( $config );
-		$user = $article->getContext()->getUser();
-		if ( $workflow->shouldInterceptEditPage( $article, $user ) ) {
-			$title = $article->getTitle();
-			// If the landing page didn't exist, we wouldn't have intercepted.
-			$redirTo = $workflow->getLandingPageTitle();
-			$output = $article->getContext()->getOutput();
-			$output->redirect( $redirTo->getFullURL(
-				[ 'page' => $title->getPrefixedText() ]
-			) );
-		}
+		$workflow = self::getWorkflow();
+		$context = $article->getContext();
+		$user = $context->getUser();
+		$title = $article->getTitle();
+
+		$workflow->interceptIfNeeded( $title, $user, $context );
 	}
 
 	/**
@@ -74,15 +86,28 @@ class Hooks {
 	 * @param OutputPage $out OutputPage instance
 	 */
 	public static function onBeforePageDisplay( OutputPage $out ) {
-		$config = MediaWikiServices::getInstance()
-			->getConfigFactory()
-			->makeConfig( 'ArticleCreationWorkflow' );
-		$workflow = new Workflow( $config );
+		$workflow = self::getWorkflow();
 		if ( $out->getPageTitle() == $workflow->getLandingPageTitle() ) {
-			if ( $config->get( 'UseCustomLandingPageStyles' ) ) {
+			if ( $workflow->getConfig()->get( 'UseCustomLandingPageStyles' ) ) {
 				$out->addModuleStyles( 'ext.acw.landingPageStyles' );
 			}
 			$out->addModules( 'ext.acw.eventlogging' );
 		}
+	}
+
+	/**
+	 * @return Workflow
+	 */
+	private static function getWorkflow() {
+		static $cached;
+
+		if ( !$cached ) {
+			$config = MediaWikiServices::getInstance()
+				->getConfigFactory()
+				->makeConfig( 'ArticleCreationWorkflow' );
+			$cached = new Workflow( $config );
+		}
+
+		return $cached;
 	}
 }

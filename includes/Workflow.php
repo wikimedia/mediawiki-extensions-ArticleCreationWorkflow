@@ -3,7 +3,7 @@
 namespace ArticleCreationWorkflow;
 
 use Config;
-use Article;
+use IContextSource;
 use User;
 use Title;
 
@@ -23,6 +23,13 @@ class Workflow {
 	}
 
 	/**
+	 * @return Config
+	 */
+	public function getConfig() {
+		return $this->config;
+	}
+
+	/**
 	 * Returns the message defining the landing page
 	 *
 	 * @return Title|null
@@ -35,17 +42,23 @@ class Workflow {
 	/**
 	 * Checks whether an attempt to edit a page should be intercepted and redirected to our workflow
 	 *
-	 * @param Article $article The requested page
+	 * @param Title $title The title $user attempts to create
 	 * @param User $user The user trying to load the editor
 	 * @return bool
 	 */
-	public function shouldInterceptEditPage( Article $article, User $user ) {
-		$title = $article->getTitle();
-
-		$conditions = $this->config->get( 'ArticleCreationWorkflows' );
-
+	public function shouldInterceptPage( Title $title, User $user ) {
 		// We are only interested in creation
 		if ( $title->exists() ) {
+			return false;
+		}
+
+		// Articles only
+		if ( !$title->inNamespace( NS_MAIN ) ) {
+			return false;
+		}
+
+		// User has perms, don't intercept
+		if ( $user->isAllowed( 'createpagemainns' ) ) {
 			return false;
 		}
 
@@ -60,20 +73,28 @@ class Workflow {
 			return false;
 		}
 
-		foreach ( $conditions as $cond ) {
-			// Filter on namespace
-			if ( !in_array( $title->getNamespace(), $cond['namespaces'] ) ) {
-				continue;
-			}
+		return true;
+	}
 
-			// Don't intercept users that have these rights
-			if ( isset( $cond['excludeRight'] ) && $user->isAllowed( $cond['excludeRight'] ) ) {
-				continue;
-			}
+	/**
+	 * If a user without sufficient permissions attempts to create a page in the main namespace
+	 *
+	 * @param Title $title
+	 * @param User $user
+	 * @param IContextSource $context
+	 * @return bool
+	 */
+	public function interceptIfNeeded( Title $title, User $user, IContextSource $context ) {
+		if ( $this->shouldInterceptPage( $title, $user ) ) {
+			// If the landing page didn't exist, we wouldn't have intercepted.
+			$redirTo = $this->getLandingPageTitle();
+			$output = $context->getOutput();
+			$output->redirect( $redirTo->getFullURL(
+				[ 'page' => $title->getPrefixedText() ]
+			) );
 
 			return true;
 		}
-
 		return false;
 	}
 }
