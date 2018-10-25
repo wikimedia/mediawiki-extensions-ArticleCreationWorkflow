@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Verdy p"
+			"Verdy p",
+			"Gomoko"
 		]
 	},
-	"acw-desc": "Adapte l’expérience des nouveaux utilisateurs pour la création de nouvelles pages"
+	"acw-desc": "Adapte l’expérience des nouveaux utilisateurs pour la création de nouvelles pages",
+	"right-createpagemainns": "Créer des pages dans l’espace de noms principal"
 }
