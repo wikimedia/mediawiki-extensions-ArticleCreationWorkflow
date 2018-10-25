@@ -50,6 +50,11 @@
 			"createpagemainns": true
 		}
 	},
+	"GrantPermissions": {
+		"createeditmovepage": {
+			"createpagemainns": true
+		}
+	},
 	"AvailableRights": [
 		"createpagemainns"
 	],
