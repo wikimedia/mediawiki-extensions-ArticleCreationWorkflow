@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Railfail536"
+			"Railfail536",
+			"Chrumps"
 		]
 	},
-	"acw-desc": "Dostosowuje proces tworzenia nowych stron do nowych użytkowników"
+	"acw-desc": "Dostosowuje proces tworzenia nowych stron do nowych użytkowników",
+	"right-createpagemainns": "Tworzenie stron w głównej przestrzeni nazw"
 }
