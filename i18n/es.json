@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Macofe"
+			"Macofe",
+			"Dgstranz"
 		]
 	},
-	"acw-desc": "Personaliza la experiencia de creación de páginas nuevas para usuarios nuevos"
+	"acw-desc": "Personaliza la experiencia de creación de páginas nuevas para usuarios nuevos",
+	"right-createpagemainns": "Crear páginas en el espacio de nombres principal"
 }
