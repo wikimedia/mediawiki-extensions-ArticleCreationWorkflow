@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Liuxinyu970226"
+			"Liuxinyu970226",
+			"A Chinese Wikipedian"
 		]
 	},
-	"acw-desc": "自定义新用户的创建新页面体验"
+	"acw-desc": "自定义新用户的创建新页面体验",
+	"right-createpagemainns": "在主名字空间建立新的页面"
 }
