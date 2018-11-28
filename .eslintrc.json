@@ -8,8 +8,5 @@
 	"globals": {
 		"OO": false,
 		"mediaWiki": false
-	},
-	"rules": {
-		"dot-notation": [ "error", { "allowKeywords": true } ]
 	}
 }
