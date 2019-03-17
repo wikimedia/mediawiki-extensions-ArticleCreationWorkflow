@@ -68,7 +68,6 @@ class Hooks {
 	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ShowMissingArticle
 	 *
 	 * @param Article $article Article instance
-	 * @return bool
 	 */
 	public static function onShowMissingArticle( Article $article ) {
 		$workflow = self::getWorkflow();
