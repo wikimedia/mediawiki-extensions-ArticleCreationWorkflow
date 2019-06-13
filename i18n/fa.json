@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Ladsgroup"
+			"Ladsgroup",
+			"FarsiNevis"
 		]
 	},
-	"acw-desc": "تجربه ایجاد صفحات جدید برای کاربران تازه‌کار را شخصی‌سازی می‌کند"
+	"acw-desc": "تجربه ایجاد صفحات جدید برای کاربران تازه‌کار را شخصی‌سازی می‌کند",
+	"action-createpagemainns": "ایجاد صفحه در فضای نام اصلی",
+	"right-createpagemainns": "ایجاد صقحه در فضای نام اصلی"
 }
