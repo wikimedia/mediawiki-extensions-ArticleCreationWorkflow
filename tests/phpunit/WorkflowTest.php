@@ -90,7 +90,7 @@ class WorkflowTest extends MediaWikiTestCase {
 	}
 
 	public function providePageInterception() {
-		$anon = $this->createMock( 'User' );
+		$anon = $this->createMock( User::class );
 		$anonmap = [
 			[ 'autoconfirmed', false ],
 			[ 'createpage', false ],
@@ -99,7 +99,7 @@ class WorkflowTest extends MediaWikiTestCase {
 		$anon->method( 'isAllowed' )
 			->will( self::returnValueMap( $anonmap ) );
 
-		$newbie = $this->createMock( 'User' );
+		$newbie = $this->createMock( User::class );
 		$newbiemap = [
 			[ 'autoconfirmed', false ],
 			[ 'createpage', true ],
@@ -108,7 +108,7 @@ class WorkflowTest extends MediaWikiTestCase {
 		$newbie->method( 'isAllowed' )
 			->will( self::returnValueMap( $newbiemap ) );
 
-		$confirmed = $this->createMock( 'User' );
+		$confirmed = $this->createMock( User::class );
 		$confirmedmap = [
 			[ 'autoconfirmed', true ],
 			[ 'createpage', true ],
@@ -119,7 +119,7 @@ class WorkflowTest extends MediaWikiTestCase {
 
 		$mainspacePage = Title::newFromText( 'Some nonexistent page' );
 		$miscPage = Title::newFromText( 'Project:Nonexistent too' );
-		$existingPage = $this->createMock( 'Title' );
+		$existingPage = $this->createMock( Title::class );
 		$existingPage->method( 'exists' )
 			->willReturn( true );
 		$existingPage->method( 'getContentModel' )
@@ -143,7 +143,7 @@ class WorkflowTest extends MediaWikiTestCase {
 	 */
 	public function testLandingPageExistence() {
 		$title = Title::newFromText( 'Test page' );
-		$user = $this->createMock( 'User' );
+		$user = $this->createMock( User::class );
 		$user->method( 'isAllowed' )
 			->will( self::returnValue( true ) );
 		$config = new HashConfig( [
