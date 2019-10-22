@@ -76,10 +76,7 @@ class HooksTest extends MediaWikiTestCase {
 	}
 
 	private function makeUser( $anon, $canCreate ) {
-		$user = $this->getMockBuilder( User::class )
-			->disableOriginalConstructor()
-			->setMethods( [ 'isAnon', 'isAllowed' ] )
-			->getMock();
+		$user = $this->createMock( User::class );
 
 		$user->method( 'isAnon' )
 			->willReturn( $anon );
