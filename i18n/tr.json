@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hedda"
+			"Hedda",
+			"BaRaN6161 TURK"
 		]
 	},
 	"acw-desc": "Yeni kullanıcılar için yeni sayfa oluşturma deneyimini özelleştirir",
+	"action-createpagemainns": "Ana ad alanında sayfa oluşturun",
 	"right-createpagemainns": "Ana ad alanında sayfalar oluşturun"
 }
