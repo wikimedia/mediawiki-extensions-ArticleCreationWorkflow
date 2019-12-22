@@ -1,8 +1,10 @@
 {
 	"@metadata": {
 		"authors": [
-			"Reiwa period"
+			"Reiwa period",
+			"Aefgh39622"
 		]
 	},
-	"action-createpagemainns": "標準名前空間で記事を作成する"
+	"action-createpagemainns": "標準名前空間で記事を作成する",
+	"right-createpagemainns": "標準名前空間でページを作成する"
 }
