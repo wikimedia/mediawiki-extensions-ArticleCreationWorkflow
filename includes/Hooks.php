@@ -2,11 +2,11 @@
 
 namespace ArticleCreationWorkflow;
 
-use MediaWiki\MediaWikiServices;
 use Article;
+use MediaWiki\MediaWikiServices;
+use OutputPage;
 use Title;
 use User;
-use OutputPage;
 
 /**
  * Hook handlers

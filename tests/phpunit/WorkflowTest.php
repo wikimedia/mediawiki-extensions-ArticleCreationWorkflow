@@ -159,7 +159,7 @@ class WorkflowTest extends MediaWikiTestCase {
 		// Check that it doesn't intercept if the message is empty
 		/** @var Workflow $workflow */
 		/** @var User $user */
-		self::assertEquals( false, $workflow->shouldInterceptPage( $title, $user ) );
+		self::assertFalse( $workflow->shouldInterceptPage( $title, $user ) );
 	}
 
 }

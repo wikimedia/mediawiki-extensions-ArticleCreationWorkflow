@@ -4,8 +4,8 @@ namespace ArticleCreationWorkflow;
 
 use Config;
 use IContextSource;
-use User;
 use Title;
+use User;
 
 /**
  * Contains this extension's business logic
