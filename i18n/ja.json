@@ -2,10 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Aefgh39622",
-			"Reiwa period"
+			"Reiwa period",
+			"Shirayuki"
 		]
 	},
 	"acw-desc": "新しいユーザー向けに新しいページ作成体験をカスタマイズします",
-	"action-createpagemainns": "標準名前空間で記事を作成する",
-	"right-createpagemainns": "標準名前空間でページを作成する"
+	"action-createpagemainns": "標準名前空間での記事の作成",
+	"right-createpagemainns": "標準名前空間でページを作成"
 }
