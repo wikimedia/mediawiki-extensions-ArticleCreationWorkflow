@@ -15,7 +15,7 @@ use User;
  * @group ArticleCreationWorkflow
  */
 class WorkflowTest extends MediaWikiTestCase {
-	const REDIRECT_URL = 'this is a URL, trust me';
+	private const REDIRECT_URL = 'this is a URL, trust me';
 
 	/**
 	 * @dataProvider providePageInterception
