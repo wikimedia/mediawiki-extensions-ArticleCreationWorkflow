@@ -4,7 +4,6 @@
 	"description": "MediaWiki extension ArtcleCreationWorkflow",
 	"license": "MIT",
 	"minimum-stability": "dev",
-	"require": {},
 	"require-dev": {
 		"mediawiki/mediawiki-codesniffer": "31.0.0",
 		"mediawiki/mediawiki-phan-config": "0.10.2",
