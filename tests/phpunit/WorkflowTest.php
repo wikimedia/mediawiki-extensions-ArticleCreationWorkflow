@@ -36,7 +36,7 @@ class WorkflowTest extends MediaWikiTestCase {
 		$landingPage = $this->createMock( Title::class );
 		$landingPage->method( 'exists' )->willReturn( true );
 		$workflow = $this->getMockBuilder( Workflow::class )
-			->setMethods( [ 'getLandingPageTitle' ] )
+			->onlyMethods( [ 'getLandingPageTitle' ] )
 			->setConstructorArgs( [ $config ] )
 			->getMock();
 		$workflow->method( 'getLandingPageTitle' )->willReturn( $landingPage );
@@ -80,7 +80,7 @@ class WorkflowTest extends MediaWikiTestCase {
 			->with( [ 'page' => $title->getPrefixedText() ] )
 			->willReturn( self::REDIRECT_URL );
 		$workflow = $this->getMockBuilder( Workflow::class )
-			->setMethods( [ 'getLandingPageTitle' ] )
+			->onlyMethods( [ 'getLandingPageTitle' ] )
 			->setConstructorArgs( [ $config ] )
 			->getMock();
 		$workflow->method( 'getLandingPageTitle' )->willReturn( $landingPage );
@@ -151,7 +151,7 @@ class WorkflowTest extends MediaWikiTestCase {
 		] );
 
 		$workflow = $this->getMockBuilder( Workflow::class )
-			->setMethods( [ 'getLandingPageTitle' ] )
+			->onlyMethods( [ 'getLandingPageTitle' ] )
 			->setConstructorArgs( [ $config ] )
 			->getMock();
 		$workflow->method( 'getLandingPageTitle' )->willReturn( null );
