@@ -3,14 +3,14 @@
 namespace ArticleCreationWorkflow\Tests;
 
 use ArticleCreationWorkflow\Hooks;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use Title;
 use User;
 
 /**
  * @group ArticleCreationWorkflow
  */
-class HooksTest extends MediaWikiTestCase {
+class HooksTest extends MediaWikiIntegrationTestCase {
 	/**
 	 * @dataProvider provideOnTitleQuickPermissions
 	 *

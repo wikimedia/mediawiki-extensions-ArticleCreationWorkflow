@@ -5,7 +5,7 @@ namespace ArticleCreationWorkflow\Tests;
 use ArticleCreationWorkflow\Workflow;
 use DerivativeContext;
 use HashConfig;
-use MediaWikiTestCase;
+use MediaWikiIntegrationTestCase;
 use OutputPage;
 use RequestContext;
 use Title;
@@ -14,7 +14,7 @@ use User;
 /**
  * @group ArticleCreationWorkflow
  */
-class WorkflowTest extends MediaWikiTestCase {
+class WorkflowTest extends MediaWikiIntegrationTestCase {
 	private const REDIRECT_URL = 'this is a URL, trust me';
 
 	/**
