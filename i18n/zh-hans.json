@@ -3,10 +3,11 @@
 		"authors": [
 			"A Chinese Wikipedian",
 			"Liuxinyu970226",
-			"佛壁灯"
+			"佛壁灯",
+			"Xiplus"
 		]
 	},
 	"acw-desc": "自定义新用户的创建新页面体验",
-	"action-createpagemainns": "在主名字空间建立新的页面",
-	"right-createpagemainns": "在主名字空间建立新的页面"
+	"action-createpagemainns": "在主命名空间建立新的页面",
+	"right-createpagemainns": "在主命名空间建立新的页面"
 }

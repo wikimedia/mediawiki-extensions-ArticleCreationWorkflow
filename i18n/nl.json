@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Mainframe98"
+			"Mainframe98",
+			"McDutchie"
 		]
 	},
+	"acw-desc": "Past de manier van het aanmaken van nieuwe pagina's aan voor nieuwe gebruikers",
 	"action-createpagemainns": "pagina's te kunnen aanmaken in de hoofdnaamruimte",
 	"right-createpagemainns": "Pagina's kunnen aanmaken in de hoofdnaamruimte"
 }
