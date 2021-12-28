@@ -1,8 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Hidayatsrf"
+			"Hidayatsrf",
+			"Daud I.F. Argana"
 		]
 	},
-	"action-createpagemainns": "membuat halaman di ruang nama utama"
+	"acw-desc": "Menyesuaikan pengalaman membuat halaman baru bagi pengguna baru",
+	"action-createpagemainns": "membuat halaman di ruang nama utama",
+	"right-createpagemainns": "Membuat halaman di ruang nama utama"
 }
