@@ -80,7 +80,6 @@ class Hooks {
 
 	/**
 	 * BeforePageDisplay hook handler
-	 * If user is landing on our landing page, we add eventlogging
 	 *
 	 * @param OutputPage $out OutputPage instance
 	 */
@@ -90,7 +89,6 @@ class Hooks {
 			if ( $workflow->getConfig()->get( 'UseCustomLandingPageStyles' ) ) {
 				$out->addModuleStyles( 'ext.acw.landingPageStyles' );
 			}
-			$out->addModules( 'ext.acw.eventlogging' );
 		}
 	}
 
