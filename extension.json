@@ -28,11 +28,6 @@
 		"remoteExtPath": "ArticleCreationWorkflow/modules"
 	},
 	"ResourceModules": {
-		"ext.acw.eventlogging": {
-			"scripts": [
-				"ext.acw.eventlogging.js"
-			]
-		},
 		"ext.acw.landingPageStyles": {
 			"styles": [
 				"ext.acw.landingPage.css"
@@ -58,13 +53,6 @@
 	"AvailableRights": [
 		"createpagemainns"
 	],
-	"attributes": {
-		"EventLogging": {
-			"Schemas": {
-				"ArticleCreationWorkflow": 17145434
-			}
-		}
-	},
 	"config": {
 		"ArticleCreationLandingPage": {
 			"description": "The name of the wiki page to which users should be redirected if intercepted.",
