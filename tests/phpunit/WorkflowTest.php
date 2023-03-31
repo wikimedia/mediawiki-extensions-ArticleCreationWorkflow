@@ -15,7 +15,7 @@ use User;
  * @group ArticleCreationWorkflow
  */
 class WorkflowTest extends MediaWikiIntegrationTestCase {
-	private const REDIRECT_URL = 'this is a URL, trust me';
+	private const LANDING_PAGE_TITLE = 'this is a title, trust me';
 
 	/**
 	 * @dataProvider providePageInterception
@@ -59,11 +59,10 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 
 		if ( $expected ) {
 			$output->expects( self::once() )
-				->method( 'redirect' )
-				->with( self::REDIRECT_URL );
+				->method( 'addHTML' );
 		} else {
 			$output->expects( self::never() )
-				->method( 'redirect' );
+				->method( 'addHTML' );
 		}
 
 		$context = new DerivativeContext( RequestContext::getMain() );
@@ -76,9 +75,8 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 
 		$landingPage = $this->createMock( Title::class );
 		$landingPage->method( 'exists' )->willReturn( true );
-		$landingPage->method( 'getFullURL' )
-			->with( [ 'page' => $title->getPrefixedText() ] )
-			->willReturn( self::REDIRECT_URL );
+		$landingPage->method( 'getPrefixedText' )
+			->willReturn( self::LANDING_PAGE_TITLE );
 		$workflow = $this->getMockBuilder( Workflow::class )
 			->onlyMethods( [ 'getLandingPageTitle' ] )
 			->setConstructorArgs( [ $config ] )

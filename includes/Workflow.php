@@ -4,6 +4,7 @@ namespace ArticleCreationWorkflow;
 
 use Config;
 use IContextSource;
+use MediaWiki\Language\RawMessage;
 use Title;
 use User;
 
@@ -40,7 +41,8 @@ class Workflow {
 	}
 
 	/**
-	 * Checks whether an attempt to edit a page should be intercepted and redirected to our workflow
+	 * Check whether an attempt to visit a missing page should be intercepted and replaced by our
+	 * workflow.
 	 *
 	 * @param Title $title The title $user attempts to create
 	 * @param User $user The user trying to load the editor
@@ -77,24 +79,30 @@ class Workflow {
 	}
 
 	/**
-	 * If a user without sufficient permissions attempts to create a page in the main namespace
+	 * If a user without sufficient permissions attempts to view or create a missing page in the main
+	 * namespace, display our workflow instead with a message defined on-wiki.
 	 *
 	 * @param Title $title
 	 * @param User $user
 	 * @param IContextSource $context
-	 * @return bool
+	 * @return bool Whether we intercepted the page view by displaying our own message
 	 */
 	public function interceptIfNeeded( Title $title, User $user, IContextSource $context ) {
 		if ( $this->shouldInterceptPage( $title, $user ) ) {
-			// If the landing page didn't exist, we wouldn't have intercepted.
-			$redirTo = $this->getLandingPageTitle();
+			// If the landing page didn't exist, we wouldn't have intercepted, so it's guaranteed to exist
+			// here ($landingPage is not null).
+			$landingPage = $this->getLandingPageTitle();
 			$output = $context->getOutput();
-			$output->redirect( $redirTo->getFullURL(
-				[ 'page' => $title->getPrefixedText() ]
-			) );
+			$output->disableClientCache();
+
+			// Transclude the landing page instead of redirecting. This allows for the deletion log snippet
+			// to be shown as usual, and for magic words like {{PAGENAME}} to be used in the message. (T204234)
+			$msg = new RawMessage( '{{:' . $landingPage->getPrefixedText() . '}}' );
+			$output->addHTML( $msg->parseAsBlock() );
 
 			return true;
 		}
+
 		return false;
 	}
 }

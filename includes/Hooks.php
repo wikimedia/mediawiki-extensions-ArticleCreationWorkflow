@@ -3,8 +3,8 @@
 namespace ArticleCreationWorkflow;
 
 use Article;
+use IContextSource;
 use MediaWiki\MediaWikiServices;
-use OutputPage;
 use Title;
 use User;
 
@@ -39,57 +39,43 @@ class Hooks {
 	}
 
 	/**
-	 * CustomEditor hook handler
-	 * Redirects users attempting to create pages to the landing page, based on configuration
+	 * GetActionName hook handler
 	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/CustomEditor
-	 *
-	 * @param Article $article The requested page
-	 * @param User $user The user trying to load the editor
-	 * @return bool
+	 * @param IContextSource $context Request context
+	 * @param string &$action Default action name, reassign to change it
+	 * @return void This hook must not abort, it must return no value
 	 */
-	public static function onCustomEditor( Article $article, User $user ) {
-		$workflow = self::getWorkflow();
-		$context = $article->getContext();
-		$title = $article->getTitle();
-
-		if ( $workflow->interceptIfNeeded( $title, $user, $context ) ) {
-			// Stop hook propagation, we're disallowing editing
-			return false;
+	public static function onGetActionName( IContextSource $context, string &$action ): void {
+		if ( $action !== 'edit' ) {
+			return;
 		}
-
-		return true;
+		$workflow = self::getWorkflow();
+		$title = $context->getTitle();
+		$user = $context->getUser();
+		if ( $workflow->shouldInterceptPage( $title, $user ) ) {
+			// The user wouldn't be allowed to edit anyway, so pretend we're in the 'view' action,
+			// so that we can intercept it in onBeforeDisplayNoArticleText.
+			$action = 'view';
+		}
 	}
 
 	/**
-	 * ShowMissingArticle hook handler
-	 * If article doesn't exist, redirect non-autoconfirmed users to  AfC
+	 * BeforeDisplayNoArticleText hook handler
 	 *
-	 * @see https://www.mediawiki.org/wiki/Manual:Hooks/ShowMissingArticle
-	 *
-	 * @param Article $article Article instance
+	 * @param Article $article The (empty) article
+	 * @return bool This hook can abort
 	 */
-	public static function onShowMissingArticle( Article $article ) {
+	public static function onBeforeDisplayNoArticleText( $article ) {
 		$workflow = self::getWorkflow();
 		$context = $article->getContext();
 		$user = $context->getUser();
 		$title = $article->getTitle();
 
-		$workflow->interceptIfNeeded( $title, $user, $context );
-	}
+		$wasIntercepted = $workflow->interceptIfNeeded( $title, $user, $context );
 
-	/**
-	 * BeforePageDisplay hook handler
-	 *
-	 * @param OutputPage $out OutputPage instance
-	 */
-	public static function onBeforePageDisplay( OutputPage $out ) {
-		$workflow = self::getWorkflow();
-		if ( $out->getPageTitle() == $workflow->getLandingPageTitle() ) {
-			if ( $workflow->getConfig()->get( 'UseCustomLandingPageStyles' ) ) {
-				$out->addModuleStyles( 'ext.acw.landingPageStyles' );
-			}
-		}
+		// If we displayed our own message, abort the hook by returning `false`
+		// to suppress the default message, otherwise let it continue.
+		return !$wasIntercepted;
 	}
 
 	/**

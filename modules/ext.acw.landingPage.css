@@ -1,8 +1,0 @@
-/*
- * Hide unneeded page elements.
- */
-#firstHeading,
-#siteSub,
-#catlinks {
-	display: none !important;
-}

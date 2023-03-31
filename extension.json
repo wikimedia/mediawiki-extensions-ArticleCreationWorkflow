@@ -10,9 +10,8 @@
 		"MediaWiki": ">= 1.34.0"
 	},
 	"Hooks": {
-		"CustomEditor": "ArticleCreationWorkflow\\Hooks::onCustomEditor",
-		"ShowMissingArticle": "ArticleCreationWorkflow\\Hooks::onShowMissingArticle",
-		"BeforePageDisplay": "ArticleCreationWorkflow\\Hooks::onBeforePageDisplay",
+		"GetActionName": "ArticleCreationWorkflow\\Hooks::onGetActionName",
+		"BeforeDisplayNoArticleText": "ArticleCreationWorkflow\\Hooks::onBeforeDisplayNoArticleText",
 		"TitleQuickPermissions": "ArticleCreationWorkflow\\Hooks::onTitleQuickPermissions"
 	},
 	"AutoloadNamespaces": {
@@ -22,17 +21,6 @@
 		"ArticleCreationWorkflow": [
 			"i18n"
 		]
-	},
-	"ResourceFileModulePaths": {
-		"localBasePath": "modules",
-		"remoteExtPath": "ArticleCreationWorkflow/modules"
-	},
-	"ResourceModules": {
-		"ext.acw.landingPageStyles": {
-			"styles": [
-				"ext.acw.landingPage.css"
-			]
-		}
 	},
 	"GroupPermissions": {
 		"*": {
@@ -55,12 +43,8 @@
 	],
 	"config": {
 		"ArticleCreationLandingPage": {
-			"description": "The name of the wiki page to which users should be redirected if intercepted.",
+			"description": "The name of the wiki page which should replace the default message when intercepting.",
 			"value": "Project:Article wizard"
-		},
-		"UseCustomLandingPageStyles": {
-			"description": "Whether to load custom CSS for the landing page",
-			"value": true
 		}
 	},
 	"ConfigRegistry": {
