@@ -22,11 +22,21 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @covers \ArticleCreationWorkflow\Workflow::shouldInterceptPage()
 	 *
-	 * @param User $user
-	 * @param Title $title
+	 * @param array $allowedMap
+	 * @param Title|string $title
 	 * @param bool $expected
 	 */
-	public function testShouldInterceptPage( User $user, Title $title, $expected ) {
+	public function testShouldInterceptPage( array $allowedMap, $title, $expected ) {
+		$user = $this->createMock( User::class );
+		$user->method( 'isAllowed' )
+			->will( self::returnValueMap( $allowedMap ) );
+		if ( $title === 'existing' ) {
+			$title = $this->createMock( Title::class );
+			$title->method( 'exists' )
+				->willReturn( true );
+			$title->method( 'getContentModel' )
+				->willReturn( CONTENT_MODEL_WIKITEXT );
+		}
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setTitle( $title );
 		$context->setUser( $user );
@@ -50,11 +60,21 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @covers \ArticleCreationWorkflow\Workflow::interceptIfNeeded()
 	 *
-	 * @param User $user
-	 * @param Title $title
+	 * @param array $allowedMap
+	 * @param Title|string $title
 	 * @param bool $expected
 	 */
-	public function testInterceptIfNeeded( User $user, Title $title, $expected ) {
+	public function testInterceptIfNeeded( array $allowedMap, $title, $expected ) {
+		$user = $this->createMock( User::class );
+		$user->method( 'isAllowed' )
+			->will( self::returnValueMap( $allowedMap ) );
+		if ( $title === 'existing' ) {
+			$title = $this->createMock( Title::class );
+			$title->method( 'exists' )
+				->willReturn( true );
+			$title->method( 'getContentModel' )
+				->willReturn( CONTENT_MODEL_WIKITEXT );
+		}
 		$output = $this->createMock( OutputPage::class );
 
 		if ( $expected ) {
@@ -87,52 +107,37 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 		self::assertEquals( $expected, $workflow->interceptIfNeeded( $title, $user, $context ) );
 	}
 
-	public function providePageInterception() {
-		$anon = $this->createMock( User::class );
-		$anonmap = [
+	public static function providePageInterception() {
+		$anonAllowMap = [
 			[ 'autoconfirmed', false ],
 			[ 'createpage', false ],
 			[ 'createpagemainns', false ],
 		];
-		$anon->method( 'isAllowed' )
-			->will( self::returnValueMap( $anonmap ) );
-
-		$newbie = $this->createMock( User::class );
-		$newbiemap = [
+		$newbieAllowList = [
 			[ 'autoconfirmed', false ],
 			[ 'createpage', true ],
 			[ 'createpagemainns', false ],
 		];
-		$newbie->method( 'isAllowed' )
-			->will( self::returnValueMap( $newbiemap ) );
-
-		$confirmed = $this->createMock( User::class );
-		$confirmedmap = [
+		$confirmedAllowList = [
 			[ 'autoconfirmed', true ],
 			[ 'createpage', true ],
 			[ 'createpagemainns', true ],
 		];
-		$confirmed->method( 'isAllowed' )
-			->will( self::returnValueMap( $confirmedmap ) );
 
 		$mainspacePage = Title::newFromText( 'Some nonexistent page' );
 		$miscPage = Title::newFromText( 'Project:Nonexistent too' );
-		$existingPage = $this->createMock( Title::class );
-		$existingPage->method( 'exists' )
-			->willReturn( true );
-		$existingPage->method( 'getContentModel' )
-			->willReturn( CONTENT_MODEL_WIKITEXT );
+		$existingPage = 'existing';
 
 		return [
-			[ $anon, $miscPage, false, 'Wrong NS, do nothing' ],
-			[ $anon, $existingPage, false, 'Page exists, do nothing' ],
-			[ $anon, $mainspacePage, false, 'Anon attempting to create a page, do nothing' ],
-			[ $confirmed, $mainspacePage, false, 'Confirmed user in mainspace, do nothing' ],
-			[ $confirmed, $existingPage, false, 'Confirmed user on an existing page, do nothing' ],
-			[ $confirmed, $miscPage, false, 'Confirmed user not in mainspace, do nothing' ],
-			[ $newbie, $mainspacePage, true, 'Newbie attempting to create a page, intercept' ],
-			[ $newbie, $existingPage, false, 'Newbie on an existing page, do nothing' ],
-			[ $newbie, $miscPage, false, 'Newbie attempting to create a non-mainspace page, do nothing' ],
+			[ $anonAllowMap, $miscPage, false, 'Wrong NS, do nothing' ],
+			[ $anonAllowMap, $existingPage, false, 'Page exists, do nothing' ],
+			[ $anonAllowMap, $mainspacePage, false, 'Anon attempting to create a page, do nothing' ],
+			[ $confirmedAllowList, $mainspacePage, false, 'Confirmed user in mainspace, do nothing' ],
+			[ $confirmedAllowList, $existingPage, false, 'Confirmed user on an existing page, do nothing' ],
+			[ $confirmedAllowList, $miscPage, false, 'Confirmed user not in mainspace, do nothing' ],
+			[ $newbieAllowList, $mainspacePage, true, 'Newbie attempting to create a page, intercept' ],
+			[ $newbieAllowList, $existingPage, false, 'Newbie on an existing page, do nothing' ],
+			[ $newbieAllowList, $miscPage, false, 'Newbie attempting to create a non-mainspace page, do nothing' ],
 		];
 	}
 

@@ -16,12 +16,14 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @covers \ArticleCreationWorkflow\Hooks::onTitleQuickPermissions()
 	 *
-	 * @param User $user
+	 * @param bool $mockAnon
+	 * @param bool $mockCanCreate
 	 * @param Title $title
 	 * @param string $action
 	 * @param array $expected
 	 */
-	public function testOnTitleQuickPermissions( User $user, Title $title, $action, $expected ) {
+	public function testOnTitleQuickPermissions( $mockAnon, $mockCanCreate, Title $title, $action, $expected ) {
+		$user = $this->makeUser( $mockAnon, $mockCanCreate );
 		$errors = [];
 		$this->callOnTitleQuickPermissions( $user, $title, $action, $expected, $errors );
 		self::assertEquals( $expected, $errors );
@@ -43,35 +45,34 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		);
 	}
 
-	public function provideOnTitleQuickPermissions() {
+	public static function provideOnTitleQuickPermissions() {
 		$mainspace = Title::newFromText( 'Mainspace page' );
 		$nonMainspace = Title::newFromText( 'MediaWiki:Non-mainspace page' );
 
-		$anon = $this->makeUser( true, false );
-		$anonAcwDisabled = $this->makeUser( true, true );
-		$newbie = $this->makeUser( false, false );
-		$autoconfirmed = $this->makeUser( false, true );
-
 		return [
-			[ $anon, $mainspace, 'read', [] ],
-			[ $anon, $nonMainspace, 'read', [] ],
-			[ $anon, $mainspace, 'create', [ [ 'nocreatetext' ] ] ],
-			[ $anon, $nonMainspace, 'create', [] ],
+			// anon
+			[ true, false, $mainspace, 'read', [] ],
+			[ true, false, $nonMainspace, 'read', [] ],
+			[ true, false, $mainspace, 'create', [ [ 'nocreatetext' ] ] ],
+			[ true, false, $nonMainspace, 'create', [] ],
 
-			[ $anonAcwDisabled, $mainspace, 'read', [] ],
-			[ $anonAcwDisabled, $nonMainspace, 'read', [] ],
-			[ $anonAcwDisabled, $mainspace, 'create', [] ],
-			[ $anonAcwDisabled, $nonMainspace, 'create', [] ],
+			// anon AcwDisabled
+			[ true, true, $mainspace, 'read', [] ],
+			[ true, true, $nonMainspace, 'read', [] ],
+			[ true, true, $mainspace, 'create', [] ],
+			[ true, true, $nonMainspace, 'create', [] ],
 
-			[ $newbie, $mainspace, 'read', [] ],
-			[ $newbie, $nonMainspace, 'read', [] ],
-			[ $newbie, $mainspace, 'create', [ [ 'nocreate-loggedin' ] ] ],
-			[ $newbie, $nonMainspace, 'create', [] ],
+			// newbie
+			[ false, false, $mainspace, 'read', [] ],
+			[ false, false, $nonMainspace, 'read', [] ],
+			[ false, false, $mainspace, 'create', [ [ 'nocreate-loggedin' ] ] ],
+			[ false, false, $nonMainspace, 'create', [] ],
 
-			[ $autoconfirmed, $mainspace, 'read', [] ],
-			[ $autoconfirmed, $nonMainspace, 'read', [] ],
-			[ $autoconfirmed, $mainspace, 'create', [] ],
-			[ $autoconfirmed, $nonMainspace, 'create', [] ],
+			// autoconfirmed
+			[ false, true, $mainspace, 'read', [] ],
+			[ false, true, $nonMainspace, 'read', [] ],
+			[ false, true, $mainspace, 'create', [] ],
+			[ false, true, $nonMainspace, 'create', [] ],
 		];
 	}
 
