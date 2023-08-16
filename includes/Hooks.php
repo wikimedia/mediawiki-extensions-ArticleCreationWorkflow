@@ -5,7 +5,7 @@ namespace ArticleCreationWorkflow;
 use Article;
 use IContextSource;
 use MediaWiki\MediaWikiServices;
-use Title;
+use MediaWiki\Title\Title;
 use User;
 
 /**

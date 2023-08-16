@@ -5,10 +5,10 @@ namespace ArticleCreationWorkflow\Tests;
 use ArticleCreationWorkflow\Workflow;
 use DerivativeContext;
 use HashConfig;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
 use OutputPage;
 use RequestContext;
-use Title;
 use User;
 
 /**

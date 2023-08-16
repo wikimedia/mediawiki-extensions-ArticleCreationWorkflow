@@ -3,8 +3,8 @@
 namespace ArticleCreationWorkflow\Tests;
 
 use ArticleCreationWorkflow\Hooks;
+use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
-use Title;
 use User;
 
 /**

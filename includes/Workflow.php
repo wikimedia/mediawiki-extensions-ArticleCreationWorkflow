@@ -5,7 +5,7 @@ namespace ArticleCreationWorkflow;
 use Config;
 use IContextSource;
 use MediaWiki\Language\RawMessage;
-use Title;
+use MediaWiki\Title\Title;
 use User;
 
 /**
