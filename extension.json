@@ -2,12 +2,15 @@
 	"manifest_version": 2,
 	"name": "ArticleCreationWorkflow",
 	"type": "other",
-	"author": [ "Max Semenik", "Niharika Kohli" ],
+	"author": [
+		"Max Semenik",
+		"Niharika Kohli"
+	],
 	"url": "https://www.mediawiki.org/wiki/Extension:ArticleCreationWorkflow",
 	"descriptionmsg": "acw-desc",
 	"license-name": "MIT",
 	"requires": {
-		"MediaWiki": ">= 1.40.0"
+		"MediaWiki": ">= 1.41"
 	},
 	"Hooks": {
 		"GetActionName": "ArticleCreationWorkflow\\Hooks::onGetActionName",
