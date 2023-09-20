@@ -7,6 +7,7 @@ use DerivativeContext;
 use HashConfig;
 use MediaWiki\Title\Title;
 use MediaWikiIntegrationTestCase;
+use MessageCache;
 use OutputPage;
 use RequestContext;
 use User;
@@ -23,20 +24,17 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 	 * @covers \ArticleCreationWorkflow\Workflow::shouldInterceptPage()
 	 *
 	 * @param array $allowedMap
-	 * @param Title|string $title
+	 * @param int $namespace
+	 * @param bool $exists
 	 * @param bool $expected
 	 */
-	public function testShouldInterceptPage( array $allowedMap, $title, $expected ) {
+	public function testShouldInterceptPage( array $allowedMap, int $namespace, bool $exists, $expected ) {
 		$user = $this->createMock( User::class );
 		$user->method( 'isAllowed' )
-			->will( self::returnValueMap( $allowedMap ) );
-		if ( $title === 'existing' ) {
-			$title = $this->createMock( Title::class );
-			$title->method( 'exists' )
-				->willReturn( true );
-			$title->method( 'getContentModel' )
-				->willReturn( CONTENT_MODEL_WIKITEXT );
-		}
+			->willReturnMap( $allowedMap );
+		$title = Title::makeTitle( $namespace, 'TestShouldInterceptPage' );
+		$title->resetArticleID( $exists ? 42 : 0 );
+		$title->setContentModel( CONTENT_MODEL_WIKITEXT );
 		$context = new DerivativeContext( RequestContext::getMain() );
 		$context->setTitle( $title );
 		$context->setUser( $user );
@@ -61,20 +59,17 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 	 * @covers \ArticleCreationWorkflow\Workflow::interceptIfNeeded()
 	 *
 	 * @param array $allowedMap
-	 * @param Title|string $title
+	 * @param int $namespace
+	 * @param bool $exists
 	 * @param bool $expected
 	 */
-	public function testInterceptIfNeeded( array $allowedMap, $title, $expected ) {
+	public function testInterceptIfNeeded( array $allowedMap, int $namespace, bool $exists, $expected ) {
 		$user = $this->createMock( User::class );
 		$user->method( 'isAllowed' )
-			->will( self::returnValueMap( $allowedMap ) );
-		if ( $title === 'existing' ) {
-			$title = $this->createMock( Title::class );
-			$title->method( 'exists' )
-				->willReturn( true );
-			$title->method( 'getContentModel' )
-				->willReturn( CONTENT_MODEL_WIKITEXT );
-		}
+			->willReturnMap( $allowedMap );
+		$title = Title::makeTitle( $namespace, 'TestInterceptIfNeeded' );
+		$title->resetArticleID( $exists ? 42 : 0 );
+		$title->setContentModel( CONTENT_MODEL_WIKITEXT );
 		$output = $this->createMock( OutputPage::class );
 
 		if ( $expected ) {
@@ -102,6 +97,9 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 			->setConstructorArgs( [ $config ] )
 			->getMock();
 		$workflow->method( 'getLandingPageTitle' )->willReturn( $landingPage );
+		$msgCache = $this->createMock( MessageCache::class );
+		$msgCache->method( 'parse' )->willReturn( '' );
+		$this->setService( 'MessageCache', $msgCache );
 
 		/** @var Workflow $workflow */
 		self::assertEquals( $expected, $workflow->interceptIfNeeded( $title, $user, $context ) );
@@ -109,35 +107,37 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 
 	public static function providePageInterception() {
 		$anonAllowMap = [
-			[ 'autoconfirmed', false ],
-			[ 'createpage', false ],
-			[ 'createpagemainns', false ],
+			[ 'autoconfirmed', null, false ],
+			[ 'createpage', null, false ],
+			[ 'createpagemainns', null, false ],
 		];
 		$newbieAllowList = [
-			[ 'autoconfirmed', false ],
-			[ 'createpage', true ],
-			[ 'createpagemainns', false ],
+			[ 'autoconfirmed', null, false ],
+			[ 'createpage', null, true ],
+			[ 'createpagemainns', null, false ],
 		];
 		$confirmedAllowList = [
-			[ 'autoconfirmed', true ],
-			[ 'createpage', true ],
-			[ 'createpagemainns', true ],
+			[ 'autoconfirmed', null, true ],
+			[ 'createpage', null, true ],
+			[ 'createpagemainns', null, true ],
 		];
 
-		$mainspacePage = Title::newFromText( 'Some nonexistent page' );
-		$miscPage = Title::newFromText( 'Project:Nonexistent too' );
-		$existingPage = 'existing';
-
 		return [
-			[ $anonAllowMap, $miscPage, false, 'Wrong NS, do nothing' ],
-			[ $anonAllowMap, $existingPage, false, 'Page exists, do nothing' ],
-			[ $anonAllowMap, $mainspacePage, false, 'Anon attempting to create a page, do nothing' ],
-			[ $confirmedAllowList, $mainspacePage, false, 'Confirmed user in mainspace, do nothing' ],
-			[ $confirmedAllowList, $existingPage, false, 'Confirmed user on an existing page, do nothing' ],
-			[ $confirmedAllowList, $miscPage, false, 'Confirmed user not in mainspace, do nothing' ],
-			[ $newbieAllowList, $mainspacePage, true, 'Newbie attempting to create a page, intercept' ],
-			[ $newbieAllowList, $existingPage, false, 'Newbie on an existing page, do nothing' ],
-			[ $newbieAllowList, $miscPage, false, 'Newbie attempting to create a non-mainspace page, do nothing' ],
+			[ $anonAllowMap, NS_PROJECT, false, false, 'Wrong NS, do nothing' ],
+			[ $anonAllowMap, NS_MAIN, true, false, 'Page exists, do nothing' ],
+			[ $anonAllowMap, NS_MAIN, false, false, 'Anon attempting to create a page, do nothing' ],
+			[ $confirmedAllowList, NS_MAIN, false, false, 'Confirmed user in mainspace, do nothing' ],
+			[ $confirmedAllowList, NS_MAIN, true, false, 'Confirmed user on an existing page, do nothing' ],
+			[ $confirmedAllowList, NS_PROJECT, false, false, 'Confirmed user not in mainspace, do nothing' ],
+			[ $newbieAllowList, NS_MAIN, false, true, 'Newbie attempting to create a page, intercept' ],
+			[ $newbieAllowList, NS_MAIN, true, false, 'Newbie on an existing page, do nothing' ],
+			[
+				$newbieAllowList,
+				NS_PROJECT,
+				false,
+				false,
+				'Newbie attempting to create a non-mainspace page, do nothing'
+			],
 		];
 	}
 
@@ -145,10 +145,11 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 	 * @covers \ArticleCreationWorkflow\Workflow::shouldInterceptPage()
 	 */
 	public function testLandingPageExistence() {
-		$title = Title::newFromText( 'Test page' );
+		$title = Title::makeTitle( NS_MAIN, 'TestLandingPageExistence' );
+		$title->resetArticleID( 0 );
 		$user = $this->createMock( User::class );
 		$user->method( 'isAllowed' )
-			->will( self::returnValue( true ) );
+			->willReturn( true );
 		$config = new HashConfig( [
 			'ArticleCreationLandingPage' => 'Nonexistent page',
 		] );
