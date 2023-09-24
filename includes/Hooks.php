@@ -4,14 +4,21 @@ namespace ArticleCreationWorkflow;
 
 use Article;
 use IContextSource;
+use MediaWiki\Actions\Hook\GetActionNameHook;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
+use MediaWiki\Permissions\Hook\TitleQuickPermissionsHook;
 use MediaWiki\Title\Title;
 use User;
 
 /**
  * Hook handlers
  */
-class Hooks {
+class Hooks implements
+	GetActionNameHook,
+	BeforeDisplayNoArticleTextHook,
+	TitleQuickPermissionsHook
+{
 	/**
 	 * TitleQuickPermissions hook handler
 	 * Prohibits creating pages in main namespace for users without a special permission
@@ -21,12 +28,16 @@ class Hooks {
 	 * @param User $user
 	 * @param string $action
 	 * @param array &$errors
+	 * @param bool $doExpensiveQueries
+	 * @param bool $short
 	 * @return bool
 	 */
-	public static function onTitleQuickPermissions( Title $title,
-		User $user,
+	public function onTitleQuickPermissions( $title,
+		$user,
 		$action,
-		array &$errors
+		&$errors,
+		$doExpensiveQueries,
+		$short
 	) {
 		if ( $action === 'create'
 			&& $title->inNamespace( NS_MAIN )
@@ -45,7 +56,7 @@ class Hooks {
 	 * @param string &$action Default action name, reassign to change it
 	 * @return void This hook must not abort, it must return no value
 	 */
-	public static function onGetActionName( IContextSource $context, string &$action ): void {
+	public function onGetActionName( IContextSource $context, string &$action ): void {
 		if ( $action !== 'edit' ) {
 			return;
 		}
@@ -65,7 +76,7 @@ class Hooks {
 	 * @param Article $article The (empty) article
 	 * @return bool This hook can abort
 	 */
-	public static function onBeforeDisplayNoArticleText( $article ) {
+	public function onBeforeDisplayNoArticleText( $article ) {
 		$workflow = self::getWorkflow();
 		$context = $article->getContext();
 		$user = $context->getUser();

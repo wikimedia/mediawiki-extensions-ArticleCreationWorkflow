@@ -39,7 +39,7 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		$expected,
 		array &$errors
 	) {
-		$ret = Hooks::onTitleQuickPermissions( $title, $user, $action, $errors );
+		$ret = ( new Hooks )->onTitleQuickPermissions( $title, $user, $action, $errors, false, false );
 		self::assertEquals( !$expected, $ret,
 			'onTitleQuickPermissions() should return false on permission errors, true otherwise'
 		);

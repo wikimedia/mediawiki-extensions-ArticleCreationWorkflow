@@ -13,9 +13,14 @@
 		"MediaWiki": ">= 1.41"
 	},
 	"Hooks": {
-		"GetActionName": "ArticleCreationWorkflow\\Hooks::onGetActionName",
-		"BeforeDisplayNoArticleText": "ArticleCreationWorkflow\\Hooks::onBeforeDisplayNoArticleText",
-		"TitleQuickPermissions": "ArticleCreationWorkflow\\Hooks::onTitleQuickPermissions"
+		"GetActionName": "main",
+		"BeforeDisplayNoArticleText": "main",
+		"TitleQuickPermissions": "main"
+	},
+	"HookHandlers": {
+		"main": {
+			"class": "ArticleCreationWorkflow\\Hooks"
+		}
 	},
 	"AutoloadNamespaces": {
 		"ArticleCreationWorkflow\\": "includes/"
