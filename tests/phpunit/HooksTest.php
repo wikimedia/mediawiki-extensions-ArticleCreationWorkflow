@@ -4,8 +4,8 @@ namespace ArticleCreationWorkflow\Tests;
 
 use ArticleCreationWorkflow\Hooks;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use User;
 
 /**
  * @group ArticleCreationWorkflow

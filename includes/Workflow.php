@@ -2,11 +2,11 @@
 
 namespace ArticleCreationWorkflow;
 
-use Config;
 use IContextSource;
+use MediaWiki\Config\Config;
 use MediaWiki\Language\RawMessage;
 use MediaWiki\Title\Title;
-use User;
+use MediaWiki\User\User;
 
 /**
  * Contains this extension's business logic

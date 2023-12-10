@@ -4,13 +4,13 @@ namespace ArticleCreationWorkflow\Tests;
 
 use ArticleCreationWorkflow\Workflow;
 use DerivativeContext;
-use HashConfig;
+use MediaWiki\Config\HashConfig;
+use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
+use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
 use MessageCache;
-use OutputPage;
 use RequestContext;
-use User;
 
 /**
  * @group ArticleCreationWorkflow
