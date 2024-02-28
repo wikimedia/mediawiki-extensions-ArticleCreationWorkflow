@@ -43,7 +43,7 @@ class Hooks implements
 			&& $title->inNamespace( NS_MAIN )
 			&& !$user->isAllowed( 'createpagemainns' )
 		) {
-			$errors[] = $user->isAnon() ? [ 'nocreatetext' ] : [ 'nocreate-loggedin' ];
+			$errors[] = !$user->isNamed() ? [ 'nocreatetext' ] : [ 'nocreate-loggedin' ];
 			return false;
 		}
 		return true;

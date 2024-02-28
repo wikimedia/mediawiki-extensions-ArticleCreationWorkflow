@@ -16,14 +16,14 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 	 *
 	 * @covers \ArticleCreationWorkflow\Hooks::onTitleQuickPermissions()
 	 *
-	 * @param bool $mockAnon
+	 * @param bool $mockNamedAccount
 	 * @param bool $mockCanCreate
 	 * @param Title $title
 	 * @param string $action
 	 * @param array $expected
 	 */
-	public function testOnTitleQuickPermissions( $mockAnon, $mockCanCreate, Title $title, $action, $expected ) {
-		$user = $this->makeUser( $mockAnon, $mockCanCreate );
+	public function testOnTitleQuickPermissions( $mockNamedAccount, $mockCanCreate, Title $title, $action, $expected ) {
+		$user = $this->makeUser( $mockNamedAccount, $mockCanCreate );
 		$errors = [];
 		$this->callOnTitleQuickPermissions( $user, $title, $action, $expected, $errors );
 		self::assertEquals( $expected, $errors );
@@ -50,13 +50,13 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		$nonMainspace = Title::newFromText( 'MediaWiki:Non-mainspace page' );
 
 		return [
-			// anon
+			// named account
 			[ true, false, $mainspace, 'read', [] ],
 			[ true, false, $nonMainspace, 'read', [] ],
-			[ true, false, $mainspace, 'create', [ [ 'nocreatetext' ] ] ],
+			[ true, false, $mainspace, 'create', [ [ 'nocreate-loggedin' ] ] ],
 			[ true, false, $nonMainspace, 'create', [] ],
 
-			// anon AcwDisabled
+			// named account & AcwDisabled
 			[ true, true, $mainspace, 'read', [] ],
 			[ true, true, $nonMainspace, 'read', [] ],
 			[ true, true, $mainspace, 'create', [] ],
@@ -65,7 +65,7 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 			// newbie
 			[ false, false, $mainspace, 'read', [] ],
 			[ false, false, $nonMainspace, 'read', [] ],
-			[ false, false, $mainspace, 'create', [ [ 'nocreate-loggedin' ] ] ],
+			[ false, false, $mainspace, 'create', [ [ 'nocreatetext' ] ] ],
 			[ false, false, $nonMainspace, 'create', [] ],
 
 			// autoconfirmed
@@ -76,11 +76,11 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 		];
 	}
 
-	private function makeUser( $anon, $canCreate ) {
+	private function makeUser( $isNamed, $canCreate ) {
 		$user = $this->createMock( User::class );
 
-		$user->method( 'isAnon' )
-			->willReturn( $anon );
+		$user->method( 'isNamed' )
+			->willReturn( $isNamed );
 
 		$user->method( 'isAllowed' )
 			->with( 'createpagemainns' )
