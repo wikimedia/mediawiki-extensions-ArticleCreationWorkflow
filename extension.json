@@ -1,6 +1,7 @@
 {
 	"manifest_version": 2,
 	"name": "ArticleCreationWorkflow",
+	"namemsg": "acw-extensionname",
 	"type": "other",
 	"author": [
 		"Max Semenik",
