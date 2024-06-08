@@ -3,8 +3,8 @@
 namespace ArticleCreationWorkflow;
 
 use Article;
-use IContextSource;
 use MediaWiki\Actions\Hook\GetActionNameHook;
+use MediaWiki\Context\IContextSource;
 use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Permissions\Hook\TitleQuickPermissionsHook;
