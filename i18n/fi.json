@@ -1,9 +1,11 @@
 {
 	"@metadata": {
 		"authors": [
-			"Pyscowicz"
+			"Pyscowicz",
+			"Samoasambia"
 		]
 	},
+	"acw-desc": "Mukauttaa uuden sivun luomiskokemuksen uusille käyttäjille",
 	"action-createpagemainns": "luoda sivuja päänimiavaruudessa",
 	"right-createpagemainns": "Luoda sivuja päänimiavaruudessa"
 }
