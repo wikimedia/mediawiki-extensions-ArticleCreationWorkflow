@@ -28,6 +28,9 @@ module.exports = function ( grunt ) {
 			tasks: 'test'
 		},
 		stylelint: {
+			options: {
+				cache: true
+			},
 			all: [
 				'**/*.css',
 				'!{docs,vendor,node_modules}/**'
