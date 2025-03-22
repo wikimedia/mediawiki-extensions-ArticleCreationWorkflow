@@ -6,11 +6,11 @@ use ArticleCreationWorkflow\Workflow;
 use MediaWiki\Config\HashConfig;
 use MediaWiki\Context\DerivativeContext;
 use MediaWiki\Context\RequestContext;
+use MediaWiki\Language\MessageParser;
 use MediaWiki\Output\OutputPage;
 use MediaWiki\Title\Title;
 use MediaWiki\User\User;
 use MediaWikiIntegrationTestCase;
-use MessageCache;
 
 /**
  * @group ArticleCreationWorkflow
@@ -97,9 +97,8 @@ class WorkflowTest extends MediaWikiIntegrationTestCase {
 			->setConstructorArgs( [ $config ] )
 			->getMock();
 		$workflow->method( 'getLandingPageTitle' )->willReturn( $landingPage );
-		$msgCache = $this->createMock( MessageCache::class );
-		$msgCache->method( 'parse' )->willReturn( '' );
-		$this->setService( 'MessageCache', $msgCache );
+		$msgParser = $this->createMock( MessageParser::class );
+		$this->setService( 'MessageParser', $msgParser );
 
 		/** @var Workflow $workflow */
 		self::assertEquals( $expected, $workflow->interceptIfNeeded( $title, $user, $context ) );
