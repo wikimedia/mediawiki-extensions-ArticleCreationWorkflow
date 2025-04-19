@@ -2,10 +2,10 @@
 
 namespace ArticleCreationWorkflow;
 
-use Article;
 use MediaWiki\Actions\Hook\GetActionNameHook;
 use MediaWiki\Context\IContextSource;
 use MediaWiki\MediaWikiServices;
+use MediaWiki\Page\Article;
 use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Permissions\Hook\TitleQuickPermissionsHook;
 use MediaWiki\Title\Title;
