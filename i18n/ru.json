@@ -2,9 +2,11 @@
 	"@metadata": {
 		"authors": [
 			"Facenapalm",
-			"Vlad5250"
+			"Vlad5250",
+			"Engineer56"
 		]
 	},
+	"acw-extensionname": "Article&shy;Creation&shy;Workflow",
 	"acw-desc": "Настраивает создание новых страниц для новичков.",
 	"action-createpagemainns": "создание страниц в основном пространстве имён",
 	"right-createpagemainns": "создание страниц в основном пространстве имён"
