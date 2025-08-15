@@ -57,6 +57,6 @@
 		}
 	},
 	"ConfigRegistry": {
-		"ArticleCreationWorkflow": "GlobalVarConfig::newInstance"
+		"ArticleCreationWorkflow": "MediaWiki\\Config\\GlobalVarConfig::newInstance"
 	}
 }
