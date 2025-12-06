@@ -13,14 +13,7 @@ use MediaWiki\User\User;
  */
 class Workflow {
 
-	/** @var Config */
-	private $config;
-
-	/**
-	 * @param Config $config Configuration to use
-	 */
-	public function __construct( Config $config ) {
-		$this->config = $config;
+	public function __construct( private readonly Config $config ) {
 	}
 
 	/**
