@@ -1,9 +1,12 @@
 {
 	"@metadata": {
 		"authors": [
-			"Vlad5250"
+			"Vlad5250",
+			"Wizzard"
 		]
 	},
+	"acw-extensionname": "Article­Creation­Workflow",
+	"acw-desc": "Prispôsobuje proces vytvárania nových stránok pre nových používateľov",
 	"action-createpagemainns": "vytvarať stránky hlavného menného priestoru",
 	"right-createpagemainns": "Vytvarať stránky hlavného menného priestoru"
 }
