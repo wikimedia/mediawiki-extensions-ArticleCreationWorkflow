@@ -46,8 +46,8 @@ class HooksTest extends MediaWikiIntegrationTestCase {
 	}
 
 	public static function provideOnTitleQuickPermissions() {
-		$mainspace = Title::newFromText( 'Mainspace page' );
-		$nonMainspace = Title::newFromText( 'MediaWiki:Non-mainspace page' );
+		$mainspace = Title::makeTitle( NS_MAIN, 'Mainspace page' );
+		$nonMainspace = Title::makeTitle( NS_MEDIAWIKI, 'Non-mainspace page' );
 
 		return [
 			// named account
