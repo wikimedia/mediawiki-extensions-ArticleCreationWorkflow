@@ -1,0 +1,10 @@
+{
+	"@metadata": {
+		"authors": [
+			"Bachounda"
+		]
+	},
+	"acw-desc": "يخصص تجربة إنشاء الصفحات الجديدة للمستخدمين الجدد.",
+	"action-createpagemainns": "ينشئ صفحات في النطاق الرئيسي",
+	"right-createpagemainns": "ينشئ صفحات في النطاق الرئيسي"
+}
