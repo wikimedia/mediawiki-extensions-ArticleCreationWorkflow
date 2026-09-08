@@ -20,7 +20,10 @@
 	},
 	"HookHandlers": {
 		"main": {
-			"class": "ArticleCreationWorkflow\\Hooks"
+			"class": "ArticleCreationWorkflow\\Hooks",
+			"services": [
+				"ConfigFactory"
+			]
 		}
 	},
 	"AutoloadNamespaces": {

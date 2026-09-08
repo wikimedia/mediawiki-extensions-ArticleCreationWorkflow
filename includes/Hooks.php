@@ -3,8 +3,8 @@
 namespace ArticleCreationWorkflow;
 
 use MediaWiki\Actions\Hook\GetActionNameHook;
+use MediaWiki\Config\ConfigFactory;
 use MediaWiki\Context\IContextSource;
-use MediaWiki\MediaWikiServices;
 use MediaWiki\Page\Article;
 use MediaWiki\Page\Hook\BeforeDisplayNoArticleTextHook;
 use MediaWiki\Permissions\Hook\TitleQuickPermissionsHook;
@@ -19,6 +19,13 @@ class Hooks implements
 	BeforeDisplayNoArticleTextHook,
 	TitleQuickPermissionsHook
 {
+	private ?Workflow $workflow = null;
+
+	public function __construct(
+		private readonly ConfigFactory $configFactory,
+	) {
+	}
+
 	/**
 	 * TitleQuickPermissions hook handler
 	 * Prohibits creating pages in main namespace for users without a special permission
@@ -60,7 +67,7 @@ class Hooks implements
 		if ( $action !== 'edit' ) {
 			return;
 		}
-		$workflow = self::getWorkflow();
+		$workflow = $this->getWorkflow();
 		$title = $context->getTitle();
 		$user = $context->getUser();
 		if ( $workflow->shouldInterceptPage( $title, $user ) ) {
@@ -77,7 +84,7 @@ class Hooks implements
 	 * @return bool This hook can abort
 	 */
 	public function onBeforeDisplayNoArticleText( $article ) {
-		$workflow = self::getWorkflow();
+		$workflow = $this->getWorkflow();
 		$context = $article->getContext();
 		$user = $context->getUser();
 		$title = $article->getTitle();
@@ -89,19 +96,12 @@ class Hooks implements
 		return !$wasIntercepted;
 	}
 
-	/**
-	 * @return Workflow
-	 */
-	private static function getWorkflow() {
-		static $cached;
-
-		if ( !$cached ) {
-			$config = MediaWikiServices::getInstance()
-				->getConfigFactory()
-				->makeConfig( 'ArticleCreationWorkflow' );
-			$cached = new Workflow( $config );
+	private function getWorkflow(): Workflow {
+		if ( !$this->workflow ) {
+			$config = $this->configFactory->makeConfig( 'ArticleCreationWorkflow' );
+			$this->workflow = new Workflow( $config );
 		}
 
-		return $cached;
+		return $this->workflow;
 	}
 }
